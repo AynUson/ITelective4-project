@@ -1,0 +1,26 @@
+ion-slides {
+  height: 100%;
+
+}
+ion-slide{
+  padding: 160px 20px;
+  display: block;
+  h1{
+    font-size: 36px;
+    font-weight: bold;
+  }
+}
+
+img{
+  width: 150px;
+}
+
+div{
+  width: 90%;
+  position: fixed;
+  bottom: 50px;
+}
+
+ion-button{
+  font-size: 30px;
+}
