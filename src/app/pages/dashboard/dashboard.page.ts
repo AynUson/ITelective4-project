@@ -10,7 +10,7 @@ export class DashboardPage implements OnInit {
   constructor() { }
 
   slidesOptions = {
-    slidesPerView: 1
+    slidesPerView: 1.1
   }
   ngOnInit() {
   }

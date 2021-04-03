@@ -1,5 +1,14 @@
+ion-content{
+  --background: linear-gradient(90deg, rgba(43,90,148,1) 0%, rgba(45,112,229,1) 35%, rgba(45,112,229,1) 100%);
+  font-family: 'Poppins', sans-serif;
+}
+
+
 ion-slides {
   height: 100%;
+  --bullet-background-active:#fff;
+  --bullet-background: #000;
+  color:#fff;
 
 }
 ion-slide{
@@ -15,12 +24,13 @@ img{
   width: 150px;
 }
 
-div{
+.btnBot{
   width: 90%;
   position: fixed;
   bottom: 50px;
 }
 
 ion-button{
-  font-size: 30px;
+  color: #fff;
+  font-size: 25px;
 }
