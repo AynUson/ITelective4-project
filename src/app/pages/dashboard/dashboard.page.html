@@ -1,5 +1,6 @@
 <ion-header>
-  <ion-toolbar>
+  <ion-toolbar >
+    <ion-title><b>Todos</b></ion-title>
     <ion-button slot="end" color="light"  >
       <ion-icon  name="people-circle-outline"></ion-icon>
     </ion-button>
@@ -20,49 +21,31 @@
 
 
   <div class="slides ion-margin-bottom">
-    <ion-slides [options]="slidesOptions">
-      <ion-slide>
-        <ion-card>
-          <ion-card-header>
-            <h3> Description: Loremsasa   </h3>
-          </ion-card-header>
-          <ion-card-content class="ion-text-left">
-            <ion-card-title class="ion-margin-bottom">Title</ion-card-title>
-          </ion-card-content>
-          <ion-icon name="arrow-forward" style="float:right;"></ion-icon>
-        </ion-card>
-      </ion-slide>
 
-      <ion-slide>
-        <ion-card>
-          <ion-button expand="block">View</ion-button>
-          <ion-button expand="block">Update</ion-button>
-        </ion-card>
-      </ion-slide>
+      <ion-slides [options]="slidesOptions" *ngFor="let task of task">
+        <ion-slide >
+          <ion-card>
+            <ion-card-header>
+              <h3> {{task.description}}   </h3>
+            </ion-card-header>
+            <ion-card-content class="ion-text-left">
+              <ion-card-title class="ion-margin-bottom">{{task.title}}</ion-card-title>
+            </ion-card-content>
+            <ion-icon name="arrow-forward" style="float:right;"></ion-icon>
+          </ion-card>
+        </ion-slide>
 
-    </ion-slides>
+        <ion-slide>
+          <ion-card>
+            <ion-button expand="block">View</ion-button>
+            <ion-button expand="block">Update</ion-button>
+          </ion-card>
+        </ion-slide>
 
-    <ion-slides [options]="slidesOptions">
-      <ion-slide>
-        <ion-card>
-          <ion-card-header>
-            <h3> Description: Loremsasa   </h3>
-          </ion-card-header>
-          <ion-card-content class="ion-text-left">
-            <ion-card-title class="ion-margin-bottom">Title</ion-card-title>
-          </ion-card-content>
-          <ion-icon name="arrow-forward" style="float:right;"></ion-icon>
-        </ion-card>
-      </ion-slide>
+      </ion-slides>
+    
+    <ion-button color="{{tbcolor}}" (click)="changeTbColor()" >(test)Change Button Color</ion-button>
 
-      <ion-slide>
-        <ion-card>
-          <ion-button expand="block">View</ion-button>
-          <ion-button expand="block">Update</ion-button>
-        </ion-card>
-      </ion-slide>
-
-    </ion-slides>
   </div>
 
   <div class="container">
