@@ -1,10 +1,23 @@
 ion-toolbar {
-  --background: #f5f5f3;
+  --background: #ffffff;
 
   ion-button {
     text-transform: initial;
     font-size: 17px;
   }
+
+}
+#header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  h1 {
+    font-weight: 700;
+    font-size: 26px;
+    color: #010100;
+  }
+
 }
 
 ion-content {
@@ -15,14 +28,8 @@ ion-content {
     flex-direction: column;
     align-items: center;
 
-    h1 {
-      font-weight: 700;
-      font-size: 26px;
-      color: #010100;
-      margin-bottom: 15%;
-    }
-
     img {
+      margin-top: 25px;
       width: 170px;
       height: 170px;
       border-radius: 50%;

@@ -1,9 +1,52 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>profile</ion-title>
+    <ion-title><b>Profile</b></ion-title>
+    <ion-button slot="end" color="light" (click)="logout()" >
+      <ion-icon name="log-out"></ion-icon>
+    </ion-button>
   </ion-toolbar>
+
+  <ion-item lines='none' >
+    <ion-avatar slot="start">
+      <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAAAAACH5BAAAAAAALAAAAAABAAEAAAICTAEAOw==">
+    </ion-avatar>
+    <ion-label>
+      <p>Uson</p>
+      <h2>Ayn Gandhi </h2>
+    </ion-label>
+  </ion-item>
 </ion-header>
 
 <ion-content>
 
+  <div class="slides ion-margin-bottom">
+    <ion-card>
+      <ion-list>
+        <ion-item>
+          <ion-label>Level</ion-label>
+        </ion-item>
+        <ion-item>
+          <ion-label>Gold</ion-label>
+        </ion-item>
+      </ion-list>
+    </ion-card>
+
+    <ion-card>
+      <ion-list>
+        <ion-item>
+          <ion-label>Owned Items</ion-label>
+        </ion-item>
+        <ion-item>
+          <ion-label>Unfinished Collab tasks</ion-label>
+        </ion-item>
+        <ion-item>
+          <ion-label>Your unfinished tasks</ion-label>
+        </ion-item>
+      </ion-list>
+    </ion-card>
+
+
+  </div>
+
 </ion-content>
+
