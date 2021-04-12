@@ -12,23 +12,26 @@
      <img src="../../../assets/Tcircle.png" />
     </div>
 
-    <form id="form">
+
+    <form  ngNativeValidate (submit)="login($event)">
       <ion-item>
         <ion-label position="floating">Username</ion-label>
-        <ion-input></ion-input>
+        <input type="text" id="uname" >
+        <!-- <ion-input id="uname"></ion-input> -->
       </ion-item>
 
       <ion-item>
         <ion-label position="floating">Password</ion-label>
-        <ion-input type="password"></ion-input>
+        <input type="password" id="pword" >
+        <!-- <ion-input type="password" ></ion-input> -->
       </ion-item>
 
-      <!-- 
+      <!--
       <ion-input placeholder="Username"></ion-input>
       <ion-input type="password" placeholder="Password"></ion-input>
       -->
 
-      <ion-button expand="block" shape="round" routerLink="/home">Login</ion-button>
+      <ion-button expand="block" shape="round" type="submit" >Login</ion-button>
     </form>
   </div>
 </ion-content>
