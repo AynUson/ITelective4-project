@@ -1,7 +1,7 @@
-<ion-header>
-  <ion-toolbar >
+<ion-header >
+  <ion-toolbar color="primary">
     <ion-title><b>Todos</b></ion-title>
-    <ion-button slot="end" color="light"  >
+    <ion-button slot="end" color="light">
       <ion-icon  name="people-circle-outline"></ion-icon>
     </ion-button>
   </ion-toolbar>
@@ -47,6 +47,12 @@
     <ion-button color="{{tbcolor}}" (click)="changeTbColor()" >(test)Change Button Color</ion-button>
 
   </div>
+
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button>
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
 
   <div class="container">
 

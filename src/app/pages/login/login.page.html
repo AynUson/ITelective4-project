@@ -1,10 +1,10 @@
-<ion-header>
+<!-- <ion-header >
   <ion-toolbar>
     <ion-buttons slot="end">
       <ion-button routerLink="/signup">Sign up</ion-button>
     </ion-buttons>
   </ion-toolbar>
-</ion-header>
+</ion-header> -->
 
 <ion-content>
   <div class="bg-container">
@@ -25,13 +25,14 @@
 
         <ion-input type="password" name="pword" [(ngModel)]="pwordInput" ></ion-input>
       </ion-item>
-<!--
-
+      <!--
       <ion-input placeholder="Username"></ion-input>
       <ion-input type="password" placeholder="Password"></ion-input> -->
 
 
       <ion-button expand="block" shape="round" type="submit" >Login</ion-button>
+      <h4 routerLink="/signup"> Sign up</h4>
+
     </form>
   </div>
 </ion-content>
