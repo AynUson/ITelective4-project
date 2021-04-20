@@ -24,6 +24,12 @@ export class LoginPage implements OnInit {
     this.getUsers();
   }
 
+  showPassword = false;
+  passwordToggleIcon = 'eye';
+
+  togglePassword():void {
+    this.showPassword = !this.showPassword;
+  }
 
   constructor(
     private user:UserService,
