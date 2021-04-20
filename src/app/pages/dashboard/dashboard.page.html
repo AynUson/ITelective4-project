@@ -1,3 +1,4 @@
+
 <ion-header >
   <ion-toolbar color="primary">
     <ion-title><b>Todos</b></ion-title>
@@ -19,22 +20,39 @@
 
 <ion-content>
   <!-- {{a | json}} -->
-
-  <div class="slides ion-margin-bottom">
-
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <ion-card >
+          <ion-icon name="person"></ion-icon>
+          <h2>Profile</h2>
+        </ion-card>
+      </ion-col>
+      <ion-col >
+        <ion-card>
+          <ion-icon name="people"></ion-icon>
+          <h2>Group</h2>
+        </ion-card>
+      </ion-col>
+    </ion-row> 
+  </ion-grid>
+  
+  <!-- <div class="slides ion-margin-bottom" >
+      
       <ion-slides [options]="slidesOptions" *ngFor="let task of selectedData">
-        <ion-slide >
-          <ion-card>
+        <ion-slide > -->
+          <ion-card *ngFor="let task of selectedData">
             <ion-card-header>
               <h3> {{task.task_description}}   </h3>
             </ion-card-header>
             <ion-card-content class="ion-text-left">
               <ion-card-title class="ion-margin-bottom">{{task.task_title}}</ion-card-title>
             </ion-card-content>
-            <ion-icon name="arrow-forward" style="float:right;"></ion-icon>
+            <!-- <ion-icon name="arrow-forward" style="float:right;"></ion-icon> -->
           </ion-card>
-        </ion-slide>
+        <!-- </ion-slide>
 
+      
         <ion-slide>
           <ion-card>
             <ion-button expand="block">View</ion-button>
@@ -43,10 +61,11 @@
         </ion-slide>
 
       </ion-slides>
+      -->
 
     <ion-button color="{{tbcolor}}" (click)="changeTbColor()" >(test)Change Button Color</ion-button>
 
-  </div>
+  <!-- </div> -->
 
   <ion-fab vertical="bottom" horizontal="end" slot="fixed">
     <ion-fab-button>
