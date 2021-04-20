@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { DataService } from 'src/app/services/data.service';
 
 @Component({
   selector: 'app-collaboration',
@@ -6,10 +7,11 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./collaboration.page.scss'],
 })
 export class CollaborationPage implements OnInit {
-
-  constructor() { }
+  user:any;
+  constructor(private data_service: DataService) { }
 
   ngOnInit() {
+    this.user=this.data_service.userLoggedIn;
   }
 
 }

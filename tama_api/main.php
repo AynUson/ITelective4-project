@@ -20,9 +20,16 @@ switch ($_SERVER['REQUEST_METHOD']) {
         //SELECT
       case 'task':
         if (count($req) > 1) {
-          echo json_encode($gm->select($req[0].'_tbl', $req[1]), JSON_PRETTY_PRINT);
+          echo json_encode($gm->exec_query($req[0] . '_tbl', $req[1]), JSON_PRETTY_PRINT);
         } else {
-          echo json_encode($gm->select($req[0].'_tbl', null), JSON_PRETTY_PRINT);
+          echo json_encode($gm->exec_query($req[0] . '_tbl', null), JSON_PRETTY_PRINT);
+        }
+        break;
+      case 'user':
+        if (count($req) > 1) {
+          echo json_encode($gm->exec_query($req[0] . '_tbl', $req[1]), JSON_PRETTY_PRINT);
+        } else {
+          echo json_encode($gm->exec_query($req[0] . '_tbl', null), JSON_PRETTY_PRINT);
         }
         break;
 
@@ -41,7 +48,7 @@ switch ($_SERVER['REQUEST_METHOD']) {
         //UPDATE
       case 'updating':
         $d = json_decode(file_get_contents("php://input"));
-        echo json_encode($gm->update("tbl name", $d,'task_id='.$req[1]), JSON_PRETTY_PRINT);
+        echo json_encode($gm->update("tbl name", $d, 'task_id=' . $req[1]), JSON_PRETTY_PRINT);
         break;
         //DELETE??
     }

@@ -1,4 +1,7 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { DataService } from 'src/app/services/data.service';
 
 @Component({
   selector: 'app-shop',
@@ -6,10 +9,12 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./shop.page.scss'],
 })
 export class ShopPage implements OnInit {
+  user:any;
 
-  constructor() { }
+  constructor(private router: Router,private data_service: DataService) { }
 
   ngOnInit() {
+    this.user=this.data_service.userLoggedIn;
   }
 
 }

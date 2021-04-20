@@ -5,17 +5,19 @@ import { ChartDataSets } from 'chart.js';
 import { Color, Label } from 'ng2-charts';
 
 import { HttpClient } from '@angular/common/http';
+import { DataService } from 'src/app/services/data.service';
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.page.html',
   styleUrls: ['./profile.page.scss'],
 })
 export class ProfilePage implements OnInit {
-
-  constructor(private router: Router,private http: HttpClient) { }
+  user:any;
+  constructor(private router: Router,private http: HttpClient,private data_service: DataService) { }
 
   ngOnInit() {
     this.getData();
+    this.user=this.data_service.userLoggedIn;
   }
   chartData: ChartDataSets[] = [{ data: [], label: 'Stock price' }];
   chartLabels: Label[];

@@ -11,25 +11,25 @@
       <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAAAAACH5BAAAAAAALAAAAAABAAEAAAICTAEAOw==">
     </ion-avatar>
     <ion-label>
-      <p>Uson</p>
-      <h2>Ayn Gandhi</h2>
+      <p>Level: {{user.user_level}}</p>
+      <h2>{{user.user_name}}</h2>
     </ion-label>
   </ion-item>
 </ion-header>
 
 <ion-content>
-
+  <!-- {{a | json}} -->
 
   <div class="slides ion-margin-bottom">
 
-      <ion-slides [options]="slidesOptions" *ngFor="let task of task">
+      <ion-slides [options]="slidesOptions" *ngFor="let task of selectedData">
         <ion-slide >
           <ion-card>
             <ion-card-header>
-              <h3> {{task.description}}   </h3>
+              <h3> {{task.task_description}}   </h3>
             </ion-card-header>
             <ion-card-content class="ion-text-left">
-              <ion-card-title class="ion-margin-bottom">{{task.title}}</ion-card-title>
+              <ion-card-title class="ion-margin-bottom">{{task.task_title}}</ion-card-title>
             </ion-card-content>
             <ion-icon name="arrow-forward" style="float:right;"></ion-icon>
           </ion-card>
@@ -43,7 +43,7 @@
         </ion-slide>
 
       </ion-slides>
-    
+
     <ion-button color="{{tbcolor}}" (click)="changeTbColor()" >(test)Change Button Color</ion-button>
 
   </div>

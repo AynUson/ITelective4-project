@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { UserService } from 'src/app/services/user.service';
 import { AlertController } from '@ionic/angular';
+import { DataService } from '../../services/data.service'
 
 @Component({
   selector: 'app-login',
@@ -14,7 +15,56 @@ export class LoginPage implements OnInit {
   pword:string = "admin"
   unameInput:string;
   pwordInput:string;
-  constructor(private user:UserService, private router:Router,public alertController: AlertController) { }
+  users:any;
+
+
+
+
+  ngOnInit() {
+    this.getUsers();
+  }
+
+
+  constructor(
+    private user:UserService,
+     private router:Router,
+     public alertController: AlertController,
+     private data_service: DataService
+     ) { }
+
+  public getUsers(){
+    this.data_service.sendAPIRequest(("user"), null)
+    .subscribe(result=>{
+      this.users = result.payload;
+      console.log(this.users)
+  });
+  }
+
+  loginUser(e){
+    e.preventDefault();
+    this.getUsers();
+    let count = 0
+    if(this.unameInput != null && this.pwordInput != null){
+      for(let user of this.users){
+        if((this.unameInput == user.user_name || this.unameInput == user.user_email) && this.pwordInput == user.user_pword){
+          this.presentAlert('Success','Welcome '+ user.user_name)
+          this.data_service.userLoggedIn = user;
+          this.data_service.user_id = user.user_id;
+          this.router.navigate(['/home']);
+          this.user.setLogin();
+          break;
+        }else{
+          count++
+          if(count == this.users.length){
+            this.presentAlert('Warning','Username or Password is incorrect')
+          }
+
+        }
+      }
+    }else{
+      this.presentAlert('Warning','Fill the fields!')
+    }
+  }
 
   async presentAlert(title, sub) {
     const alert = await this.alertController.create({
@@ -28,12 +78,10 @@ export class LoginPage implements OnInit {
     await alert.present();
 
     const { role } = await alert.onDidDismiss();
-    this.router.navigate(['/home']);
+
   }
 
 
-  ngOnInit() {
-  }
 
   login(e): void{
     e.preventDefault();
@@ -44,18 +92,19 @@ export class LoginPage implements OnInit {
         console.log(this.unameInput);
         console.log(this.pwordInput);
         this.presentAlert('Success','Welcome '+ this.name)
+        this.router.navigate(['/home']);
         this.user.setLogin();
 
       }else{
-        if(this.unameInput == null || this.pwordInput == null){
-          this.presentAlert('Warning','Fill the fields!')
-        }
+
         if(this.unameInput != null && this.pwordInput != null){
           this.presentAlert('Warning','Username or Password is incorrect')
         }
 
 
       }
+    }if(this.unameInput == null || this.pwordInput == null){
+      this.presentAlert('Warning','Fill the fields!')
     }
 
 

@@ -7,25 +7,24 @@
 			$this->pdo = $pdo;
 		}
 
-		public function select($table, $filter_data) {
-			$sql = "SELECT * FROM $table ";
+		public function exec_query($table, $filter_data) {
 
-			if ($filter_data != null && $table == "tbl_profiling_residents") {
-				$this->sql .= " WHERE res_id=$filter_data";
+			$this->sql = "SELECT * FROM $table";
+
+			if($filter_data != null && $table == "task_tbl") {
+				$this->sql .= " WHERE user_id=$filter_data";
 			}
-			$data = array(); $errmsg = ""; $code = 0;
+
+			$data = array(); $code = 0; $msg= ""; $remarks = "";
 			try {
-				if ($res = $this->pdo->query($sql)->fetchAll()) {
-					foreach ($res as $rec) {
-						array_push($data, $rec);
-						$res = null; $code = 200;
-					}
+				if ($res = $this->pdo->query($this->sql)->fetchAll()) {
+					foreach ($res as $rec) { array_push($data, $rec);}
+					$res = null; $code = 200; $msg = "Successfully retrieved the requested records"; $remarks = "success";
 				}
-			} catch(\PDOException $e) {
-				$errmsg = $e->getMessage(); $code = 401;
+			} catch (\PDOException $e) {
+				$msg = $e->getMessage(); $code = 401; $remarks = "failed";
 			}
-			return $this->sendPayload($data, "success", $errmsg, $code);
-      //
+			return $this->sendPayload($data, $remarks, $msg, $code);
 		}
 
 		public function insert($table, $data) {
@@ -51,7 +50,7 @@
 				$sqlstr.=") VALUES (".str_repeat("?, ", count($values)-1)."?)";
 				$sql = $this->pdo->prepare($sqlstr);
 				$sql->execute($values);
-				return $this->select("$table", null);
+				return $this->exec_query("$table", null);
 			}
 			catch(\PDOException $e) {
 				$errmsg = $e->getMessage();
