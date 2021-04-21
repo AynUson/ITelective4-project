@@ -44,7 +44,7 @@ export class DashboardPage{
     this.data_service.sendAPIRequest("task/" + this.data_service.user_id, null).subscribe(data => {
       this.selectedData = data.payload
       console.log(this.selectedData)
-    })
+    });
   }
   public getTasks(){
     this.data_service.sendAPIRequest(("task"), null)

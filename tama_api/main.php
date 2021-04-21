@@ -5,6 +5,7 @@ $db = new Connection();
 $pdo = $db->connect();
 $gm = new GlobalMethods($pdo);
 $auth = new Auth($pdo);
+$post = new Post($pdo);
 
 if (isset($_REQUEST['request'])) {
   $req = explode('/', rtrim(($_REQUEST['request']), '/'));
@@ -32,7 +33,27 @@ switch ($_SERVER['REQUEST_METHOD']) {
           echo json_encode($gm->exec_query($req[0] . '_tbl', null), JSON_PRETTY_PRINT);
         }
         break;
-
+      case 'showCollabJoin':
+        if (count($req) > 1) {
+          echo json_encode($post->selectCollabJoin($req[1]), JSON_PRETTY_PRINT);
+        } else {
+          echo json_encode($post->selectCollabJoin(null), JSON_PRETTY_PRINT);
+        }
+        break;
+      case 'showCollabTasks':
+        if (count($req) > 1) {
+          echo json_encode($post->collabTaskJoin($req[1]), JSON_PRETTY_PRINT);
+        } else {
+          echo json_encode($post->collabTaskJoin(null), JSON_PRETTY_PRINT);
+        }
+        break;
+      case 'showCollabMembers':
+        if (count($req) > 1) {
+          echo json_encode($post->collabMembersJoin($req[1]), JSON_PRETTY_PRINT);
+        } else {
+          echo json_encode($post->collabMembersJoin(null), JSON_PRETTY_PRINT);
+        }
+        break;
 
 
 

@@ -7,6 +7,10 @@ const routes: Routes = [
   {
     path: '',
     component: CollaborationPage
+  },
+  {
+    path: 'collaboration-view',
+    loadChildren: () => import('./collaboration-view/collaboration-view.module').then( m => m.CollaborationViewPageModule)
   }
 ];
 

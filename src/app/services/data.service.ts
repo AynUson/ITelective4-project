@@ -8,9 +8,10 @@ export class DataService {
   baseURL="http://localhost/TAMA/tama_api/"
   userLoggedIn:any;
   user_id:number;
+  currentCollabView:any;
   constructor(private _http: HttpClient) { }
 
-  
+
   sendAPIRequest(method:any, data:any) {
     return <any>(
       this._http.post(this.baseURL + method, btoa(JSON.stringify(data)))

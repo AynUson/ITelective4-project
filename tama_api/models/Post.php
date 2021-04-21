@@ -8,13 +8,12 @@
 
     function selectCollabJoin($filter_data) {
 
-			$this->sql = "SELECT *
-            from tbl_clinic_supplies
-            LEFT JOIN tbl_clinic_medicines on tbl_clinic_medicines.med_id = tbl_clinic_supplies.med_id
-            LEFT JOIN tbl_clinic_med_suppliers on tbl_clinic_med_suppliers.supplier_id = tbl_clinic_supplies.supplier_id";
+			$this->sql = "SELECT * FROM collab_room_tbl
+      INNER JOIN collab_member_tbl ON collab_room_tbl.collab_room_id=collab_member_tbl.collab_room_id
+      INNER JOIN user_tbl ON user_tbl.user_id=collab_member_tbl.user_id";
 
             if($filter_data != null) {
-                $this->sql .= " WHERE supply_id=$filter_data";
+                $this->sql .= " WHERE user_tbl.user_id =  $filter_data";
             }
 
             $data = array(); $code = 0; $msg= ""; $remarks = "";
@@ -29,37 +28,14 @@
             return $this->sendPayload($data, $remarks, $msg, $code);
         }
 
-    function selectCheckupJoin($filter_data) {
+    function collabTaskJoin($filter_data) {
 
-			$this->sql = "SELECT tbl_clinic_checkups.appointment_id,
-            tbl_clinic_checkups.patient_id,
-            tbl_clinic_checkups.medOrder_id,
-            tbl_clinic_checkups.hprof_id,
-            tbl_clinic_checkups.fld_amount,
-            tbl_profiling_residents.res_id,
-            tbl_profiling_residents.res_lname,
-            tbl_profiling_residents.res_mname,
-            tbl_profiling_residents.res_fname,
-            tbl_profiling_residents.res_ext,
-            tbl_profiling_residents.res_gender,
-            tbl_clinic_healthprofs.hprof_lname,
-            tbl_clinic_healthprofs.hprof_fname,
-            tbl_clinic_healthprofs.hprof_mname,
-            tbl_clinic_checkups.fld_startTime,
-            tbl_clinic_checkups.fld_endTime,
-            tbl_clinic_checkups.fld_inProgress,
-            tbl_clinic_checkups.fld_symptoms,
-            tbl_clinic_checkups.fld_findings,
-            tbl_clinic_checkups.fld_remarks,
-            tbl_clinic_checkups.fld_isDeleted,
-            tbl_clinic_checkups.checkup_id
-            from tbl_clinic_checkups
-            LEFT JOIN tbl_clinic_healthprofs on tbl_clinic_healthprofs.hprof_id = tbl_clinic_checkups.hprof_id
-            LEFT JOIN tbl_profiling_residents on tbl_profiling_residents.res_id = tbl_clinic_checkups.patient_id
-            LEFT JOIN tbl_clinic_appointments on tbl_clinic_appointments.appointment_id = tbl_clinic_checkups.appointment_id";
+			$this->sql = "SELECT * FROM task_tbl
+      INNER JOIN collab_tasks_tbl ON task_tbl.task_id=collab_tasks_tbl.task_id
+      INNER JOIN collab_room_tbl ON collab_tasks_tbl.collab_room_id=collab_room_tbl.collab_room_id";
 
             if($filter_data != null) {
-                $this->sql .= " WHERE checkup_id=$filter_data";
+                $this->sql .= " WHERE collab_room_tbl.collab_room_id=$filter_data";
             }
 
             $data = array(); $code = 0; $msg= ""; $remarks = "";
@@ -73,6 +49,28 @@
             }
             return $this->sendPayload($data, $remarks, $msg, $code);
         }
+
+        function collabMembersJoin($filter_data) {
+
+          $this->sql = "SELECT * FROM collab_member_tbl
+          INNER JOIN collab_room_tbl ON collab_member_tbl.collab_room_id=collab_room_tbl.collab_room_id
+          INNER JOIN user_tbl ON user_tbl.user_id=collab_member_tbl.user_id";
+
+                if($filter_data != null) {
+                    $this->sql .= " WHERE collab_member_tbl.collab_room_id=$filter_data";
+                }
+
+                $data = array(); $code = 0; $msg= ""; $remarks = "";
+                try {
+                    if ($res = $this->pdo->query($this->sql)->fetchAll()) {
+                        foreach ($res as $rec) { array_push($data, $rec);}
+                        $res = null; $code = 200; $msg = "Successfully retrieved the requested records"; $remarks = "success";
+                    }
+                } catch (\PDOException $e) {
+                    $msg = $e->getMessage(); $code = 401; $remarks = "failed";
+                }
+                return $this->sendPayload($data, $remarks, $msg, $code);
+            }
 
 
 
@@ -113,7 +111,7 @@
 			return array(
 				"status"=>$status,
 				"payload"=>$payload,
-				'prepared_by'=>'Jason Paul Cruz, Developer',
+				'prepared_by'=>'Ayn Gandhi V. Uson, Developer',
 				"timestamp"=>date_create());
 		}
     }

@@ -12,11 +12,12 @@ const routes: Routes = [
       {
         path:'',
         loadChildren: ()=> import('../pages/dashboard/dashboard.module').then(m => m.DashboardPageModule)
+        
       },
       {
         path:'dashboard',
         loadChildren: ()=> import('../pages/dashboard/dashboard.module').then(m => m.DashboardPageModule),
-        canActivate:[AuthGuard]
+
       },
       {
         path:'profile',
