@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { UserService } from 'src/app/services/user.service';
 import { AlertController } from '@ionic/angular';
-import { DataService } from '../../services/data.service'
+import { DataService } from '../../services/data.service';
 
 @Component({
   selector: 'app-login',

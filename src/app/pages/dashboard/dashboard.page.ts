@@ -1,13 +1,18 @@
 import { Component, OnInit } from '@angular/core';
 import { Tasks } from './tasks.model';
 import { TasksService } from './tasks.service';
-import { DataService } from '../../services/data.service'
+import {  ModalController } from '@ionic/angular';
+import { ModalPage } from "../../modal/modal.page";
+import { DataService } from '../../services/data.service';
+
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.page.html',
   styleUrls: ['./dashboard.page.scss'],
 })
 export class DashboardPage{
+
+
  slidesOptions = {
     slidesPerView: 1.15
   }
@@ -23,7 +28,18 @@ export class DashboardPage{
 
     this.tbcolor = this.colors[this.randomNum];
   }
-  constructor(private tasksService: TasksService, private data_service: DataService) { }
+  constructor(private tasksService: TasksService, private data_service: DataService, private modalController:ModalController) {  }
+
+    OpenModal() {
+      this.modalController.create(
+        { component:ModalPage }).then((modalElement)=>{
+        modalElement.present();
+      })
+
+    }
+
+
+ 
 
 
 

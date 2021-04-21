@@ -50,6 +50,22 @@ ion-content {
     background: rgba(255, 255, 255, 0.8);
   }
 
+  ion-card-title {
+    font-weight: 700;
+    font-size: 14px;
+  }
+
+  page-dashboard {
+    .fixline {
+      height: 40px;
+      margin-bottom: 7px;
+    }
+  }
+
+  h3 {
+    font-size: 14px;
+  }
+
   .container {
     padding: 6px 20px;
     color: #ffffff;
