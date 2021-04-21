@@ -14,7 +14,6 @@ ion-header {
     }
   }
   ion-item {
-     border-radius: 20px;
     h3 {
       font-weight: 700;
       font-size: 14px;
@@ -30,6 +29,7 @@ ion-header {
 }
 
 ion-content {
+
   --background: linear-gradient(
     90deg,
     rgba(43, 90, 148, 1) 0%,
@@ -45,26 +45,9 @@ ion-content {
 
   ion-card {
     width: 95%;
-    box-shadow: 1;
+    box-shadow: none;
     border-radius: 14px;
-    padding: 7px;
     background: rgba(255, 255, 255, 0.8);
-  }
-
-  ion-card-title {
-    font-weight: 700;
-    font-size: 14px;
-  }
-
-  page-dashboard {
-    .fixline {
-      height: 40px;
-      margin-bottom: 7px;
-    }
-  }
-
-  h3 {
-    font-size: 14px;
   }
 
   .container {
@@ -96,4 +79,14 @@ ion-content {
       padding-bottom: 8px;
     }
   }
+}
+
+.flexbox{
+  display: flex;
+}
+.buttonright{
+  position: absolute;
+  right: 10px;
+  padding: 0px 10px 10px 10px;
+  font-family: "Poppins", sans-serif;
 }

@@ -1,0 +1,39 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title><b> {{category}}  </b></ion-title>
+    <!-- <ion-button slot="end" color="light" (click)="backCollab()" >
+      <ion-icon name="caret-back"></ion-icon>
+    </ion-button> -->
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+
+  <ion-item lines='none' >
+    <ion-avatar slot="start">
+      <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAAAAACH5BAAAAAAALAAAAAABAAEAAAICTAEAOw==">
+    </ion-avatar>
+    <ion-label>
+      <p>Level: {{user.user_level}}</p>
+      <h2>{{user.user_name}}</h2>
+    </ion-label>
+  </ion-item>
+</ion-header>
+
+<ion-content>
+
+  <div class="slides ion-margin-bottom">
+
+    <ion-card *ngFor="let task of tasks">
+      <ion-card-header>
+        <h3> {{task.task_title}}  </h3>
+      </ion-card-header>
+      <ion-card-content class="ion-text-left flexbox" >
+        <ion-card-title class="ion-margin-bottom"  > {{task.task_description}} </ion-card-title>
+      </ion-card-content>
+    </ion-card>
+
+  </div>
+
+</ion-content>
+

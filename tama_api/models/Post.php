@@ -73,6 +73,42 @@
             }
 
 
+        function tasksCategory($table) {
+
+            $this->sql = "SELECT * FROM $table";
+                    
+                    $data = array(); $code = 0; $msg= ""; $remarks = "";
+                    try {
+                        if ($res = $this->pdo->query($this->sql)->fetchAll()) {
+                            foreach ($res as $rec) { array_push($data, $rec);}
+                            $res = null; $code = 200; $msg = "Successfully retrieved the requested records"; $remarks = "success";
+                        }
+                    } catch (\PDOException $e) {
+                        $msg = $e->getMessage(); $code = 401; $remarks = "failed";
+                    }
+                    return $this->sendPayload($data, $remarks, $msg, $code);
+                }
+
+        function viewCategory($filter_data) {
+
+            $this->sql = "SELECT * FROM `task_tbl` INNER JOIN task_category_tbl ON task_tbl.category_id=task_category_tbl.category_id";
+    
+                    if($filter_data != null) {
+                        $this->sql .= " WHERE task_tbl.user_id=$filter_data";
+                    }
+    
+                    $data = array(); $code = 0; $msg= ""; $remarks = "";
+                    try {
+                        if ($res = $this->pdo->query($this->sql)->fetchAll()) {
+                            foreach ($res as $rec) { array_push($data, $rec);}
+                            $res = null; $code = 200; $msg = "Successfully retrieved the requested records"; $remarks = "success";
+                        }
+                    } catch (\PDOException $e) {
+                        $msg = $e->getMessage(); $code = 401; $remarks = "failed";
+                    }
+                    return $this->sendPayload($data, $remarks, $msg, $code);
+                }
+           
 
     public function insertOrderDetails($table, $data){
             foreach($data as $x => $x_value) {

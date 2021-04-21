@@ -54,6 +54,21 @@ switch ($_SERVER['REQUEST_METHOD']) {
           echo json_encode($post->collabMembersJoin(null), JSON_PRETTY_PRINT);
         }
         break;
+      case 'task_category':
+        if (count($req) > 1) {
+          echo json_encode($post->tasksCategory($req[0] . '_tbl'), JSON_PRETTY_PRINT);
+        } else {
+          echo json_encode($post->tasksCategory($req[0] . '_tbl'), JSON_PRETTY_PRINT);
+        }
+        break;
+      case 'viewCategory':
+        if (count($req) > 1) {
+          echo json_encode($post->viewCategory($req[1]), JSON_PRETTY_PRINT);
+        } else {
+          echo json_encode($post->viewCategory(null), JSON_PRETTY_PRINT);
+        }
+        break;
+      
 
 
 

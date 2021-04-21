@@ -7,6 +7,10 @@ const routes: Routes = [
   {
     path: '',
     component: DashboardPage
+  },
+  {
+    path: 'category-view',
+    loadChildren: () => import('./category-view/category-view.module').then( m => m.CategoryViewPageModule)
   }
 ];
 

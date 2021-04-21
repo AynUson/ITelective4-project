@@ -56,7 +56,7 @@ export class LoginPage implements OnInit {
           this.presentAlert('Success','Welcome '+ user.user_name)
           this.data_service.userLoggedIn = user;
           this.data_service.user_id = user.user_id;
-          this.router.navigate(['/home']);
+          this.router.navigate(['/home/dashboard']);
           this.user.setLogin();
           break;
         }else{

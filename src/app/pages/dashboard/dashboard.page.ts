@@ -4,7 +4,7 @@ import { TasksService } from './tasks.service';
 import {  ModalController } from '@ionic/angular';
 import { ModalPage } from "../../modal/modal.page";
 import { DataService } from '../../services/data.service';
-
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.page.html',
@@ -21,6 +21,7 @@ export class DashboardPage{
   randomNum = 0;
   task: Tasks[];
   a: any[]=[];
+  
   user: any;
   filteredTask: any[]=[];
   changeTbColor(){
@@ -28,7 +29,7 @@ export class DashboardPage{
 
     this.tbcolor = this.colors[this.randomNum];
   }
-  constructor(private tasksService: TasksService, private data_service: DataService, private modalController:ModalController) {  }
+  constructor(private tasksService: TasksService, private data_service: DataService, private modalController:ModalController, private router:Router) {  }
 
     OpenModal() {
       this.modalController.create(
@@ -38,19 +39,12 @@ export class DashboardPage{
 
     }
 
-
- 
-
-
-
   ngOnInit():void {
-    this.task = this.tasksService.getAllTasks();
     this.user=this.data_service.userLoggedIn;
-    console.log(this.user);
-    console.log("User id: "+this.data_service.user_id)
     this.getTasks();
     this.getData();
     this.filterTasks();
+    this.getCateg();
   }
 
   selectedData: any[] = [];
@@ -62,6 +56,39 @@ export class DashboardPage{
       console.log(this.selectedData)
     });
   }
+
+  category:any[] =[];
+  getCateg(){
+    this.data_service.sendAPIRequest("task_category/", null).subscribe(data => {
+      this.category = data.payload
+      console.log(data.payload)
+    });
+  }
+  categoryTasks:any[]=[];
+  categoryTaskOnView:any[]=[]
+
+  viewCategory(categ, title){
+    this.categoryTaskOnView = []
+    // console.log(this.data_service.user_id)
+    // console.log(categ.category_id)
+    this.data_service.sendAPIRequest("viewCategory/"+this.data_service.user_id, null).subscribe(data => {
+      this.categoryTasks=data.payload;
+      for(let task of this.categoryTasks){
+        if(task.category_id == categ.category_id){
+          this.categoryTaskOnView.push(task)
+          console.log(task.task_title);
+        }
+      }
+      console.log(this.categoryTaskOnView)
+      this.data_service.tasksCateg = this.categoryTaskOnView;
+      this.data_service.categ = title;
+      this.router.navigate(['/home/dashboard/category-view']);
+      console.log("CATEG TITLE :"+title)
+    });
+  }
+
+  
+
   public getTasks(){
     this.data_service.sendAPIRequest(("task"), null)
     .subscribe((result:any)=>{

@@ -13,7 +13,7 @@ export class ModalPage implements OnInit {
 
   ngOnInit() {
   }
-
+ 
   CloseModal () {
      this.ModalController.dismiss();
   }

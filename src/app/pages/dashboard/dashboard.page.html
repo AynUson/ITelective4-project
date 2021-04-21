@@ -28,6 +28,27 @@
       
       <!-- <ion-slides [options]="slidesOptions" *ngFor="let task of selectedData">
         <ion-slide > -->
+        <ion-grid>
+            <ion-row>
+
+              <ion-col *ngFor="let categ of category" col-6 no-padding> 
+                <ion-card>
+                  <ion-card-header (click)="viewCategory(categ,categ.category)">
+                    <ion-icon  name="people-circle-outline"></ion-icon>
+                    <h3> // Icon // to be done </h3>
+                    <!-- Add icon name on DB -->
+                    <ion-card-title size="small"> {{categ.category}} </ion-card-title>
+                  </ion-card-header>
+                    <ion-card-content class="fixline">
+                      <h3> // No. of tasks// to be done </h3>
+                    </ion-card-content>
+                </ion-card>     
+              </ion-col>
+
+            </ion-row>
+          </ion-grid>
+
+<!--      // SHOW ALL THE TASK OF USER THAT IS NOT COLLAB
           <ion-grid>
             <ion-row>
               <ion-col *ngFor="let task of selectedData" col-6 no-padding>
@@ -43,7 +64,7 @@
       
               </ion-col>
             </ion-row>
-          </ion-grid>
+          </ion-grid> -->
 
           <!--
           <ion-card *ngFor="let task of selectedData">

@@ -9,6 +9,8 @@ export class DataService {
   userLoggedIn:any;
   user_id:number;
   currentCollabView:any;
+  tasksCateg: any[]=[]
+  categ:any;
   constructor(private _http: HttpClient) { }
 
 
