@@ -17,7 +17,7 @@
 <ion-content>
 
   <div class="slides ion-margin-bottom">
-
+    <h3>Tasks</h3>
     <ion-card *ngFor="let task of selectedData">
       <ion-card-header>
         <h3> {{task.task_title}}  </h3>
@@ -28,5 +28,10 @@
     </ion-card>
 
 </div>
+<ion-fab vertical="bottom" horizontal="end" slot="fixed">
+  <ion-fab-button>
+    <ion-icon name="add" style="color:aliceblue"></ion-icon>
+  </ion-fab-button>
+</ion-fab>
 </ion-content>
 

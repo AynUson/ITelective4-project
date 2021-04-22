@@ -19,8 +19,9 @@ export class DataService {
 
 
   sendAPIRequest(method:any, data:any) {
+    console.log(data)
     return <any>(
-      this._http.post(this.baseURL + method, btoa(JSON.stringify(data)))
+      this._http.post(this.baseURL + method, (JSON.stringify(data)))
     );
   }
 

@@ -31,11 +31,17 @@ export class DashboardPage{
   }
   constructor(private tasksService: TasksService, private data_service: DataService, private modalController:ModalController, private router:Router) {  }
 
-    OpenModal() {
-      this.modalController.create(
-        { component:ModalPage }).then((modalElement)=>{
-        modalElement.present();
-      })
+    async OpenModal() {
+      // this.modalController.create(
+      //   { component:ModalPage }).then((modalElement)=>{
+      //   modalElement.present();
+      // });
+      let modal =await this.modalController.create({ component:ModalPage });
+      modal.onDidDismiss().then(()=>{
+        this.countReset();
+        this.getData();
+      });
+        modal.present();
 
     }
 
@@ -48,6 +54,12 @@ export class DashboardPage{
   }
 
   selectedData: any[] = [];
+  countReset(){
+    this.fitnessCount=0;
+    this.workCount=0;
+    this.schoolCount=0;
+    this.othersCount=0;
+  }
   fitnessCount:number=0;
   workCount:number=0;
   schoolCount:number=0;
