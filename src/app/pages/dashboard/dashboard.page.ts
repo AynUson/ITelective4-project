@@ -21,7 +21,7 @@ export class DashboardPage{
   randomNum = 0;
   task: Tasks[];
   a: any[]=[];
-  
+
   user: any;
   filteredTask: any[]=[];
   changeTbColor(){
@@ -48,11 +48,28 @@ export class DashboardPage{
   }
 
   selectedData: any[] = [];
-
+  fitnessCount:number=0;
+  workCount:number=0;
+  schoolCount:number=0;
+  othersCount:number=0;
   getData() {
     console.log(this.data_service.user_id)
     this.data_service.sendAPIRequest("task/" + this.data_service.user_id, null).subscribe(data => {
       this.selectedData = data.payload
+      for(let task of this.selectedData){
+        if(task.category_id == 1){
+          this.schoolCount++;
+        }
+        if(task.category_id == 2){
+          this.workCount++;
+        }
+        if(task.category_id == 3){
+          this.fitnessCount++;
+        }
+        if(task.category_id == 4){
+          this.othersCount++;
+        }
+      }
       console.log(this.selectedData)
     });
   }
@@ -66,6 +83,9 @@ export class DashboardPage{
   }
   categoryTasks:any[]=[];
   categoryTaskOnView:any[]=[]
+
+
+
 
   viewCategory(categ, title){
     this.categoryTaskOnView = []
@@ -87,7 +107,7 @@ export class DashboardPage{
     });
   }
 
-  
+
 
   public getTasks(){
     this.data_service.sendAPIRequest(("task"), null)

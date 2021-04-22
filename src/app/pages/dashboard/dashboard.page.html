@@ -15,34 +15,35 @@
       <p>Level: {{user.user_level}}</p>
       <h2>{{user.user_name}}</h2>
     </ion-label>
-  </ion-item> 
+  </ion-item>
 -->
-</ion-header> 
+</ion-header>
 
 
 <ion-content>
-  
+
   <!-- {{a | json}} -->
 
   <div class="slides ion-margin-bottom" >
-      
+
       <!-- <ion-slides [options]="slidesOptions" *ngFor="let task of selectedData">
         <ion-slide > -->
         <ion-grid>
             <ion-row>
 
-              <ion-col *ngFor="let categ of category" col-6 no-padding> 
+              <ion-col *ngFor="let categ of category" col-6 no-padding>
                 <ion-card>
                   <ion-card-header (click)="viewCategory(categ,categ.category)">
-                    <ion-icon  name="people-circle-outline"></ion-icon>
-                    <h3> // Icon // to be done </h3>
-                    <!-- Add icon name on DB -->
+                    <ion-icon  name="{{categ.category_property}}"></ion-icon>
                     <ion-card-title size="small"> {{categ.category}} </ion-card-title>
                   </ion-card-header>
                     <ion-card-content class="fixline">
-                      <h3> // No. of tasks// to be done </h3>
+                      <h3 *ngIf="categ.category_id == 1"> {{schoolCount}} </h3>
+                      <h3 *ngIf="categ.category_id == 2"> {{workCount}} </h3>
+                      <h3 *ngIf="categ.category_id == 3"> {{fitnessCount}} </h3>
+                      <h3 *ngIf="categ.category_id == 4"> {{othersCount}} </h3>
                     </ion-card-content>
-                </ion-card>     
+                </ion-card>
               </ion-col>
 
             </ion-row>
@@ -61,7 +62,7 @@
                       <h3> {{task.task_description}}</h3>
                     </ion-card-content>
                 </ion-card>
-      
+
               </ion-col>
             </ion-row>
           </ion-grid> -->
@@ -76,7 +77,7 @@
             </ion-card-content>
             <ion-icon name="arrow-forward" style="float:right;"></ion-icon>
           </ion-card> -->
-          
+
         <!-- </ion-slide>
 
 
@@ -88,7 +89,7 @@
         </ion-slide>
 
       </ion-slides>
-      
+
 
     <ion-button color="{{tbcolor}}" (click)="changeTbColor()" >(test)Change Button Color</ion-button> -->
 
@@ -96,7 +97,7 @@
 
   <ion-fab vertical="bottom" horizontal="end" slot="fixed">
     <ion-fab-button (click)="OpenModal()">
-      <ion-icon name="add"></ion-icon>
+      <ion-icon name="add" style="color:aliceblue"></ion-icon>
     </ion-fab-button>
   </ion-fab>
 
