@@ -26,6 +26,13 @@ switch ($_SERVER['REQUEST_METHOD']) {
           echo json_encode($gm->exec_query($req[0] . '_tbl', null), JSON_PRETTY_PRINT);
         }
         break;
+      case 'shop':
+        if (count($req) > 1) {
+          echo json_encode($post->shop($req[0] . '_tbl', $req[1]), JSON_PRETTY_PRINT);
+        } else {
+          echo json_encode($post->shop($req[0] . '_tbl', null), JSON_PRETTY_PRINT);
+        }
+        break;
       case 'user':
         if (count($req) > 1) {
           echo json_encode($gm->exec_query($req[0] . '_tbl', $req[1]), JSON_PRETTY_PRINT);
@@ -68,7 +75,7 @@ switch ($_SERVER['REQUEST_METHOD']) {
           echo json_encode($post->viewCategory(null), JSON_PRETTY_PRINT);
         }
         break;
-      
+
 
 
 

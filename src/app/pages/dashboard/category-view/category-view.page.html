@@ -24,6 +24,8 @@
 
   <div class="slides ion-margin-bottom">
 
+    <h3 *ngIf="categoryBlank"> {{category}} is empty. Do something... </h3>
+
     <ion-card *ngFor="let task of tasks">
       <ion-card-header>
         <h3> {{task.task_title}}  </h3>

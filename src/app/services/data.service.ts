@@ -11,6 +11,10 @@ export class DataService {
   currentCollabView:any;
   tasksCateg: any[]=[]
   categ:any;
+  fitnessCount:number=0;
+  workCount:number=0;
+  schoolCount:number=0;
+  othersCount:number=0;
   constructor(private _http: HttpClient) { }
 
 

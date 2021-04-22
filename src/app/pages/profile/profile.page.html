@@ -11,7 +11,7 @@
       <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAAAAACH5BAAAAAAALAAAAAABAAEAAAICTAEAOw==">
     </ion-avatar>
     <ion-label>
-      <p>Level: {{user.user_level}}</p>
+      <!-- <p>Level: {{user.user_level}}</p> -->
       <h2>{{user.user_name}}</h2>
     </ion-label>
   </ion-item>
@@ -23,10 +23,10 @@
     <ion-card>
       <ion-list>
         <ion-item>
-          <ion-label>Level</ion-label>
+          <ion-label>Level {{user.user_level}} </ion-label>
         </ion-item>
         <ion-item>
-          <ion-label>Gold</ion-label>
+          <ion-label>Gold {{user.user_gold}} </ion-label>
         </ion-item>
       </ion-list>
     </ion-card>

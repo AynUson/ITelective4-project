@@ -15,6 +15,15 @@ export class ShopPage implements OnInit {
 
   ngOnInit() {
     this.user=this.data_service.userLoggedIn;
+    this.getCateg();
+  }
+
+  items:any[] =[];
+  getCateg(){
+    this.data_service.sendAPIRequest("shop/", null).subscribe(data => {
+      this.items = data.payload
+      console.log(data.payload)
+    });
   }
 
 }

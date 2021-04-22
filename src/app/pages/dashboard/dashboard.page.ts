@@ -99,6 +99,10 @@ export class DashboardPage{
           console.log(task.task_title);
         }
       }
+      this.data_service.schoolCount = this.schoolCount;
+      this.data_service.workCount = this.workCount;
+      this.data_service.fitnessCount = this.fitnessCount;
+      this.data_service.othersCount = this.othersCount;
       console.log(this.categoryTaskOnView)
       this.data_service.tasksCateg = this.categoryTaskOnView;
       this.data_service.categ = title;
