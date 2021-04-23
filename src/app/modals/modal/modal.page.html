@@ -1,0 +1,41 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Add Task</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="CloseModal()">
+        <ion-icon name="arrow-back-outline"></ion-icon>
+      </ion-button>
+  </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <div class="slides ion-margin-bottom">
+      <ion-card>
+        <ion-item>
+          <ion-label position="floating">Title</ion-label>
+          <ion-input name="title" [(ngModel)]="addTask.task_title"></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label position="floating">Description</ion-label>
+          <ion-input name="description" [(ngModel)]="addTask.task_description"></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label position="floating">Category</ion-label>
+          <ion-select name="category" [(ngModel)]="addTask.category_id">
+            <ion-select-option value="1">School</ion-select-option>
+            <ion-select-option value="2">Work</ion-select-option>
+            <ion-select-option value="3">Fitness</ion-select-option>
+            <ion-select-option value="4">Others</ion-select-option>
+          </ion-select>
+        </ion-item>
+
+        <ion-button (click)="createTask()"> Create </ion-button>
+      </ion-card>
+  </div>
+
+
+</ion-content>

@@ -40,6 +40,13 @@ switch ($_SERVER['REQUEST_METHOD']) {
           echo json_encode($gm->exec_query($req[0] . '_tbl', null), JSON_PRETTY_PRINT);
         }
         break;
+      case 'collab_room':
+        if (count($req) > 1) {
+          echo json_encode($gm->exec_query($req[0] . '_tbl', $req[1]), JSON_PRETTY_PRINT);
+        } else {
+          echo json_encode($gm->exec_query($req[0] . '_tbl', null), JSON_PRETTY_PRINT);
+        }
+        break;
       case 'showCollabJoin':
         if (count($req) > 1) {
           echo json_encode($post->selectCollabJoin($req[1]), JSON_PRETTY_PRINT);
@@ -83,6 +90,21 @@ switch ($_SERVER['REQUEST_METHOD']) {
       case 'createTask':
         $d = json_decode(file_get_contents("php://input"));
         echo json_encode($gm->insert("task_tbl", $d), JSON_PRETTY_PRINT);
+        return array("data" => $d);
+        break;
+      case 'createCollab':
+        $d = json_decode(file_get_contents("php://input"));
+        echo json_encode($gm->insert("collab_room_tbl", $d), JSON_PRETTY_PRINT);
+        return array("data" => $d);
+        break;
+      case 'initCollabMem':
+        $d = json_decode(file_get_contents("php://input"));
+        echo json_encode($gm->insert("collab_member_tbl", $d), JSON_PRETTY_PRINT);
+        return array("data" => $d);
+        break;
+      case 'collabtask':
+        $d = json_decode(file_get_contents("php://input"));
+        echo json_encode($gm->insert("collab_tasks_tbl", $d), JSON_PRETTY_PRINT);
         return array("data" => $d);
         break;
 

@@ -13,8 +13,16 @@ const routes: Routes = [
   },
   {
     path: 'modal',
-    loadChildren: () => import('./modal/modal.module').then( m => m.ModalPageModule)
+    loadChildren: () => import('./modals/modal/modal.module').then( m => m.ModalPageModule)
+  },  {
+    path: 'collab-modal',
+    loadChildren: () => import('./modals/collab-modal/collab-modal.module').then( m => m.CollabModalPageModule)
+  },
+  {
+    path: 'collabtask-modal',
+    loadChildren: () => import('./modals/collabtask-modal/collabtask-modal.module').then( m => m.CollabtaskModalPageModule)
   }
+
 
 ];
 @NgModule({

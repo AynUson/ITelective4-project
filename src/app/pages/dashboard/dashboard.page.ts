@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Tasks } from './tasks.model';
 import { TasksService } from './tasks.service';
 import {  ModalController } from '@ionic/angular';
-import { ModalPage } from "../../modal/modal.page";
+import { ModalPage } from "../../modals/modal/modal.page";
 import { DataService } from '../../services/data.service';
 import { Router } from '@angular/router';
 @Component({
@@ -38,7 +38,6 @@ export class DashboardPage{
       // });
       let modal =await this.modalController.create({ component:ModalPage });
       modal.onDidDismiss().then(()=>{
-        this.countReset();
         this.getData();
       });
         modal.present();

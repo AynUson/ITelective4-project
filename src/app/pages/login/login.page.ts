@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { UserService } from 'src/app/services/user.service';
 import { AlertController } from '@ionic/angular';
 import { DataService } from '../../services/data.service';
+import { ToastController } from '@ionic/angular';
 
 @Component({
   selector: 'app-login',
@@ -35,7 +36,8 @@ export class LoginPage implements OnInit {
     private user:UserService,
      private router:Router,
      public alertController: AlertController,
-     private data_service: DataService
+     private data_service: DataService,
+     public toastController: ToastController
      ) { }
 
   public getUsers(){
@@ -53,7 +55,7 @@ export class LoginPage implements OnInit {
     if(this.unameInput != null && this.pwordInput != null){
       for(let user of this.users){
         if((this.unameInput == user.user_name || this.unameInput == user.user_email) && this.pwordInput == user.user_pword){
-          this.presentAlert('Success','Welcome '+ user.user_name)
+          this.presentToast("Welcome "+user.user_name+"!")
           this.data_service.userLoggedIn = user;
           this.data_service.user_id = user.user_id;
           this.router.navigate(['/home/dashboard']);
@@ -62,57 +64,24 @@ export class LoginPage implements OnInit {
         }else{
           count++
           if(count == this.users.length){
-            this.presentAlert('Warning','Username or Password is incorrect')
+            this.presentToast('Username or Password is incorrect')
           }
 
         }
       }
     }else{
-      this.presentAlert('Warning','Fill the fields!')
+      this.presentToast('Fill the fields!')
     }
   }
 
-  async presentAlert(title, sub) {
-    const alert = await this.alertController.create({
-      cssClass: 'my-custom-class',
-      header: title,
-      subHeader: sub,
-      message: 'This is an alert message.',
-      buttons: ['OK']
+
+  async presentToast(msg) {
+    const toast = await this.toastController.create({
+      message: msg,
+      duration: 2000,
+      position: 'top'
     });
-
-    await alert.present();
-
-    const { role } = await alert.onDidDismiss();
-
+    toast.present();
   }
 
-
-
-  login(e): void{
-    e.preventDefault();
-
-
-    if(this.unameInput != '' && this.pwordInput != ''){
-      if(this.uname == this.unameInput && this.pword == this.pwordInput ){
-        console.log(this.unameInput);
-        console.log(this.pwordInput);
-        this.presentAlert('Success','Welcome '+ this.name)
-        this.router.navigate(['/home']);
-        this.user.setLogin();
-
-      }else{
-
-        if(this.unameInput != null && this.pwordInput != null){
-          this.presentAlert('Warning','Username or Password is incorrect')
-        }
-
-
-      }
-    }if(this.unameInput == null || this.pwordInput == null){
-      this.presentAlert('Warning','Fill the fields!')
-    }
-
-
-  }
 }

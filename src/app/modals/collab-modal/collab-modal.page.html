@@ -1,0 +1,40 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Start a Collaboration</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="CloseModal()">
+        <ion-icon name="arrow-back-outline"></ion-icon>
+      </ion-button>
+  </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <div class="slides ion-margin-bottom">
+      <ion-card>
+        <ion-item>
+          <ion-label position="floating">Collab Name</ion-label>
+          <ion-input name="title" [(ngModel)]="addCollab.collab_room_name"></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label position="floating">Collab Description</ion-label>
+          <ion-input name="description" [(ngModel)]="addCollab.collab_room_description"></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label position="floating">Category</ion-label>
+          <!-- make category dropdown dynamic -->
+          <ion-select name="category" [(ngModel)]="addCollab.collab_category_id">
+            <ion-select-option value="1">School</ion-select-option>
+            <ion-select-option value="2">Work</ion-select-option>
+          </ion-select>
+        </ion-item>
+
+        <ion-button (click)="createCollab()"> Create </ion-button>
+      </ion-card>
+  </div>
+
+
+</ion-content>

@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 
 import { Router } from '@angular/router';
 import { DataService } from 'src/app/services/data.service';
+import { CollabtaskModalPage } from "../../../modals/collabtask-modal/collabtask-modal.page";
+import {  ModalController } from '@ionic/angular';
 @Component({
   selector: 'app-collaboration-view',
   templateUrl: './collaboration-view.page.html',
@@ -14,7 +16,7 @@ export class CollaborationViewPage implements OnInit {
 
   selectedData: any[] = [];
   constructor(private data_service: DataService,
-    private router:Router) { }
+    private router:Router, private modalController:ModalController) { }
 
   ngOnInit() {
     this.user=this.data_service.userLoggedIn;
@@ -23,6 +25,20 @@ export class CollaborationViewPage implements OnInit {
     console.log(this.data_service.currentCollabView.collab_room_id);
     this.getCollabTasks();
     this.getCollabMem();
+  }
+
+  async OpenModal() {
+    // this.modalController.create(
+    //   { component:ModalPage }).then((modalElement)=>{
+    //   modalElement.present();
+    // });
+    let modal =await this.modalController.create({ component:CollabtaskModalPage });
+    modal.onDidDismiss().then(()=>{
+      this.getCollabTasks();
+      this.getCollabMem();
+    });
+      modal.present();
+
   }
 
   getCollabTasks(){
