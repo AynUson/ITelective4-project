@@ -46,7 +46,8 @@ export class CollabModalPage implements OnInit {
             console.log(this.room);
         });
         for(let rm of this.room){
-          this.room_id=rm.collab_room_id
+          this.room_id=rm.collab_room_id+1
+          console.log(this.room_id)
         }
   }
 

@@ -39,6 +39,7 @@ export class DashboardPage{
       let modal =await this.modalController.create({ component:ModalPage });
       modal.onDidDismiss().then(()=>{
         this.getData();
+        this.countReset();
       });
         modal.present();
 

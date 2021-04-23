@@ -54,7 +54,7 @@ export class CollabtaskModalPage implements OnInit {
             console.log(this.task);
         });
         for(let tsk of this.task){
-          this.task_id=tsk.task_id
+          this.task_id=tsk.task_id+1
           console.log(this.task_id)
         }
   }
