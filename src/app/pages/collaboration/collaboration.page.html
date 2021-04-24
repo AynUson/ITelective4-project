@@ -25,10 +25,10 @@
     <h3>Rooms</h3>
         <ion-card *ngFor="let room of acceptedCollab" (click)="selectRoom(room)">
           <ion-card-header>
-            <h3> {{room.collab_room_name}}  </h3>
+            <ion-card-title class="ion-margin-bottom"  > {{room.collab_room_name}}  </ion-card-title>
           </ion-card-header>
           <ion-card-content class="ion-text-left flexbox" >
-            <ion-card-title class="ion-margin-bottom"  > {{room.collab_room_description}} </ion-card-title>
+            <h3> {{room.collab_room_description}} </h3>
           </ion-card-content>
         </ion-card>
 

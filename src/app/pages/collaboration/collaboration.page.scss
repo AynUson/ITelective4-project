@@ -2,11 +2,10 @@ ion-header {
   #notification-button {
     position: relative;
 
-    top:1px;
+    top: 1px;
     right: 1px;
-    overflow: visible!important;
-}
-
+    overflow: visible !important;
+  }
 
   #notifications-badge {
     background-color: red;
@@ -14,7 +13,7 @@ ion-header {
     top: -3px;
     right: -16px;
     border-radius: 100%;
-}
+  }
 
   font-family: "Poppins", sans-serif;
   ion-toolbar,
@@ -65,7 +64,8 @@ ion-content {
 
   ion-card {
     width: 95%;
-    box-shadow: none;
+    box-shadow: 1;
+
     border-radius: 14px;
     background: rgba(255, 255, 255, 0.8);
   }
@@ -101,10 +101,10 @@ ion-content {
   }
 }
 
-.flexbox{
+.flexbox {
   display: flex;
 }
-.buttonright{
+.buttonright {
   position: absolute;
   right: 10px;
   padding: 0px 10px 10px 10px;
