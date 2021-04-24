@@ -1,15 +1,20 @@
 <ion-header>
   <ion-toolbar color="primary">
-    <ion-title><b>Collaboration</b></ion-title>
-    <ion-button slot="end" color="light" (click)="backCollab()" >
-      <ion-icon name="caret-back"></ion-icon>
+    <ion-title><b>{{room.collab_room_name}}</b></ion-title>
+
+    <ion-buttons slot="start">
+      <ion-button (click)="backCollab()">
+        <ion-icon name="arrow-back-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-button slot="end" color="light" (click)="OpenInviteModal()" >
+      <ion-icon name="person-add"></ion-icon>
     </ion-button>
   </ion-toolbar>
 
   <ion-item lines='none' >
     <ion-label>
-      <p>{{room.collab_room_description}}</p>
-      <h2>{{room.collab_room_name}}</h2>
+      <h2>{{room.collab_room_description}}</h2>
     </ion-label>
   </ion-item>
 </ion-header>
@@ -27,11 +32,19 @@
       </ion-card-content>
     </ion-card>
 
-</div>
-<ion-fab vertical="bottom" horizontal="end" slot="fixed">
-  <ion-fab-button (click)="OpenModal()">
-    <ion-icon name="add" style="color:aliceblue"></ion-icon>
-  </ion-fab-button>
-</ion-fab>
+
+    pull members temporary
+    <ion-list>
+      <ion-item *ngFor="let mem of members">
+        <h2>{{mem.user_name}}</h2>
+      </ion-item>
+    </ion-list>
+
+  </div>
+    <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+      <ion-fab-button (click)="OpenModal()">
+        <ion-icon name="add" style="color:aliceblue"></ion-icon>
+      </ion-fab-button>
+    </ion-fab>
 </ion-content>
 

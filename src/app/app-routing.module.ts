@@ -21,6 +21,14 @@ const routes: Routes = [
   {
     path: 'collabtask-modal',
     loadChildren: () => import('./modals/collabtask-modal/collabtask-modal.module').then( m => m.CollabtaskModalPageModule)
+  },
+  {
+    path: 'invite-member-modal',
+    loadChildren: () => import('./modals/invite-member-modal/invite-member-modal.module').then( m => m.InviteMemberModalPageModule)
+  },
+  {
+    path: 'pendingreq-modal',
+    loadChildren: () => import('./modals/pendingreq-modal/pendingreq-modal.module').then( m => m.PendingreqModalPageModule)
   }
 
 

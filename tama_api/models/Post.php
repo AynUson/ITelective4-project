@@ -6,6 +6,49 @@
 			$this->pdo = $pdo;
 		}
 
+    function selectCollabJoinAccepted($filter_data) {
+
+			$this->sql = "SELECT * FROM collab_room_tbl
+      INNER JOIN collab_member_tbl ON collab_room_tbl.collab_room_id=collab_member_tbl.collab_room_id
+      INNER JOIN user_tbl ON user_tbl.user_id=collab_member_tbl.user_id";
+
+            if($filter_data != null) {
+                $this->sql .= " WHERE collab_member_tbl.isAccepted=1 AND user_tbl.user_id =  $filter_data";
+            }
+
+            $data = array(); $code = 0; $msg= ""; $remarks = "";
+            try {
+                if ($res = $this->pdo->query($this->sql)->fetchAll()) {
+                    foreach ($res as $rec) { array_push($data, $rec);}
+                    $res = null; $code = 200; $msg = "Successfully retrieved the requested records"; $remarks = "success";
+                }
+            } catch (\PDOException $e) {
+                $msg = $e->getMessage(); $code = 401; $remarks = "failed";
+            }
+            return $this->sendPayload($data, $remarks, $msg, $code);
+        }
+      function selectCollabJoinReq($filter_data) {
+
+        $this->sql = "SELECT * FROM collab_room_tbl
+        INNER JOIN collab_member_tbl ON collab_room_tbl.collab_room_id=collab_member_tbl.collab_room_id
+        INNER JOIN user_tbl ON user_tbl.user_id=collab_member_tbl.user_id";
+
+              if($filter_data != null) {
+                  $this->sql .= " WHERE collab_member_tbl.isAccepted=0 AND user_tbl.user_id =  $filter_data";
+              }
+
+              $data = array(); $code = 0; $msg= ""; $remarks = "";
+              try {
+                  if ($res = $this->pdo->query($this->sql)->fetchAll()) {
+                      foreach ($res as $rec) { array_push($data, $rec);}
+                      $res = null; $code = 200; $msg = "Successfully retrieved the requested records"; $remarks = "success";
+                  }
+              } catch (\PDOException $e) {
+                  $msg = $e->getMessage(); $code = 401; $remarks = "failed";
+              }
+              return $this->sendPayload($data, $remarks, $msg, $code);
+          }
+
     function selectCollabJoin($filter_data) {
 
 			$this->sql = "SELECT * FROM collab_room_tbl

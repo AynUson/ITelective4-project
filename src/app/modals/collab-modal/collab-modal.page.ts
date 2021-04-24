@@ -13,7 +13,7 @@ import { InitCollab } from 'src/app/model/initCollabMem.model';
 })
 export class CollabModalPage implements OnInit {
   addCollab = new AddCollab(0,0,'','');
-  initCollab = new InitCollab(0,0);
+  initCollab = new InitCollab(0,0,1);
   constructor(private ModalController:ModalController,private data_service: DataService,private router:Router, public toastController: ToastController) { }
 
   ngOnInit() {

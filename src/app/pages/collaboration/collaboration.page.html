@@ -1,8 +1,9 @@
 <ion-header>
   <ion-toolbar color="primary">
     <ion-title><b>Collaboration</b></ion-title>
-    <ion-button slot="end" color="light"  >
-      <ion-icon name="person-add"></ion-icon>
+    <ion-button id="notification-button" slot="end" color="light" (click)="toPendingreq()" >
+      <ion-icon name="notifications" name="person-add"></ion-icon>
+      <ion-badge id="notifications-badge" color="primary"> {{pendingReq}} </ion-badge>
     </ion-button>
   </ion-toolbar>
 
@@ -19,9 +20,10 @@
 
 <ion-content>
 
+
   <div class="slides ion-margin-bottom">
     <h3>Rooms</h3>
-        <ion-card *ngFor="let room of selectedData" (click)="selectRoom(room)">
+        <ion-card *ngFor="let room of acceptedCollab" (click)="selectRoom(room)">
           <ion-card-header>
             <h3> {{room.collab_room_name}}  </h3>
           </ion-card-header>

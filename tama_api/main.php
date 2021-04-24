@@ -54,6 +54,20 @@ switch ($_SERVER['REQUEST_METHOD']) {
           echo json_encode($post->selectCollabJoin(null), JSON_PRETTY_PRINT);
         }
         break;
+      case 'showCollabJoin2':
+        if (count($req) > 1) {
+          echo json_encode($post->selectCollabJoinAccepted($req[1]), JSON_PRETTY_PRINT);
+        } else {
+          echo json_encode($post->selectCollabJoinAccepted(null), JSON_PRETTY_PRINT);
+        }
+        break;
+        case 'showCollabJoin3':
+          if (count($req) > 1) {
+            echo json_encode($post->selectCollabJoinReq($req[1]), JSON_PRETTY_PRINT);
+          } else {
+            echo json_encode($post->selectCollabJoinReq(null), JSON_PRETTY_PRINT);
+          }
+          break;
       case 'showCollabTasks':
         if (count($req) > 1) {
           echo json_encode($post->collabTaskJoin($req[1]), JSON_PRETTY_PRINT);
@@ -111,9 +125,9 @@ switch ($_SERVER['REQUEST_METHOD']) {
 
 
         //UPDATE
-      case 'updating':
+      case 'acceptCollab':
         $d = json_decode(file_get_contents("php://input"));
-        echo json_encode($gm->update("tbl name", $d, 'task_id=' . $req[1]), JSON_PRETTY_PRINT);
+        echo json_encode($gm->update("collab_member_tbl", $d, 'member_rec_id=' . $req[1]), JSON_PRETTY_PRINT);
         break;
         //DELETE??
     }

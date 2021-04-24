@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { DataService } from 'src/app/services/data.service';
 import { CollabtaskModalPage } from "../../../modals/collabtask-modal/collabtask-modal.page";
+import { InviteMemberModalPage } from "../../../modals/invite-member-modal/invite-member-modal.page";
 import {  ModalController } from '@ionic/angular';
 @Component({
   selector: 'app-collaboration-view',
@@ -27,6 +28,21 @@ export class CollaborationViewPage implements OnInit {
     this.getCollabMem();
   }
 
+
+  async OpenInviteModal() {
+    // this.modalController.create(
+    //   { component:ModalPage }).then((modalElement)=>{
+    //   modalElement.present();
+    // });
+    let modal =await this.modalController.create({ component:InviteMemberModalPage });
+    modal.onDidDismiss().then(()=>{
+      this.getCollabTasks();
+      this.getCollabMem();
+    });
+      modal.present();
+
+  }
+
   async OpenModal() {
     // this.modalController.create(
     //   { component:ModalPage }).then((modalElement)=>{
@@ -47,10 +63,11 @@ export class CollaborationViewPage implements OnInit {
       console.log(data)
     });
   }
-
+  members:any;
   getCollabMem(){
     this.data_service.sendAPIRequest("showCollabMembers/" + this.data_service.currentCollabView.collab_room_id, null).subscribe(data => {
-      console.log(data.payload)
+      this.members = data.payload
+      console.log("MEMBERS: "+this.members )
     });
   }
 

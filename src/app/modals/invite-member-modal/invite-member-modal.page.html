@@ -1,0 +1,29 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Invite Collaborator</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="CloseModal()">
+        <ion-icon name="arrow-back-outline"></ion-icon>
+      </ion-button>
+  </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <div class="slides ion-margin-bottom">
+      <ion-card>
+        <ion-item>
+          <ion-searchbar showCancelButton="focus" placeholder="Search Collaborator" #search debounce="500" (ionChange)="collabSearch($event)"></ion-searchbar>
+        </ion-item>
+
+      </ion-card>
+  </div>
+  <ion-list>
+    <ion-item *ngFor="let collaborator of searchedItem">
+      <ion-label>{{collaborator.user_name}}</ion-label>
+      <ion-button (click)="checkIfMem(collaborator.user_id,collaborator.user_name)"> Invite </ion-button>
+    </ion-item>
+  </ion-list>
+
+</ion-content>
