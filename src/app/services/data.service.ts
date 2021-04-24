@@ -11,6 +11,7 @@ export class DataService {
   currentCollabView:any;
   tasksCateg: any[]=[]
   categ:any;
+  icon:any;
   room_id:any;
   fitnessCount:number=0;
   workCount:number=0;

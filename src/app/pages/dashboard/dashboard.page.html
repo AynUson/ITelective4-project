@@ -33,7 +33,7 @@
 
               <ion-col *ngFor="let categ of category" col-6 no-padding>
                 <ion-card>
-                  <ion-card-header (click)="viewCategory(categ,categ.category)">
+                  <ion-card-header (click)="viewCategory(categ,categ.category, categ.category_property)">
                     <ion-icon  name="{{categ.category_property}}"></ion-icon>
                     <ion-card-title size="small"> {{categ.category}} </ion-card-title>
                   </ion-card-header>
@@ -48,50 +48,6 @@
 
             </ion-row>
           </ion-grid>
-
-<!--      // SHOW ALL THE TASK OF USER THAT IS NOT COLLAB
-          <ion-grid>
-            <ion-row>
-              <ion-col *ngFor="let task of selectedData" col-6 no-padding>
-
-                <ion-card>
-                  <ion-card-header>
-                    <ion-card-title size="small">{{task.task_title}}</ion-card-title>
-                  </ion-card-header>
-                    <ion-card-content class="fixline">
-                      <h3> {{task.task_description}}</h3>
-                    </ion-card-content>
-                </ion-card>
-
-              </ion-col>
-            </ion-row>
-          </ion-grid> -->
-
-          <!--
-          <ion-card *ngFor="let task of selectedData">
-            <ion-card-header>
-              <h3> {{task.task_description}}</h3>
-            </ion-card-header>
-            <ion-card-content class="ion-text-left">
-              <ion-card-title class="ion-margin-bottom">{{task.task_title}}</ion-card-title>
-            </ion-card-content>
-            <ion-icon name="arrow-forward" style="float:right;"></ion-icon>
-          </ion-card> -->
-
-        <!-- </ion-slide>
-
-
-        <ion-slide>
-          <ion-card>
-            <ion-button expand="block">View</ion-button>
-            <ion-button expand="block">Update</ion-button>
-          </ion-card>
-        </ion-slide>
-
-      </ion-slides>
-
-
-    <ion-button color="{{tbcolor}}" (click)="changeTbColor()" >(test)Change Button Color</ion-button> -->
 
    </div>
 

@@ -12,7 +12,7 @@
 			$this->sql = "SELECT * FROM $table";
 
 			if($filter_data != null && $table == "task_tbl") {
-				$this->sql .= " WHERE user_id=$filter_data";
+				$this->sql .= " WHERE task_isCollab=0 AND user_id=$filter_data";
 			}
 
 			$data = array(); $code = 0; $msg= ""; $remarks = "";

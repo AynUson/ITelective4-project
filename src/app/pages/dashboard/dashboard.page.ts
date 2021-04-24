@@ -99,7 +99,7 @@ export class DashboardPage{
 
 
 
-  viewCategory(categ, title){
+  viewCategory(categ, title, icon){
     this.categoryTaskOnView = []
     // console.log(this.data_service.user_id)
     // console.log(categ.category_id)
@@ -118,6 +118,7 @@ export class DashboardPage{
       console.log(this.categoryTaskOnView)
       this.data_service.tasksCateg = this.categoryTaskOnView;
       this.data_service.categ = title;
+      this.data_service.icon = icon;
       this.router.navigate(['/home/dashboard/category-view']);
       console.log("CATEG TITLE :"+title)
     });
