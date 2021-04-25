@@ -21,16 +21,40 @@
 
 <ion-content>
 
+  <ion-list >
+    <!-- Multi-line sliding item with icon options on both sides -->
+      <ion-item-sliding id="item100" *ngFor="let task of selectedData">
+        <ion-item>
+          <ion-label>
+            <h2>{{task.task_title}}</h2>
+            <p>{{task.task_description}}</p>
+          </ion-label>
+          <ion-note slot="end">
+            10:45 AM
+            <!-- Deadline or date created -->
+          </ion-note>
+        </ion-item>
+
+        <!-- DONE -->
+        <ion-item-options side="start">
+          <ion-item-option>
+            <ion-icon slot="icon-only" name="heart"></ion-icon>
+          </ion-item-option>
+        </ion-item-options>
+        <!-- DELETE AND VIEW -->
+        <ion-item-options side="end">
+          <ion-item-option color="danger">
+            <ion-icon slot="icon-only" name="trash"></ion-icon>
+          </ion-item-option>
+          <ion-item-option>
+            <ion-icon slot="icon-only" name="eye"></ion-icon>
+          </ion-item-option>
+        </ion-item-options>
+      </ion-item-sliding>
+
+    </ion-list>
+
   <div class="slides ion-margin-bottom">
-    <h3>Tasks</h3>
-    <ion-card *ngFor="let task of selectedData">
-      <ion-card-header>
-        <h3> {{task.task_title}}  </h3>
-      </ion-card-header>
-      <ion-card-content class="ion-text-left flexbox" >
-        <ion-card-title class="ion-margin-bottom"  > {{task.task_description}} </ion-card-title>
-      </ion-card-content>
-    </ion-card>
 
 
     pull members temporary

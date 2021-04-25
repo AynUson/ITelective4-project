@@ -15,13 +15,32 @@
 
   </div>
 
+  <ion-list >
+    <!-- Multi-line sliding item with icon options on both sides -->
+      <ion-item-sliding id="item100"  *ngFor="let req of selectedData">
+        <ion-item>
+          <ion-label>
+            <h2>{{req.collab_room_name}}</h2>
+            <p>{{req.collab_room_description}}</p>
+          </ion-label>
+          <ion-note slot="end">
+            10:45 AM
+            <!-- Deadline or date created -->
+          </ion-note>
+        </ion-item>
 
-  <ion-list>
-    <ion-item *ngFor="let req of selectedData">
-      <ion-label> <b>{{req.collab_room_name}}</b> </ion-label>
-      <ion-label>{{req.collab_room_description}}</ion-label>
-      <ion-button color="success" (click)="acceptCollab(req.member_rec_id, req.collab_room_name)"> Accept </ion-button>
-    </ion-item>
-  </ion-list>
+        <!-- DELETE AND VIEW -->
+        <ion-item-options side="end">
+          <ion-item-option color="danger">
+            <ion-icon slot="icon-only" name="trash"></ion-icon>
+          </ion-item-option>
+          <ion-item-option color="success" (click)="acceptCollab(req.member_rec_id, req.collab_room_name)">
+            <ion-icon slot="icon-only" name="heart"></ion-icon>
+          </ion-item-option>
+        </ion-item-options>
+      </ion-item-sliding>
+
+    </ion-list>
+
 
 </ion-content>

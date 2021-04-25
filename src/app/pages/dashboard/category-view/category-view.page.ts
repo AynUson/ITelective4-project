@@ -21,6 +21,7 @@ othersCount:number=0;
   constructor(private data_service: DataService,
     private router:Router) { }
 
+
   ngOnInit() {
 
     this.schoolCount=this.data_service.schoolCount;

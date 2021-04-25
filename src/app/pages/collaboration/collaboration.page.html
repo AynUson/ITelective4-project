@@ -20,11 +20,13 @@
 
 <ion-content>
 
-
   <div class="slides ion-margin-bottom">
+
     <h3>Rooms</h3>
         <ion-card *ngFor="let room of acceptedCollab" (click)="selectRoom(room)">
           <ion-card-header>
+            <ion-icon *ngIf=" room.collab_category_id==1 "  name="school"></ion-icon>
+            <ion-icon *ngIf=" room.collab_category_id==2 "  name="briefcase"></ion-icon>
             <ion-card-title class="ion-margin-bottom"  > {{room.collab_room_name}}  </ion-card-title>
           </ion-card-header>
           <ion-card-content class="ion-text-left flexbox" >

@@ -38,6 +38,7 @@ export class CollaborationPage implements OnInit {
 
     this.data_service.sendAPIRequest("showCollabJoin2/" + this.data_service.user_id, null).subscribe(data => {
       this.acceptedCollab = data.payload
+      console.log(this.acceptedCollab)
     });
   }
 
@@ -60,7 +61,7 @@ export class CollaborationPage implements OnInit {
 
   }
 
-  
+
   async OpenModal() {
     // this.modalController.create(
     //   { component:ModalPage }).then((modalElement)=>{
