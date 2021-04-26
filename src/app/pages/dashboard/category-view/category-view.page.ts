@@ -126,6 +126,7 @@ othersCount:number=0;
     this.user.user_xp = this.xp
     this.user.user_gold = this.gold
     this.user.user_level = this.level
+    this.checkIfBlank();
 
   }
 

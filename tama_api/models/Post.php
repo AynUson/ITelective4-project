@@ -78,7 +78,7 @@
       INNER JOIN collab_room_tbl ON collab_tasks_tbl.collab_room_id=collab_room_tbl.collab_room_id";
 
             if($filter_data != null) {
-                $this->sql .= " WHERE collab_room_tbl.collab_room_id=$filter_data";
+                $this->sql .= " WHERE task_tbl.task_isDone=0 AND collab_room_tbl.collab_room_id=$filter_data";
             }
 
             $data = array(); $code = 0; $msg= ""; $remarks = "";
