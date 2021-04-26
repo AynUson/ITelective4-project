@@ -152,7 +152,7 @@
             $this->sql = "SELECT * FROM `task_tbl` INNER JOIN task_category_tbl ON task_tbl.category_id=task_category_tbl.category_id";
 
                     if($filter_data != null) {
-                        $this->sql .= " WHERE task_tbl.task_isCollab=0 AND task_tbl.user_id=$filter_data";
+                        $this->sql .= " WHERE task_tbl.task_isDone=0 AND task_tbl.task_isCollab=0 AND task_tbl.user_id=$filter_data";
                     }
 
                     $data = array(); $code = 0; $msg= ""; $remarks = "";

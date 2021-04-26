@@ -18,6 +18,7 @@ export class ProfilePage implements OnInit {
   ngOnInit() {
     this.getData();
     this.user=this.data_service.userLoggedIn;
+    console.log(this.user)
   }
   chartData: ChartDataSets[] = [{ data: [], label: 'Stock price' }];
   chartLabels: Label[];

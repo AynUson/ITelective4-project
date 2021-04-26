@@ -45,8 +45,17 @@ export class DashboardPage{
 
     }
 
+    ionViewWillEnter()  {
+      this.getTasks();
+      this.getData();
+      this.filterTasks();
+      this.getCateg();
+      this.countReset();
+    }
+
   ngOnInit():void {
     this.user=this.data_service.userLoggedIn;
+    this.countReset();
     this.getTasks();
     this.getData();
     this.filterTasks();
@@ -60,10 +69,10 @@ export class DashboardPage{
     this.schoolCount=0;
     this.othersCount=0;
   }
-  fitnessCount:number=0;
-  workCount:number=0;
-  schoolCount:number=0;
-  othersCount:number=0;
+  fitnessCount:number=this.data_service.fitnessCount;
+  workCount:number=this.data_service.fitnessCount;
+  schoolCount:number=this.data_service.fitnessCount;
+  othersCount:number=this.data_service.fitnessCount;
   getData() {
     console.log(this.data_service.user_id)
     this.data_service.sendAPIRequest("task/" + this.data_service.user_id, null).subscribe(data => {

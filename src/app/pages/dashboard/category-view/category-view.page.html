@@ -64,15 +64,16 @@
 
           <!-- DONE -->
           <ion-item-options side="start">
-            <ion-item-option>
-              <ion-icon slot="icon-only" name="heart"></ion-icon>
+            <ion-item-option color="danger">
+              <ion-icon slot="icon-only" name="trash"></ion-icon>
             </ion-item-option>
           </ion-item-options>
           <!-- DELETE AND VIEW -->
           <ion-item-options side="end">
-            <ion-item-option color="danger">
-              <ion-icon slot="icon-only" name="trash"></ion-icon>
+            <ion-item-option color="success" (click)="doneTask(task.task_id, task.task_title)">
+              <ion-icon  slot="icon-only" name="heart"></ion-icon>
             </ion-item-option>
+
             <ion-item-option>
               <ion-icon slot="icon-only" name="eye"></ion-icon>
             </ion-item-option>
