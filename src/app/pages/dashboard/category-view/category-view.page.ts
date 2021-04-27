@@ -58,8 +58,55 @@ othersCount:number=0;
   //   );
   // }
 
-  async doneTask(id,title){
 
+  async deleteTask(id,title){
+    // task_isDone=0(not done)
+    // task_isDone=1(done)
+    // task_isDone=2(deleted)???
+    // appied delete query
+    const alert = await this.alertController.create({
+      cssClass: 'my-custom-class',
+      header: 'Are you sure?',
+      message: 'Delete <strong>'+title+'</strong>?',
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          cssClass: 'secondary',
+          handler: (blah) => {
+            console.log('Confirm Cancel: blah');
+          }
+        }, {
+          text: 'Okay',
+          handler: () => {
+            //Done task on task_tbl
+            let updateData : any = {};
+            updateData.task_isDone = 2;
+            this.data_service.sendAPIRequest("deleteTask/"+ id, null).subscribe(data => {
+              console.log(data)
+            });
+            let index = this.tasks.findIndex(x => x.task_id ===id);
+            this.tasks.splice(index, 1);
+            console.log(title+" deleted!");
+            console.log(index+" Index!");
+            this.checkIfBlank();
+            this.count = 0
+            for(let t of this.tasks){
+              this.count++
+            }
+
+          }
+        }
+      ]
+    });
+
+    await alert.present();
+  }
+
+  async doneTask(id,title){
+    // task_isDone=0(not done)
+    // task_isDone=1(done)
+    // task_isDone=2(deleted)
     const alert = await this.alertController.create({
       cssClass: 'my-custom-class',
       header: 'Are you sure?',
