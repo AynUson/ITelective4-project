@@ -22,7 +22,16 @@
   <ion-list>
     <ion-item *ngFor="let collaborator of searchedItem">
       <ion-label>{{collaborator.user_name}}</ion-label>
-      <ion-button (click)="checkIfMem(collaborator.user_id,collaborator.user_name)"> Invite </ion-button>
+      <div *ngIf="collaborator.isAccepted == 0">
+        <ion-button disabled=true (click)="checkIfMem(collaborator.user_id,collaborator.user_name)"> Invited </ion-button>
+      </div>
+      <div *ngIf="collaborator.isAccepted == 1">
+        <ion-button disabled=true (click)="checkIfMem(collaborator.user_id,collaborator.user_name)"> Member </ion-button>
+      </div>
+      <div *ngIf="collaborator.isAccepted != 1 && collaborator.isAccepted != 0">
+        <ion-button  (click)="checkIfMem(collaborator.user_id,collaborator.user_name)"> Invite </ion-button>
+      </div>
+
     </ion-item>
   </ion-list>
 

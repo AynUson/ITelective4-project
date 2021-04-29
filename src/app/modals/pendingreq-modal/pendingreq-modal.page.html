@@ -33,7 +33,7 @@
 
         <!-- DELETE AND VIEW -->
         <ion-item-options side="end">
-          <ion-item-option color="danger">
+          <ion-item-option color="danger" (click)="declineCollab(req.member_rec_id, req.collab_room_name)">
             <ion-icon slot="icon-only" name="trash"></ion-icon>
           </ion-item-option>
           <ion-item-option color="success" (click)="acceptCollab(req.member_rec_id, req.collab_room_name)">

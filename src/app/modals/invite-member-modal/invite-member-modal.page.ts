@@ -41,22 +41,30 @@ export class InviteMemberModalPage implements OnInit {
 
   members:any;
   isMember:boolean;
+  isInvited:boolean;
   checkIfMem(uid,name){
     this.isMember=false
+    this.isInvited=false
     this.initCollab.user_id = uid;
     this.data_service.sendAPIRequest(("showCollabMembers"), null)
     .subscribe(result=>{
       this.members = result.payload;
       for(let mem of this.members){
         console.log(mem.user_id+", "+ mem.collab_room_id )
-        if(this.initCollab.user_id == mem.user_id && this.initCollab.collab_room_id==mem.collab_room_id){
+        if(this.initCollab.user_id == mem.user_id && this.initCollab.collab_room_id==mem.collab_room_id && mem.isAccepted == 1){
           this.presentToast(mem.user_name+" is already a member!")
           console.log(mem.user_name+" is already a member!")
           this.isMember=true;
           break;
         }
+        if(this.initCollab.user_id == mem.user_id && this.initCollab.collab_room_id==mem.collab_room_id && mem.isAccepted == 0){
+          this.presentToast(mem.user_name+" is already invited!")
+          console.log(mem.user_name+" is already invited!")
+          this.isInvited=true;
+          break;
+        }
       }
-      if(this.isMember==false){
+      if(this.isMember==false && this.isInvited==false){
         console.log(name+" invited!")
 
         this.inviteMem(uid, name);

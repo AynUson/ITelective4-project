@@ -7,6 +7,7 @@ import { Injectable } from '@angular/core';
 export class DataService {
   baseURL="http://localhost/TAMA/tama_api/"
   userLoggedIn:any;
+  task_id:any;
   user_id:number;
   currentCollabView:any;
   tasksCateg: any[]=[]

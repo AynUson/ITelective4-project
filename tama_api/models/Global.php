@@ -99,6 +99,12 @@
 			if($filter_data != null && $table == "task_tbl") {
 				$this->sql .= " WHERE  task_id=$filter_data";
 			}
+      if($filter_data != null && $table == "collab_tasks_tbl") {
+				$this->sql .= " WHERE  task_id=$filter_data";
+			}
+      if($filter_data != null && $table == "collab_member_tbl") {
+				$this->sql .= " WHERE  member_rec_id=$filter_data";
+			}
       if($filter_data != null && $table == "user_tbl") {
 				$this->sql .= " WHERE user_id=$filter_data";
 			}

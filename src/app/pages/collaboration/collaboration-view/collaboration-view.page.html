@@ -36,7 +36,7 @@
 
         <!-- DONE -->
         <ion-item-options side="start">
-          <ion-item-option color="danger">
+          <ion-item-option color="danger" (click)="deleteTask(task.task_id, task.task_title)">
             <ion-icon slot="icon-only" name="trash"></ion-icon>
           </ion-item-option>
         </ion-item-options>

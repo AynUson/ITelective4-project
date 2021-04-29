@@ -96,6 +96,13 @@ switch ($_SERVER['REQUEST_METHOD']) {
           echo json_encode($post->viewCategory(null), JSON_PRETTY_PRINT);
         }
         break;
+      case 'collabmemshow':
+        if (count($req) > 1) {
+          echo json_encode($post->collabMembersShow($req[1]), JSON_PRETTY_PRINT);
+        } else {
+          echo json_encode($post->collabMembersShow(null), JSON_PRETTY_PRINT);
+        }
+        break;
 
 
 
@@ -147,6 +154,18 @@ switch ($_SERVER['REQUEST_METHOD']) {
           echo json_encode($gm->delete('task_tbl', $req[1]), JSON_PRETTY_PRINT);
         } else {
           echo json_encode($gm->delete('task_tbl', null), JSON_PRETTY_PRINT);
+        }
+      case 'deleteCollabTask':
+        if (count($req) > 1) {
+          echo json_encode($gm->delete('collab_tasks_tbl', $req[1]), JSON_PRETTY_PRINT);
+        } else {
+          echo json_encode($gm->delete('collab_tasks_tbl', null), JSON_PRETTY_PRINT);
+        }
+      case 'deleteCollabReq':
+        if (count($req) > 1) {
+          echo json_encode($gm->delete('collab_member_tbl', $req[1]), JSON_PRETTY_PRINT);
+        } else {
+          echo json_encode($gm->delete('collab_member_tbl', null), JSON_PRETTY_PRINT);
         }
 
 

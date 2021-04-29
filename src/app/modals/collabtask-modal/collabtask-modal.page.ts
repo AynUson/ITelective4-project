@@ -19,7 +19,7 @@ export class CollabtaskModalPage implements OnInit {
 
     this.addCollabTask.user_id = this.data_service.user_id;
     console.log(this.data_service.currentCollabView.collab_room_id);
-    this.taskCheck();
+    // this.taskCheck();
   }
 
   async presentToast(msg) {
@@ -31,20 +31,29 @@ export class CollabtaskModalPage implements OnInit {
     toast.present();
   }
   createTask(){
-    this.taskCheck();
+    // this.taskCheck();
     console.log(this.addCollabTask)
     this.data_service.sendAPIRequest(("createTask/"), this.addCollabTask)
           .subscribe((result)=>{
+            this.task = result.payload
+            for(let tsk of this.task){
+              this.task_id=tsk.task_id
+              console.log(this.task_id)
+            }
             console.log(result);
+            this.addCollabTask2.collab_room_id = this.data_service.currentCollabView.collab_room_id
+            this.addCollabTask2.task_id = this.task_id;
+            console.log("TASK ID: "+this.addCollabTask2.task_id );
+            this.insertCollabTask();
+            this.presentToast("Task created!")
+            // this.router.navigate(['/home/collaboration/collaboration-view']);
+            // this.ModalController.dismiss();
         });
-      this.addCollabTask2.collab_room_id = this.data_service.currentCollabView.collab_room_id
-      this.addCollabTask2.task_id = this.task_id;
-      console.log("TASK ID: "+this.addCollabTask2.task_id );
-      this.insertCollabTask();
-      this.presentToast("Task created!")
-      this.router.navigate(['/home/collaboration/collaboration-view']);
-      this.ModalController.dismiss();
+        this.router.navigate(['/home/collaboration/collaboration-view']);
+        this.ModalController.dismiss();
   }
+
+
   task:any;
   task_id:any;
   taskCheck(){

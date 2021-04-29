@@ -32,7 +32,49 @@ export class CollaborationViewPage implements OnInit {
     this.getCollabTasks();
     this.getCollabMem();
   }
+  async deleteTask(id,title){
 
+    const alert = await this.alertController.create({
+      cssClass: 'my-custom-class',
+      header: 'Are you sure?',
+      message: 'Delete <strong>'+title+'</strong>?',
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          cssClass: 'secondary',
+          handler: (blah) => {
+            console.log('Confirm Cancel: blah');
+          }
+        }, {
+          text: 'Okay',
+          handler: () => {
+            //Done task on task_tbl
+            this.delete(id);
+
+            this.data_service.sendAPIRequest("deleteTask/"+ id, null).subscribe(data => {
+              console.log(data)
+            });
+            let index = this.selectedData.findIndex(x => x.task_id ===id);
+            this.selectedData.splice(index, 1);
+            console.log(title+" mark as done!");
+            console.log(index+" Index!");
+
+          }
+        }
+      ]
+    });
+
+    await alert.present();
+
+  }
+
+  delete(id){
+
+    this.data_service.sendAPIRequest("deleteCollabTask/"+ id, null).subscribe(data => {
+      console.log(data)
+    });
+  }
 
   async doneTask(id,title){
 

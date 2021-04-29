@@ -17,6 +17,40 @@ export class PendingreqModalPage implements OnInit {
   ngOnInit() {
     this.getData();
   }
+  async declineCollab(id,title){
+
+    const alert = await this.alertController.create({
+      cssClass: 'my-custom-class',
+      header: 'Are you sure?',
+      message: 'Delete <strong>'+title+'</strong>?',
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          cssClass: 'secondary',
+          handler: (blah) => {
+            console.log('Confirm Cancel: blah');
+          }
+        }, {
+          text: 'Okay',
+          handler: () => {
+
+            this.data_service.sendAPIRequest("deleteCollabReq/"+ id, null).subscribe(data => {
+              console.log(data)
+            });
+            let index = this.selectedData.findIndex(x => x.member_rec_id ===id);
+            this.selectedData.splice(index, 1);
+            console.log(title+" mark as done!");
+            console.log(index+" Index!");
+
+          }
+        }
+      ]
+    });
+
+    await alert.present();
+
+  }
 
   async acceptCollab(recID, name){
 
