@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import { DataService } from '../../services/data.service';
-import { ToastController } from '@ionic/angular';
+import { LoadingController, ToastController } from '@ionic/angular';
 import { ModalController } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { AddCollab } from 'src/app/model/addCollab.model';
@@ -14,12 +14,26 @@ import { InitCollab } from 'src/app/model/initCollabMem.model';
 export class CollabModalPage implements OnInit {
   addCollab = new AddCollab(0,0,'','');
   initCollab = new InitCollab(0,0,1);
-  constructor(private ModalController:ModalController,private data_service: DataService,private router:Router, public toastController: ToastController) { }
+  constructor(private ModalController:ModalController,private data_service: DataService,private router:Router, public toastController: ToastController,public loadingController: LoadingController) { }
 
   ngOnInit() {
     this.addCollab.user_id = this.data_service.user_id;
     this.roomCheck();
   }
+
+
+  async create() {
+    const loading = await this.loadingController.create({
+      cssClass: 'my-custom-class',
+      message: 'Creating Collaboration...',
+      duration: 2000
+    });
+    await loading.present();
+
+    const { role, data } = await loading.onDidDismiss();
+    this.createCollab();
+  }
+
   room_id:any;
   room:any;
   createCollab(){

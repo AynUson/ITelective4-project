@@ -75,6 +75,20 @@ switch ($_SERVER['REQUEST_METHOD']) {
           echo json_encode($post->collabTaskJoin(null), JSON_PRETTY_PRINT);
         }
         break;
+      case 'showCollabTasksDone':
+        if (count($req) > 1) {
+          echo json_encode($post->collabTaskDone($req[1]), JSON_PRETTY_PRINT);
+        } else {
+          echo json_encode($post->collabTaskDone(null), JSON_PRETTY_PRINT);
+        }
+        break;
+      case 'showTasksDone':
+        if (count($req) > 1) {
+          echo json_encode($post->taskDone($req[1],$req[2]), JSON_PRETTY_PRINT);
+        } else {
+          echo json_encode($post->taskDone(null,null), JSON_PRETTY_PRINT);
+        }
+        break;
       case 'showCollabMembers':
         if (count($req) > 1) {
           echo json_encode($post->collabMembersJoin($req[1]), JSON_PRETTY_PRINT);

@@ -6,8 +6,23 @@ ion-header {
     background: #fff;
     padding: 0 10px;
   }
+  .headerCon{
+      display: flex;
+      flex-wrap: wrap;
+  }
+  .headerCon .item {
+    display: inline-block;
+    width: 17%;
+    height: auto;
+    margin-right: -15px;
+  }
 
   ion-toolbar {
+    img{
+      width: 40px;
+      height: 40px;
+    }
+
     .bordered {
       --border-radius: 20%;
       --box-shadow: 5px 5px 10px #d1d1d1, -5px -5px 10px #fff;

@@ -31,6 +31,9 @@ export class DashboardPage{
   }
   constructor(private tasksService: TasksService, private data_service: DataService, private modalController:ModalController, private router:Router) {  }
 
+
+  
+
     async OpenModal() {
       // this.modalController.create(
       //   { component:ModalPage }).then((modalElement)=>{

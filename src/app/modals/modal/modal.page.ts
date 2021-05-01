@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 
 import { AddTask } from '../../model/addTask.model';
 import { DataService } from '../../services/data.service';
-import { ToastController } from '@ionic/angular';
+import { LoadingController, ToastController } from '@ionic/angular';
 import { ModalController } from '@ionic/angular';
 import { Router } from '@angular/router';
 @Component({
@@ -13,7 +13,7 @@ import { Router } from '@angular/router';
 })
 export class ModalPage implements OnInit {
   addTask = new AddTask(0,0,'','');
-  constructor(private ModalController:ModalController,private data_service: DataService,private router:Router, public toastController: ToastController) { }
+  constructor(private ModalController:ModalController,private data_service: DataService,private router:Router, public toastController: ToastController,public loadingController: LoadingController) { }
 
   ngOnInit() {
     this.addTask.user_id = this.data_service.user_id;
@@ -26,6 +26,19 @@ export class ModalPage implements OnInit {
       position: 'bottom'
     });
     toast.present();
+  }
+
+
+  async create() {
+    const loading = await this.loadingController.create({
+      cssClass: 'my-custom-class',
+      message: 'Creating Task...',
+      duration: 2000
+    });
+    await loading.present();
+
+    const { role, data } = await loading.onDidDismiss();
+    this.createTask();
   }
 
   category:any;

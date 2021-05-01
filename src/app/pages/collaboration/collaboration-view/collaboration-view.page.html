@@ -8,7 +8,7 @@
       </ion-button>
     </ion-buttons>
     <ion-button slot="end" color="light" (click)="OpenInviteModal()" >
-      <ion-icon name="person-add"></ion-icon>
+      <ion-icon color="primary" slot="icon-only" name="person-add"></ion-icon>
     </ion-button>
   </ion-toolbar>
 
@@ -58,12 +58,8 @@
   <div class="slides ion-margin-bottom">
 
 
-    pull members temporary
-    <ion-list>
-      <ion-item *ngFor="let mem of members">
-        <h2>{{mem.user_name}}</h2>
-      </ion-item>
-    </ion-list>
+    <ion-button (click)="OpenViewMemModal()">Collaborators</ion-button>
+    <ion-button (click)="OpenDoneTasksModal()">Tasks Done</ion-button>
 
   </div>
     <ion-fab vertical="bottom" horizontal="end" slot="fixed">

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { UserService } from 'src/app/services/user.service';
-import { AlertController } from '@ionic/angular';
+import { AlertController, LoadingController } from '@ionic/angular';
 import { DataService } from '../../services/data.service';
 import { ToastController } from '@ionic/angular';
 
@@ -37,8 +37,23 @@ export class LoginPage implements OnInit {
      private router:Router,
      public alertController: AlertController,
      private data_service: DataService,
-     public toastController: ToastController
+     public toastController: ToastController,
+     public loadingController: LoadingController
      ) { }
+
+  async Log(e) {
+    const loading = await this.loadingController.create({
+      cssClass: 'my-custom-class',
+      message: 'Authenticating...',
+      duration: 2000,
+      spinner:"circular"
+    });
+    await loading.present();
+
+    const { role, data } = await loading.onDidDismiss();
+    console.log('Loading dismissed!');
+    this.loginUser(e);
+}
 
   public getUsers(){
     this.data_service.sendAPIRequest(("user"), null)
@@ -47,6 +62,8 @@ export class LoginPage implements OnInit {
       console.log(this.users)
   });
   }
+
+
 
   loginUser(e){
     e.preventDefault();

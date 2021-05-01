@@ -1,8 +1,11 @@
 <ion-header>
   <ion-toolbar color="primary">
-    <ion-title><b>Profile</b></ion-title>
+    <div class="headerCon">
+      <img class="item" src="../../../assets/Tcircle.png" />
+      <ion-title><b>Profile</b></ion-title>
+    </div>
     <ion-button slot="end" color="light" (click)="logout()" >
-      <ion-icon name="log-out"></ion-icon>
+      <ion-icon color="primary" slot="icon-only" name="log-out"></ion-icon>
     </ion-button>
   </ion-toolbar>
 

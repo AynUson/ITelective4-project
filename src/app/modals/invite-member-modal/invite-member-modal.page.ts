@@ -1,5 +1,5 @@
 import { Component, OnInit,ViewChild  } from '@angular/core';
-import { IonSearchbar } from '@ionic/angular';
+import { IonSearchbar, LoadingController } from '@ionic/angular';
 import { DataService } from '../../services/data.service';
 import { ToastController } from '@ionic/angular';
 import { ModalController } from '@ionic/angular';
@@ -17,13 +17,27 @@ export class InviteMemberModalPage implements OnInit {
   list: any[] = [];
   searchedItem: any;
   constructor(private data_service: DataService,
-    private router:Router, private modalController:ModalController, public toastController: ToastController, public alertController: AlertController) { }
+    private router:Router, private modalController:ModalController, public toastController: ToastController, public alertController: AlertController,public loadingController: LoadingController) { }
 
   ngOnInit() {
     this.initCollab.collab_room_id = this.data_service.currentCollabView.collab_room_id;
     console.log(this.initCollab.collab_room_id);
     this.getUsers();
   }
+
+  async presentLoading(uid,name) {
+    const loading = await this.loadingController.create({
+      cssClass: 'my-custom-class',
+      message: 'Letting <strong>'+name+'</strong> know you want to collaborate! :-)',
+      duration: 3500
+    });
+    await loading.present();
+
+    const { role, data } = await loading.onDidDismiss();
+    this.presentToast(name+" invited!")
+    this.modalController.dismiss();
+  }
+
   ionViewDidEnter() {
     setTimeout(() => {
       this.search.setFocus();
@@ -87,7 +101,7 @@ export class InviteMemberModalPage implements OnInit {
   async inviteMem( uid, name){
 
     const alert = await this.alertController.create({
-      cssClass: 'my-custom-class',
+      cssClass: '',
       header: 'Are you sure?',
       message: 'Invite <strong>'+name+'</strong>?',
       buttons: [
@@ -102,8 +116,7 @@ export class InviteMemberModalPage implements OnInit {
           text: 'Okay',
           handler: () => {
             this.insertCollabMem();
-            this.presentToast(name+" invited!")
-            this.modalController.dismiss();
+            this.presentLoading(uid,name);
           }
         }
       ]

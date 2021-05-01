@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AddCollabTask } from '../../model/addCollabTask.model';
 import { AddCollabTask2 } from '../../model/addCollabTask2.model';
 import { DataService } from '../../services/data.service';
-import { ToastController } from '@ionic/angular';
+import { LoadingController, ToastController } from '@ionic/angular';
 import { ModalController } from '@ionic/angular';
 import { Router } from '@angular/router';
 @Component({
@@ -13,13 +13,26 @@ import { Router } from '@angular/router';
 export class CollabtaskModalPage implements OnInit {
   addCollabTask = new AddCollabTask(0,0,'','',1);
   addCollabTask2 = new AddCollabTask2(0,0);
-  constructor(private ModalController:ModalController,private data_service: DataService,private router:Router, public toastController: ToastController) { }
+  constructor(private ModalController:ModalController,private data_service: DataService,private router:Router, public toastController: ToastController,public loadingController: LoadingController) { }
 
   ngOnInit() {
 
     this.addCollabTask.user_id = this.data_service.user_id;
     console.log(this.data_service.currentCollabView.collab_room_id);
     // this.taskCheck();
+  }
+
+
+  async create() {
+    const loading = await this.loadingController.create({
+      cssClass: 'my-custom-class',
+      message: 'Creating Task...',
+      duration: 2000
+    });
+    await loading.present();
+
+    const { role, data } = await loading.onDidDismiss();
+    this.createTask();
   }
 
   async presentToast(msg) {

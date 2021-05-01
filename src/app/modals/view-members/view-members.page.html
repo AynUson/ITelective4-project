@@ -2,7 +2,7 @@
   <ion-toolbar color="primary">
     <div class="headerCon">
       <img class="item" src="../../../assets/deal.png" />
-      <ion-title><b>Collab requests</b></ion-title>
+      <ion-title><b>Collaborators</b></ion-title>
     </div>
     <ion-buttons slot="start">
       <ion-button (click)="CloseModal()">
@@ -20,26 +20,21 @@
 
   <ion-list >
     <!-- Multi-line sliding item with icon options on both sides -->
-      <ion-item-sliding id="item100"  *ngFor="let req of selectedData">
+      <ion-item-sliding id="item100"  *ngFor="let req of members">
         <ion-item>
           <ion-label>
-            <h2>{{req.collab_room_name}}</h2>
-            <p>{{req.collab_room_description}}</p>
+            <h2>{{req.user_name}}</h2>
+            <p>Level: {{req.user_level}}</p>
           </ion-label>
-
-          <ion-note slot="end">
-            10:45 AM
-            <!-- Deadline or date created -->
-          </ion-note>
 
         </ion-item>
 
         <!-- DELETE AND VIEW -->
         <ion-item-options side="end">
-          <ion-item-option color="danger" (click)="declineCollab(req.member_rec_id, req.collab_room_name)">
+          <ion-item-option color="danger" >
             <ion-icon slot="icon-only" name="trash"></ion-icon>
           </ion-item-option>
-          <ion-item-option color="success" (click)="acceptCollab(req.member_rec_id, req.collab_room_name)">
+          <ion-item-option color="success" >
             <ion-icon slot="icon-only" name="heart"></ion-icon>
           </ion-item-option>
         </ion-item-options>

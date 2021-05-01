@@ -20,7 +20,7 @@ export class PendingreqModalPage implements OnInit {
   async declineCollab(id,title){
 
     const alert = await this.alertController.create({
-      cssClass: 'my-custom-class',
+      cssClass: '',
       header: 'Are you sure?',
       message: 'Delete <strong>'+title+'</strong>?',
       buttons: [
@@ -55,7 +55,7 @@ export class PendingreqModalPage implements OnInit {
   async acceptCollab(recID, name){
 
     const alert = await this.alertController.create({
-      cssClass: 'my-custom-class',
+      cssClass: '',
       header: 'Are you sure?',
       message: 'Accept <strong>'+name+'</strong>?',
       buttons: [

@@ -4,7 +4,9 @@ import { Router } from '@angular/router';
 import { DataService } from 'src/app/services/data.service';
 import { CollabtaskModalPage } from "../../../modals/collabtask-modal/collabtask-modal.page";
 import { InviteMemberModalPage } from "../../../modals/invite-member-modal/invite-member-modal.page";
-import {  AlertController, ModalController, ToastController } from '@ionic/angular';
+import { ViewMembersPage } from "../../../modals/view-members/view-members.page";
+import { ViewDoneTasksPage } from "../../../modals/view-done-tasks/view-done-tasks.page";
+import {  AlertController, LoadingController, ModalController, ToastController } from '@ionic/angular';
 @Component({
   selector: 'app-collaboration-view',
   templateUrl: './collaboration-view.page.html',
@@ -19,8 +21,11 @@ export class CollaborationViewPage implements OnInit {
   gold:any
   selectedData: any[] = [];
   constructor(private data_service: DataService,
-    private router:Router, private modalController:ModalController, public alertController: AlertController, public toastController: ToastController) { }
+    private router:Router, private modalController:ModalController, public alertController: AlertController, public toastController: ToastController,public loadingController: LoadingController) { }
 
+  ionViewDidEnter() {
+    this.load();
+  }
   ngOnInit() {
     this.user=this.data_service.userLoggedIn;
     this.level = this.user.user_level
@@ -29,13 +34,25 @@ export class CollaborationViewPage implements OnInit {
     this.user_id=this.data_service.user_id;
     this.room = this.data_service.currentCollabView;
     console.log(this.data_service.currentCollabView.collab_room_id);
+    // this.getCollabTasks();
+    // this.getCollabMem();
+  }
+
+  async load(){
+    const loading = await this.loadingController.create({
+      cssClass: 'my-custom-class',
+      duration: 500
+    });
+    await loading.present();
+
+    const { role, data } = await loading.onDidDismiss();
     this.getCollabTasks();
     this.getCollabMem();
   }
   async deleteTask(id,title){
 
     const alert = await this.alertController.create({
-      cssClass: 'my-custom-class',
+      cssClass: '',
       header: 'Are you sure?',
       message: 'Delete <strong>'+title+'</strong>?',
       buttons: [
@@ -79,7 +96,7 @@ export class CollaborationViewPage implements OnInit {
   async doneTask(id,title){
 
     const alert = await this.alertController.create({
-      cssClass: 'my-custom-class',
+      cssClass: '',
       header: 'Are you sure?',
       message: 'Mark <strong>'+title+'</strong> as done?',
       buttons: [
@@ -142,6 +159,25 @@ export class CollaborationViewPage implements OnInit {
 
   }
 
+  async OpenViewMemModal() {
+    let modal =await this.modalController.create({ component:ViewMembersPage });
+    modal.onDidDismiss().then(()=>{
+      this.getCollabTasks();
+      this.getCollabMem();
+    });
+      modal.present();
+
+  }
+  async OpenDoneTasksModal() {
+    this.data_service.DoneIsCollab = true;
+    let modal =await this.modalController.create({ component:ViewDoneTasksPage });
+    modal.onDidDismiss().then(()=>{
+      this.getCollabTasks();
+      this.getCollabMem();
+    });
+      modal.present();
+
+  }
 
   async OpenInviteModal() {
     // this.modalController.create(

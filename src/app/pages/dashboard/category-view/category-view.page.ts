@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 
 import { Router } from '@angular/router';
-import { AlertController, ToastController } from '@ionic/angular';
+import { AlertController, ToastController,ModalController } from '@ionic/angular';
 import { DataService } from 'src/app/services/data.service';
+import { ViewDoneTasksPage } from "../../../modals/view-done-tasks/view-done-tasks.page";
 @Component({
   selector: 'app-category-view',
   templateUrl: './category-view.page.html',
@@ -23,7 +24,7 @@ workCount:number=0;
 schoolCount:number=0;
 othersCount:number=0;
   constructor(private data_service: DataService,
-    private router:Router, public alertController: AlertController, public toastController: ToastController) { }
+    private router:Router, public alertController: AlertController, public toastController: ToastController, private modalController:ModalController) { }
 
 
   ngOnInit() {
@@ -59,13 +60,22 @@ othersCount:number=0;
   // }
 
 
+  async OpenDoneTasksModal() {
+    this.data_service.DoneIsCollab = false;
+    let modal =await this.modalController.create({ component:ViewDoneTasksPage });
+    modal.onDidDismiss().then(()=>{
+    });
+      modal.present();
+
+  }
+
   async deleteTask(id,title){
     // task_isDone=0(not done)
     // task_isDone=1(done)
     // task_isDone=2(deleted)???
     // appied delete query
     const alert = await this.alertController.create({
-      cssClass: 'my-custom-class',
+      cssClass: '',
       header: 'Are you sure?',
       message: 'Delete <strong>'+title+'</strong>?',
       buttons: [
@@ -108,7 +118,7 @@ othersCount:number=0;
     // task_isDone=1(done)
     // task_isDone=2(deleted)
     const alert = await this.alertController.create({
-      cssClass: 'my-custom-class',
+      cssClass: '',
       header: 'Are you sure?',
       message: 'Mark <strong>'+title+'</strong> as done?',
       buttons: [
@@ -201,6 +211,7 @@ othersCount:number=0;
       this.categoryId = 4
       this.count = this.othersCount
     }
+
     console.log(this.count)
   }
 

@@ -29,6 +29,12 @@ ion-header {
 }
 
 ion-content {
+  img{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 80%;
+  }
 
   --background: linear-gradient(
     90deg,

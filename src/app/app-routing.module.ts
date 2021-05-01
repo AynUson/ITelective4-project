@@ -29,6 +29,14 @@ const routes: Routes = [
   {
     path: 'pendingreq-modal',
     loadChildren: () => import('./modals/pendingreq-modal/pendingreq-modal.module').then( m => m.PendingreqModalPageModule)
+  },
+  {
+    path: 'view-members',
+    loadChildren: () => import('./modals/view-members/view-members.module').then( m => m.ViewMembersPageModule)
+  },
+  {
+    path: 'view-done-tasks',
+    loadChildren: () => import('./modals/view-done-tasks/view-done-tasks.module').then( m => m.ViewDoneTasksPageModule)
   }
 
 

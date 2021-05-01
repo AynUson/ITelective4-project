@@ -1,6 +1,10 @@
 <ion-header>
   <ion-toolbar color="primary">
-    <ion-title>Start a Collaboration</ion-title>
+    <div class="headerCon">
+      <img class="item" src="../../../assets/deal.png" />
+      <ion-title><b>Start a Collaboration</b></ion-title>
+    </div>
+    
     <ion-buttons slot="start">
       <ion-button (click)="CloseModal()">
         <ion-icon name="arrow-back-outline"></ion-icon>
@@ -32,7 +36,7 @@
           </ion-select>
         </ion-item>
 
-        <ion-button (click)="createCollab()"> Create </ion-button>
+        <ion-button (click)="create()"> Create </ion-button>
       </ion-card>
   </div>
 

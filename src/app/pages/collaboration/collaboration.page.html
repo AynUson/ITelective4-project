@@ -1,13 +1,16 @@
 <ion-header>
   <ion-toolbar color="primary">
-    <ion-title><b>Collaboration</b></ion-title>
+    <div class="headerCon">
+      <img class="item" src="../../../assets/Tcircle.png" />
+      <ion-title><b>Collaboration</b></ion-title>
+    </div>
     <ion-button id="notification-button" slot="end" color="light" (click)="toPendingreq()" >
-      <ion-icon name="notifications" name="person-add"></ion-icon>
+      <ion-icon  name="notifications" color="primary" slot="icon-only" name="person-add"></ion-icon>
       <ion-badge id="notifications-badge" color="primary"> {{pendingReq}} </ion-badge>
     </ion-button>
   </ion-toolbar>
 
-  <ion-item lines='none' >
+  <!-- <ion-item lines='none' >
     <ion-avatar slot="start">
       <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAAAAACH5BAAAAAAALAAAAAABAAEAAAICTAEAOw==">
     </ion-avatar>
@@ -15,7 +18,7 @@
       <p>Level: {{user.user_level}}</p>
       <h2>{{user.user_name}}</h2>
     </ion-label>
-  </ion-item>
+  </ion-item> -->
 </ion-header>
 
 <ion-content>

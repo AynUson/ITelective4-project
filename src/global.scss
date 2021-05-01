@@ -24,3 +24,15 @@
 @import "~@ionic/angular/css/text-alignment.css";
 @import "~@ionic/angular/css/text-transformation.css";
 @import "~@ionic/angular/css/flex-utils.css";
+
+.my-custom-class {
+  --background: #3880ff;
+  --spinner-color: #fff;
+  font-size: 16px;
+  color: #fff;
+
+  // background-image: url(../src/assets/Tcircle.png);
+  // background-repeat: no-repeat;
+  // background-size: 50%;
+
+}

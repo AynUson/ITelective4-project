@@ -6,6 +6,16 @@ ion-header {
     background: #fff;
     padding: 0 10px;
   }
+  .headerCon{
+    display: flex;
+    flex-wrap: wrap;
+}
+  .headerCon .item {
+    display: inline-block;
+    width: 17%;
+    height: auto;
+    margin-right: -20px;
+  }
 
   ion-toolbar {
     .bordered {
