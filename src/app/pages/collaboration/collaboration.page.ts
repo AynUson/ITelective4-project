@@ -29,7 +29,6 @@ export class CollaborationPage implements OnInit {
   acceptedCollab: any[] = [];
   selectedData: any[] = [];
   pendingReq:number = 0;
-  roomBlank:boolean =false;
   getData() {
     console.log(this.data_service.user_id)
 
@@ -43,16 +42,9 @@ export class CollaborationPage implements OnInit {
       console.log(this.pendingReq)
       console.log(this.selectedData)
     });
-    let collabCount = 0
+
     this.data_service.sendAPIRequest("showCollabJoin2/" + this.data_service.user_id, null).subscribe(data => {
       this.acceptedCollab = data.payload
-      for(let col of this.acceptedCollab){
-        collabCount++
-      }
-      if(collabCount <= 0){
-        this.roomBlank = true
-      }
-
       console.log(this.acceptedCollab)
     });
   }
