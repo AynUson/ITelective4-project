@@ -24,7 +24,7 @@ export class ViewMembersPage implements OnInit {
     this.checkIfCreator();
   }
 
-  async deleteTask(id,name){
+  async deleteMem(id,name){
 
     const alert = await this.alertController.create({
       cssClass: '',

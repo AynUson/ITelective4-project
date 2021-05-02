@@ -25,7 +25,11 @@
 
   <div class="slides ion-margin-bottom">
 
-    <h3>Rooms</h3>
+    <ion-card *ngIf="roomBlank">
+      <h2 style="color: #0e1111"> <b>No Collaboration</b> </h2>
+      <p style="font-size: 12px">Do Something </p>
+    </ion-card>
+    <h3 *ngIf="!roomBlank">Rooms</h3>
         <ion-card *ngFor="let room of acceptedCollab" (click)="selectRoom(room)">
           <ion-card-header>
             <ion-icon *ngIf=" room.collab_category_id==1 "  name="school"></ion-icon>
@@ -37,6 +41,9 @@
           </ion-card-content>
         </ion-card>
 
+  </div>
+  <div  *ngIf="roomBlank">
+    <img src="../../../../assets/relax.png" alt="">
   </div>
   <ion-fab vertical="bottom" horizontal="end" slot="fixed">
     <ion-fab-button (click)="OpenModal()">

@@ -29,6 +29,15 @@ othersCount:number=0;
     private router:Router, public alertController: AlertController, public toastController: ToastController, private modalController:ModalController) { }
 
 
+  ionViewDidEnter() {
+    this.getTask();
+    this.checkIfBlank();
+    console.log(this.tasks);
+    for(let t of this.tasks){
+      this.count++
+    }
+  }
+
   ngOnInit() {
     this.category_id = this.data_service.categ_id
     this.schoolCount=this.data_service.schoolCount;
@@ -44,11 +53,11 @@ othersCount:number=0;
     this.user_id=this.data_service.user_id;
     //this.tasks = this.data_service.tasksCateg;
     this.getTask();
-    this.checkIfBlank();
-    console.log(this.tasks);
-    for(let t of this.tasks){
-      this.count++
-    }
+    // this.checkIfBlank();
+    // console.log(this.tasks);
+    // for(let t of this.tasks){
+    //   this.count++
+    // }
   }
   getTask(){
     this.data_service.sendAPIRequest("showTasksCateg/" + this.user_id+"/"+this.category_id, null).subscribe(data => {

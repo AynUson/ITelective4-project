@@ -198,12 +198,36 @@ switch ($_SERVER['REQUEST_METHOD']) {
         } else {
           echo json_encode($gm->delete('collab_member_tbl', null), JSON_PRETTY_PRINT);
         }
-        case 'removeMem':
-          if (count($req) > 1) {
-            echo json_encode($gm->delete('collab_member_tbl', $req[1]), JSON_PRETTY_PRINT);
-          } else {
-            echo json_encode($gm->delete('collab_member_tbl', null), JSON_PRETTY_PRINT);
-          }
+      case 'removeMem':
+        if (count($req) > 1) {
+          echo json_encode($gm->delete('collab_member_tbl', $req[1]), JSON_PRETTY_PRINT);
+        } else {
+          echo json_encode($gm->delete('collab_member_tbl', null), JSON_PRETTY_PRINT);
+        }
+      case 'leaveRoom':
+        if (count($req) > 1) {
+          echo json_encode($post->delete('collab_member_tbl', $req[1],$req[2]), JSON_PRETTY_PRINT);
+        } else {
+          echo json_encode($post->delete('collab_member_tbl', null, null), JSON_PRETTY_PRINT);
+        }
+      case 'deleteTaskOfCollab':
+        if (count($req) > 1) {
+          echo json_encode($post->disband('collab_tasks_tbl', $req[1]), JSON_PRETTY_PRINT);
+        } else {
+          echo json_encode($post->disband('collab_tasks_tbl', null, null), JSON_PRETTY_PRINT);
+        }
+      case 'deleteMemOfCollab':
+        if (count($req) > 1) {
+          echo json_encode($post->disband('collab_member_tbl', $req[1]), JSON_PRETTY_PRINT);
+        } else {
+          echo json_encode($post->disband('collab_member_tbl', null, null), JSON_PRETTY_PRINT);
+        }
+      case 'deleteCollab':
+        if (count($req) > 1) {
+          echo json_encode($post->disband('collab_room_tbl', $req[1]), JSON_PRETTY_PRINT);
+        } else {
+          echo json_encode($post->disband('collab_room_tbl', null, null), JSON_PRETTY_PRINT);
+        }
 
 
     }

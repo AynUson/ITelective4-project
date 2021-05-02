@@ -32,7 +32,7 @@
 
         <!-- DELETE AND VIEW -->
         <ion-item-options side="end" *ngIf="isCreator && req.user_id != creator_id">
-          <ion-item-option color="danger" (click)="deleteTask(req.member_rec_id, req.user_name)" >
+          <ion-item-option color="danger" (click)="deleteMem(req.member_rec_id, req.user_name)" >
             <ion-icon slot="icon-only" name="trash"></ion-icon>
           </ion-item-option>
         </ion-item-options>

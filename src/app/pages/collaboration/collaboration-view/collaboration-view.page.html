@@ -16,7 +16,11 @@
     <ion-label>
       <h2>{{room.collab_room_description}}</h2>
     </ion-label>
+    <ion-button slot="end" fill="clear" (click)="openPopover($event)" >
+      <ion-icon color="primary" slot="icon-only" name="ellipsis-horizontal"></ion-icon>
+    </ion-button>
   </ion-item>
+
 </ion-header>
 
 <ion-content>
@@ -56,10 +60,6 @@
 
 
   <div class="slides ion-margin-bottom">
-
-
-    <ion-button (click)="OpenViewMemModal()">Collaborators</ion-button>
-    <ion-button (click)="OpenDoneTasksModal()">Tasks Done</ion-button>
 
   </div>
     <ion-fab vertical="bottom" horizontal="end" slot="fixed">

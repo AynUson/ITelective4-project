@@ -246,27 +246,74 @@
                         $msg = $e->getMessage(); $code = 401; $remarks = "failed";
                     }
                     return $this->sendPayload($data, $remarks, $msg, $code);
-                }
-                function checkIfCreator($filter_data) {
+    }
+    function checkIfCreator($filter_data) {
 
-                  $this->sql = "SELECT * FROM `collab_room_tbl`";
+      $this->sql = "SELECT * FROM `collab_room_tbl`";
 
-                          if($filter_data != null) {
-                              $this->sql .= " WHERE collab_room_id=$filter_data";
-                          }
+              if($filter_data != null) {
+                  $this->sql .= " WHERE collab_room_id=$filter_data";
+              }
 
-                          $data = array(); $code = 0; $msg= ""; $remarks = "";
-                          try {
-                              if ($res = $this->pdo->query($this->sql)->fetchAll()) {
-                                  foreach ($res as $rec) { array_push($data, $rec);}
-                                  $res = null; $code = 200; $msg = "Successfully retrieved the requested records"; $remarks = "success";
-                              }
-                          } catch (\PDOException $e) {
-                              $msg = $e->getMessage(); $code = 401; $remarks = "failed";
-                          }
-                          return $this->sendPayload($data, $remarks, $msg, $code);
-                      }
+              $data = array(); $code = 0; $msg= ""; $remarks = "";
+              try {
+                  if ($res = $this->pdo->query($this->sql)->fetchAll()) {
+                      foreach ($res as $rec) { array_push($data, $rec);}
+                      $res = null; $code = 200; $msg = "Successfully retrieved the requested records"; $remarks = "success";
+                  }
+              } catch (\PDOException $e) {
+                  $msg = $e->getMessage(); $code = 401; $remarks = "failed";
+              }
+              return $this->sendPayload($data, $remarks, $msg, $code);
+          }
 
+      public function delete($table, $filter_data,$filter_data2) {
+
+        $this->sql = "DELETE FROM $table";
+
+        if($filter_data != null && $table == "task_tbl") {
+          $this->sql .= " WHERE  task_id=$filter_data";
+        }
+        if($filter_data != null && $table == "collab_tasks_tbl") {
+          $this->sql .= " WHERE  task_id=$filter_data";
+        }
+        if($filter_data != null && $table == "collab_member_tbl") {
+          $this->sql .= " WHERE  collab_room_id=$filter_data AND user_id=$filter_data2";
+        }
+        if($filter_data != null && $table == "user_tbl") {
+          $this->sql .= " WHERE user_id=$filter_data";
+        }
+
+        $data = array(); $code = 0; $msg= ""; $remarks = "";
+        try {
+          if ($res = $this->pdo->query($this->sql)->fetchAll()) {
+            foreach ($res as $rec) { array_push($data, $rec);}
+            $res = null; $code = 200; $msg = "Successfully retrieved the requested records"; $remarks = "success";
+          }
+        } catch (\PDOException $e) {
+          $msg = $e->getMessage(); $code = 401; $remarks = "failed";
+        }
+        return $this->sendPayload($data, $remarks, $msg, $code);
+      }
+    public function disband($table, $filter_data) {
+
+      $this->sql = "DELETE FROM $table";
+
+      if($filter_data != null) {
+        $this->sql .= " WHERE  collab_room_id=$filter_data";
+      }
+
+      $data = array(); $code = 0; $msg= ""; $remarks = "";
+      try {
+        if ($res = $this->pdo->query($this->sql)->fetchAll()) {
+          foreach ($res as $rec) { array_push($data, $rec);}
+          $res = null; $code = 200; $msg = "Successfully retrieved the requested records"; $remarks = "success";
+        }
+      } catch (\PDOException $e) {
+        $msg = $e->getMessage(); $code = 401; $remarks = "failed";
+      }
+      return $this->sendPayload($data, $remarks, $msg, $code);
+    }
 
     public function insertOrderDetails($table, $data){
             foreach($data as $x => $x_value) {

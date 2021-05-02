@@ -1,0 +1,9 @@
+<ion-list>
+  <ion-item button (click)="OpenViewMemModal()">Collaborators</ion-item>
+  <ion-item button (click)="OpenDoneTasksModal()">Finished Tasks</ion-item>
+  <ion-item button disabled="{{isCreator}}" (click)="leaveRoom()">Leave collaboration</ion-item>
+  <ion-item button disabled="{{!isCreator}}" (click)="disbandRoom()">Disband collaboration
+    <img style="float:right" src="../../../assets/crown.png" />
+  </ion-item>
+  <ion-item lines="none" detail="false" button (click)="dismissPopover()">Close</ion-item>
+</ion-list>

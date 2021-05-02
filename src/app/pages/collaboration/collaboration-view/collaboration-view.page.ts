@@ -7,7 +7,9 @@ import { InviteMemberModalPage } from "../../../modals/invite-member-modal/invit
 import { ViewMembersPage } from "../../../modals/view-members/view-members.page";
 import { ViewDoneTasksPage } from "../../../modals/view-done-tasks/view-done-tasks.page";
 import { ViewTaskPage } from "../../../modals/view-task/view-task.page";
+import { CollabPopoverComponent} from "../../../components/collab-popover/collab-popover.component"
 import {  AlertController, LoadingController, ModalController, ToastController } from '@ionic/angular';
+import { PopoverController } from '@ionic/angular';
 @Component({
   selector: 'app-collaboration-view',
   templateUrl: './collaboration-view.page.html',
@@ -22,7 +24,7 @@ export class CollaborationViewPage implements OnInit {
   gold:any
   selectedData: any[] = [];
   constructor(private data_service: DataService,
-    private router:Router, private modalController:ModalController, public alertController: AlertController, public toastController: ToastController,public loadingController: LoadingController) { }
+    private router:Router, private modalController:ModalController, public alertController: AlertController, public toastController: ToastController,public loadingController: LoadingController, public popoverController: PopoverController) { }
 
   ionViewDidEnter() {
     this.load();
@@ -39,6 +41,20 @@ export class CollaborationViewPage implements OnInit {
     // this.getCollabTasks();
     // this.getCollabMem();
   }
+  async openPopover(ev:any){
+    const popover = await this.popoverController.create({
+      component: CollabPopoverComponent,
+      cssClass: '',
+      event: ev,
+      translucent: true
+    });
+    await popover.present();
+
+    const { role } = await popover.onDidDismiss();
+    this.getCollabTasks();
+    this.getCollabMem();
+    console.log('onDidDismiss resolved with role', role);
+  }
 
   async load(){
     const loading = await this.loadingController.create({
@@ -51,6 +67,8 @@ export class CollaborationViewPage implements OnInit {
     this.getCollabTasks();
     this.getCollabMem();
   }
+
+
 
   async deleteTask(id,title){
 
