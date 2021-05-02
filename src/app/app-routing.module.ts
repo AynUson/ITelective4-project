@@ -37,6 +37,10 @@ const routes: Routes = [
   {
     path: 'view-done-tasks',
     loadChildren: () => import('./modals/view-done-tasks/view-done-tasks.module').then( m => m.ViewDoneTasksPageModule)
+  },
+  {
+    path: 'view-task',
+    loadChildren: () => import('./modals/view-task/view-task.module').then( m => m.ViewTaskPageModule)
   }
 
 

@@ -6,6 +6,7 @@ import { CollabtaskModalPage } from "../../../modals/collabtask-modal/collabtask
 import { InviteMemberModalPage } from "../../../modals/invite-member-modal/invite-member-modal.page";
 import { ViewMembersPage } from "../../../modals/view-members/view-members.page";
 import { ViewDoneTasksPage } from "../../../modals/view-done-tasks/view-done-tasks.page";
+import { ViewTaskPage } from "../../../modals/view-task/view-task.page";
 import {  AlertController, LoadingController, ModalController, ToastController } from '@ionic/angular';
 @Component({
   selector: 'app-collaboration-view',
@@ -25,6 +26,7 @@ export class CollaborationViewPage implements OnInit {
 
   ionViewDidEnter() {
     this.load();
+
   }
   ngOnInit() {
     this.user=this.data_service.userLoggedIn;
@@ -49,6 +51,7 @@ export class CollaborationViewPage implements OnInit {
     this.getCollabTasks();
     this.getCollabMem();
   }
+
   async deleteTask(id,title){
 
     const alert = await this.alertController.create({
@@ -178,12 +181,19 @@ export class CollaborationViewPage implements OnInit {
       modal.present();
 
   }
+  async OpenViewTasksModal(task) {
+    this.data_service.DoneIsCollab = true;
+    console.log(task)
+    this.data_service.task = task
+    let modal =await this.modalController.create({ component:ViewTaskPage });
+    modal.onDidDismiss().then(()=>{
+      this.getCollabTasks();
+      this.getCollabMem();
+    });
+      modal.present();
+  }
 
   async OpenInviteModal() {
-    // this.modalController.create(
-    //   { component:ModalPage }).then((modalElement)=>{
-    //   modalElement.present();
-    // });
     let modal =await this.modalController.create({ component:InviteMemberModalPage });
     modal.onDidDismiss().then(()=>{
       this.getCollabTasks();
@@ -206,6 +216,7 @@ export class CollaborationViewPage implements OnInit {
       modal.present();
 
   }
+
 
   getCollabTasks(){
     this.data_service.sendAPIRequest("showCollabTasks/" + this.data_service.currentCollabView.collab_room_id, null).subscribe(data => {

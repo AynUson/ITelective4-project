@@ -32,7 +32,7 @@ export class DashboardPage{
   constructor(private tasksService: TasksService, private data_service: DataService, private modalController:ModalController, private router:Router) {  }
 
 
-  
+
 
     async OpenModal() {
       // this.modalController.create(
@@ -114,7 +114,8 @@ export class DashboardPage{
   viewCategory(categ, title, icon){
     this.categoryTaskOnView = []
     // console.log(this.data_service.user_id)
-    // console.log(categ.category_id)
+     console.log("Categ id "+categ.category_id)
+     this.data_service.categ_id = categ.category_id
     this.data_service.sendAPIRequest("viewCategory/"+this.data_service.user_id, null).subscribe(data => {
       this.categoryTasks=data.payload;
       for(let task of this.categoryTasks){

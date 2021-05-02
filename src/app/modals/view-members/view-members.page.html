@@ -13,7 +13,6 @@
 </ion-header>
 
 <ion-content>
-
   <div class="slides ion-margin-bottom">
 
   </div>
@@ -26,16 +25,15 @@
             <h2>{{req.user_name}}</h2>
             <p>Level: {{req.user_level}}</p>
           </ion-label>
-
+          <div class="headerCon" *ngIf=" req.user_id == creator_id">
+            <img class="item" src="../../../assets/crown.png" />
+          </div>
         </ion-item>
 
         <!-- DELETE AND VIEW -->
-        <ion-item-options side="end">
-          <ion-item-option color="danger" >
+        <ion-item-options side="end" *ngIf="isCreator && req.user_id != creator_id">
+          <ion-item-option color="danger" (click)="deleteTask(req.member_rec_id, req.user_name)" >
             <ion-icon slot="icon-only" name="trash"></ion-icon>
-          </ion-item-option>
-          <ion-item-option color="success" >
-            <ion-icon slot="icon-only" name="heart"></ion-icon>
           </ion-item-option>
         </ion-item-options>
       </ion-item-sliding>

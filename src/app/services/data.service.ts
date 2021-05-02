@@ -20,6 +20,7 @@ export class DataService {
   workCount:number=0;
   schoolCount:number=0;
   othersCount:number=0;
+  task:any;
   constructor(private _http: HttpClient) { }
 
 

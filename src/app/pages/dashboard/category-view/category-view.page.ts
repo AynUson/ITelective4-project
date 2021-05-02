@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AlertController, ToastController,ModalController } from '@ionic/angular';
 import { DataService } from 'src/app/services/data.service';
+import { ViewTaskPage } from "../../../modals/view-task/view-task.page";
 import { ViewDoneTasksPage } from "../../../modals/view-done-tasks/view-done-tasks.page";
 @Component({
   selector: 'app-category-view',
@@ -17,6 +18,7 @@ gold:any;
 user_id:any;
 tasks: any[]=[]
 category:any;
+category_id:number;
 icon:any;
 count:number = 0;
 fitnessCount:number=0;
@@ -28,6 +30,7 @@ othersCount:number=0;
 
 
   ngOnInit() {
+    this.category_id = this.data_service.categ_id
     this.schoolCount=this.data_service.schoolCount;
     this.workCount=this.data_service.workCount;
     this.fitnessCount=this.data_service.fitnessCount;
@@ -39,13 +42,19 @@ othersCount:number=0;
     this.xp = this.user.user_xp
     this.gold = this.user.user_gold
     this.user_id=this.data_service.user_id;
-    this.tasks = this.data_service.tasksCateg;
-    //this.getUser();
+    //this.tasks = this.data_service.tasksCateg;
+    this.getTask();
     this.checkIfBlank();
     console.log(this.tasks);
     for(let t of this.tasks){
       this.count++
     }
+  }
+  getTask(){
+    this.data_service.sendAPIRequest("showTasksCateg/" + this.user_id+"/"+this.category_id, null).subscribe(data => {
+      this.tasks = data.payload
+      console.log(data)
+    });
   }
 
   // getUser(){
@@ -64,9 +73,21 @@ othersCount:number=0;
     this.data_service.DoneIsCollab = false;
     let modal =await this.modalController.create({ component:ViewDoneTasksPage });
     modal.onDidDismiss().then(()=>{
+      this.getTask();
     });
       modal.present();
 
+  }
+
+  async OpenViewTasksModal(task) {
+    this.data_service.DoneIsCollab = false;
+    console.log(task)
+    this.data_service.task = task
+    let modal =await this.modalController.create({ component:ViewTaskPage });
+    modal.onDidDismiss().then(()=>{
+      this.getTask();
+    });
+      modal.present();
   }
 
   async deleteTask(id,title){

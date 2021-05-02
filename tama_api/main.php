@@ -61,13 +61,13 @@ switch ($_SERVER['REQUEST_METHOD']) {
           echo json_encode($post->selectCollabJoinAccepted(null), JSON_PRETTY_PRINT);
         }
         break;
-        case 'showCollabJoin3':
-          if (count($req) > 1) {
-            echo json_encode($post->selectCollabJoinReq($req[1]), JSON_PRETTY_PRINT);
-          } else {
-            echo json_encode($post->selectCollabJoinReq(null), JSON_PRETTY_PRINT);
-          }
-          break;
+      case 'showCollabJoin3':
+        if (count($req) > 1) {
+          echo json_encode($post->selectCollabJoinReq($req[1]), JSON_PRETTY_PRINT);
+        } else {
+          echo json_encode($post->selectCollabJoinReq(null), JSON_PRETTY_PRINT);
+        }
+        break;
       case 'showCollabTasks':
         if (count($req) > 1) {
           echo json_encode($post->collabTaskJoin($req[1]), JSON_PRETTY_PRINT);
@@ -87,6 +87,13 @@ switch ($_SERVER['REQUEST_METHOD']) {
           echo json_encode($post->taskDone($req[1],$req[2]), JSON_PRETTY_PRINT);
         } else {
           echo json_encode($post->taskDone(null,null), JSON_PRETTY_PRINT);
+        }
+        break;
+      case 'showTasksCateg':
+        if (count($req) > 1) {
+          echo json_encode($post->taskCateg($req[1],$req[2]), JSON_PRETTY_PRINT);
+        } else {
+          echo json_encode($post->taskCateg(null,null), JSON_PRETTY_PRINT);
         }
         break;
       case 'showCollabMembers':
@@ -117,7 +124,13 @@ switch ($_SERVER['REQUEST_METHOD']) {
           echo json_encode($post->collabMembersShow(null), JSON_PRETTY_PRINT);
         }
         break;
-
+      case 'checkIfCreator':
+        if (count($req) > 1) {
+          echo json_encode($post->checkIfCreator($req[1]), JSON_PRETTY_PRINT);
+        } else {
+          echo json_encode($post->checkIfCreator(null), JSON_PRETTY_PRINT);
+        }
+        break;
 
 
 
@@ -162,6 +175,10 @@ switch ($_SERVER['REQUEST_METHOD']) {
         $d = json_decode(file_get_contents("php://input"));
         echo json_encode($gm->update("user_tbl", $d, 'user_id=' . $req[1]), JSON_PRETTY_PRINT);
         break;
+      case 'updateTask':
+        $d = json_decode(file_get_contents("php://input"));
+        echo json_encode($gm->update("task_tbl", $d, 'task_id=' . $req[1]), JSON_PRETTY_PRINT);
+        break;
         //DELETE
       case 'deleteTask':
         if (count($req) > 1) {
@@ -181,6 +198,12 @@ switch ($_SERVER['REQUEST_METHOD']) {
         } else {
           echo json_encode($gm->delete('collab_member_tbl', null), JSON_PRETTY_PRINT);
         }
+        case 'removeMem':
+          if (count($req) > 1) {
+            echo json_encode($gm->delete('collab_member_tbl', $req[1]), JSON_PRETTY_PRINT);
+          } else {
+            echo json_encode($gm->delete('collab_member_tbl', null), JSON_PRETTY_PRINT);
+          }
 
 
     }
