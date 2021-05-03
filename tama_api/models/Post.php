@@ -266,6 +266,44 @@
               }
               return $this->sendPayload($data, $remarks, $msg, $code);
           }
+        function getEquipedItems($filter_data) {
+
+          $this->sql = "SELECT * FROM user_inventory_tbl INNER JOIN shop_tbl ON user_inventory_tbl.item_id=shop_tbl.item_id";
+
+                if($filter_data != null) {
+                    $this->sql .= " WHERE user_inventory_tbl.user_id =$filter_data AND user_inventory_tbl.isEquiped = 1";
+                }
+
+                $data = array(); $code = 0; $msg= ""; $remarks = "";
+                try {
+                    if ($res = $this->pdo->query($this->sql)->fetchAll()) {
+                        foreach ($res as $rec) { array_push($data, $rec);}
+                        $res = null; $code = 200; $msg = "Successfully retrieved the requested records"; $remarks = "success";
+                    }
+                } catch (\PDOException $e) {
+                    $msg = $e->getMessage(); $code = 401; $remarks = "failed";
+                }
+                return $this->sendPayload($data, $remarks, $msg, $code);
+            }
+        function getOwnedItem($filter_data) {
+
+          $this->sql = "SELECT * FROM user_inventory_tbl INNER JOIN shop_tbl ON user_inventory_tbl.item_id=shop_tbl.item_id";
+
+                if($filter_data != null) {
+                    $this->sql .= " WHERE user_inventory_tbl.user_id =$filter_data";
+                }
+
+                $data = array(); $code = 0; $msg= ""; $remarks = "";
+                try {
+                    if ($res = $this->pdo->query($this->sql)->fetchAll()) {
+                        foreach ($res as $rec) { array_push($data, $rec);}
+                        $res = null; $code = 200; $msg = "Successfully retrieved the requested records"; $remarks = "success";
+                    }
+                } catch (\PDOException $e) {
+                    $msg = $e->getMessage(); $code = 401; $remarks = "failed";
+                }
+                return $this->sendPayload($data, $remarks, $msg, $code);
+            }
 
       public function delete($table, $filter_data,$filter_data2) {
 
@@ -314,37 +352,6 @@
       }
       return $this->sendPayload($data, $remarks, $msg, $code);
     }
-
-    public function insertOrderDetails($table, $data){
-            foreach($data as $x => $x_value) {
-			$i = 0; $fields=[]; $values=[];
-			foreach ($x_value as $key => $value) {
-				array_push($fields, $key);
-				array_push($values, $value);
-			}
-
-			try {
-				$ctr = 0;
-				$sqlstr="INSERT INTO $table (";
-				foreach ($fields as $value) {
-					$sqlstr.=$value; $ctr++;
-					if($ctr<count($fields)) {
-						$sqlstr.=", ";
-					}
-				}
-				$sqlstr.=") VALUES (".str_repeat("?, ", count($values)-1)."?)";
-
-				$sql = $this->pdo->prepare($sqlstr);
-				$sql->execute($values);
-			} catch (\PDOException $e) {
-				$errmsg = $e->getMessage();
-				$code = 403;
-                return array("code"=>$code, "errmsg"=>$errmsg);
-			}
-        }
-            return array("code"=>200, "remarks"=>"success");
-
-		}
 
     public function sendPayload($payload, $remarks, $message, $code) {
 			$status = array("remarks"=>$remarks, "message"=>$message);

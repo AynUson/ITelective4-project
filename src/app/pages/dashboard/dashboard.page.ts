@@ -133,7 +133,6 @@ export class DashboardPage{
       this.data_service.categ = title;
       this.data_service.icon = icon;
       this.router.navigate(['/home/dashboard/category-view']);
-      console.log("CATEG TITLE :"+title)
     });
   }
 
@@ -143,7 +142,6 @@ export class DashboardPage{
     this.data_service.sendAPIRequest(("task"), null)
     .subscribe((result:any)=>{
       this.a =(result.payload);
-      console.log("TASKS: "+this.a)
   });
   }
 // ON progress show tasks of the logged in user
@@ -151,7 +149,6 @@ export class DashboardPage{
     this.getTasks();
     console.log("TASKS: "+this.a);
     for(let task of this.a){
-      console.log(this.user.user_id);
       if(this.user.user_id == task.user_id){
         this.filteredTask = task;
       }

@@ -59,46 +59,55 @@
     </form> -->
 
       <div *ngIf="selectedSegment == 'themes'">
-        <h2>Themes</h2>
+        <h2>Themes - ${{user.user_gold}}</h2>
           <div *ngFor="let item of themes">
-              <ion-card [ngStyle]="{'background-color': item.item_property }" *ngIf="item.item_category_id==1">
+              <ion-card [ngStyle]="{'background-color': item.item_property }" *ngIf="item.item_category_id==1  && item.item_name !='primary'">
                 <ion-card-header style=" color:#ffffff" class="ion-text-left flexbox">
                   <h3> {{item.item_name}}  </h3>
-                  <ion-button color="light" class="buttonright" (click)="buyItem(item.item_id)">$ {{item.item_price}} </ion-button>
+                  <div  *ngFor="let inv of inventory" >
+                    <ion-button color="light" class="buttonright" size="large" (click)="owneditem()" *ngIf="item.item_id==inv.item_id"  fill="clear">
+                      <img float-right *ngIf="item.item_id==inv.item_id" src="../../../assets/backpack.png" style="right:0px;border-radius: 20%; width: 32px;height: auto;">
+                    </ion-button>
+
+                  </div>
                 </ion-card-header>
-                <ion-card-content class="ion-text-left flexbox" *ngFor="let inv of inventory">
-                  <ion-button color="light" class="buttonright" disabled=true  *ngIf="item.item_id==inv.item_id" > Owned </ion-button>
-                </ion-card-content>
+                <ion-button color="light" class="buttonright" (click)="buyItem(item.item_id,item.item_price)">$ {{item.item_price}} </ion-button>
               </ion-card>
           </div>
         </div>
         <div *ngIf="selectedSegment == 'headdress'">
-          <h2>Headdress</h2>
+          <h2>Headdress - ${{user.user_gold}} </h2>
             <div *ngFor="let item of headdress">
-              <ion-card *ngIf="item.item_category_id==2">
+              <ion-card *ngIf="item.item_category_id==2 && item.item_name !='default'">
                 <ion-card-header class="ion-text-left flexbox" >
                   <img src="{{ item.item_property }}" style="border-radius: 20%; width: 64px;height: auto;">
-                  <h3> {{item.item_name}}  </h3>
-                  <ion-button color="primary" class="buttonright" (click)="buyItem(item.item_id)">$ {{item.item_price}} </ion-button>
+                  <h3> {{item.item_name}} </h3>
+                  <div  *ngFor="let inv of inventory" >
+                    <ion-button color="light" class="buttonright" size="large" (click)="owneditem()" *ngIf="item.item_id==inv.item_id"  fill="clear">
+                      <img float-right *ngIf="item.item_id==inv.item_id" src="../../../assets/backpack.png" style="right:0px;border-radius: 20%; width: 32px;height: auto;">
+                    </ion-button>
+
+                  </div>
                 </ion-card-header>
-                <ion-card-content class="ion-text-left flexbox" *ngFor="let inv of inventory" style=" margin-top: -15px;">
-                  <ion-button color="light" class="buttonright" disabled=true  *ngIf="item.item_id==inv.item_id" > Owned </ion-button>
-                </ion-card-content>
+                <ion-button color="primary" class="buttonright" (click)="buyItem(item.item_id,item.item_price)">$ {{item.item_price}} </ion-button>
               </ion-card>
             </div>
         </div>
         <div *ngIf="selectedSegment == 'icons'">
-          <h2>Profile Icon</h2>
+          <h2>Profile Icon - ${{user.user_gold}}</h2>
             <div *ngFor="let item of icons">
-              <ion-card *ngIf="item.item_category_id==3" >
+              <ion-card *ngIf="item.item_category_id==3  && item.item_name !='default'" >
                 <ion-card-header class="ion-text-left flexbox" >
                   <img src="{{ item.item_property }}" style="border-radius: 20%; width: 64px;height: auto;">
                   <h3> {{item.item_name}}  </h3>
-                  <ion-button color="primary" class="buttonright" (click)="buyItem(item.item_id)">$ {{item.item_price}} </ion-button>
+                  <div  *ngFor="let inv of inventory" >
+                    <ion-button color="light" class="buttonright" size="large" (click)="owneditem()" *ngIf="item.item_id==inv.item_id"  fill="clear">
+                      <img float-right *ngIf="item.item_id==inv.item_id" src="../../../assets/backpack.png" style="right:0px;border-radius: 20%; width: 32px;height: auto;">
+                    </ion-button>
+
+                  </div>
                 </ion-card-header>
-                <ion-card-content class="ion-text-left flexbox" *ngFor="let inv of inventory" style=" margin-top: -15px;">
-                  <ion-button color="light" class="buttonright" disabled=true  *ngIf="item.item_id==inv.item_id" > Owned </ion-button>
-                </ion-card-content>
+                <ion-button color="primary" class="buttonright" (click)="buyItem(item.item_id,item.item_price)">$ {{item.item_price}} </ion-button>
               </ion-card>
             </div>
         </div>

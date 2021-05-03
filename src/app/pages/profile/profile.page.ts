@@ -19,7 +19,58 @@ export class ProfilePage implements OnInit {
     this.getData();
     this.user=this.data_service.userLoggedIn;
     console.log(this.user)
+    this.getEquiped();
+    this.getOwned();
   }
+  ownedItems:any;
+  ownedCount:any = 0;
+  equipedTheme:any;
+  equipedProp:any="";
+  equipedProfile:any
+  equipedHeaddress:any
+  equips:any
+
+  getOwned(){
+    this.data_service.sendAPIRequest("getOwned/"+this.data_service.userLoggedIn.user_id, null).subscribe(data => {
+      this.ownedItems = data.payload
+      console.log(this.ownedItems )
+      for(let eq of this.ownedItems){
+        this.ownedCount++
+        console.log(eq.item_name )
+      }
+    });
+  }
+
+  getEquiped(){
+    this.data_service.sendAPIRequest("getEquiped/"+this.data_service.userLoggedIn.user_id, null).subscribe(data => {
+      this.equips = data.payload
+      console.log(this.equips)
+      for(let eq of this.equips){
+        if(eq.item_category_id == 1){
+          this.equipedTheme = eq.item_name
+          this.equipedProp = eq.item_property
+          this.chartColors = [
+            {
+              borderColor: '#000000',
+              backgroundColor: this.equipedProp
+            }
+          ]
+          console.log("Property: "+this.equipedProp)
+
+        }
+        if(eq.item_category_id == 2){
+          this.equipedHeaddress = eq.item_property
+          console.log(this.equipedTheme)
+        }
+        if(eq.item_category_id == 3){
+          this.equipedProfile = eq.item_property
+          console.log(this.equipedTheme)
+        }
+
+      }
+    });
+  }
+
   chartData: ChartDataSets[] = [{ data: [], label: 'Stock price' }];
   chartLabels: Label[];
 
@@ -28,7 +79,7 @@ export class ProfilePage implements OnInit {
     responsive: true,
     title: {
       display: true,
-      text: 'Historic Stock price'
+      text: 'Week Productivity'
     },
     pan: {
       enabled: true,
@@ -41,8 +92,8 @@ export class ProfilePage implements OnInit {
   };
   chartColors: Color[] = [
     {
-      borderColor: '#000000',
-      backgroundColor: '#ff00ff'
+      borderColor: '',
+      backgroundColor: ''
     }
   ];
   chartType = 'line';

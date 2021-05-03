@@ -138,6 +138,21 @@ switch ($_SERVER['REQUEST_METHOD']) {
           echo json_encode($post->checkIfCreator(null), JSON_PRETTY_PRINT);
         }
         break;
+      case 'getEquiped':
+        if (count($req) > 1) {
+          echo json_encode($post->getEquipedItems($req[1]), JSON_PRETTY_PRINT);
+        } else {
+          echo json_encode($post->getEquipedItems(null), JSON_PRETTY_PRINT);
+        }
+        break;
+      case 'getOwned':
+        if (count($req) > 1) {
+          echo json_encode($post->getOwnedItem($req[1]), JSON_PRETTY_PRINT);
+        } else {
+          echo json_encode($post->getOwnedItem(null), JSON_PRETTY_PRINT);
+        }
+        break;
+
 
 
 
@@ -167,6 +182,12 @@ switch ($_SERVER['REQUEST_METHOD']) {
         echo json_encode($gm->insert("shop_tbl", $d), JSON_PRETTY_PRINT);
         return array("data" => $d);
         break;
+      case 'buyItem':
+        $d = json_decode(file_get_contents("php://input"));
+        echo json_encode($gm->insert("user_inventory_tbl", $d), JSON_PRETTY_PRINT);
+        return array("data" => $d);
+        break;
+
 
 
 

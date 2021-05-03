@@ -59,6 +59,10 @@ othersCount:number=0;
     //   this.count++
     // }
   }
+
+
+
+
   getTask(){
     this.data_service.sendAPIRequest("showTasksCateg/" + this.user_id+"/"+this.category_id, null).subscribe(data => {
       this.tasks = data.payload

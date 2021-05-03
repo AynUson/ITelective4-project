@@ -11,5 +11,7 @@ export class SignupPage implements OnInit {
 
   ngOnInit() {
   }
-
+  //On user creation
+  //insert default items on user_inventory
+  //and equip
 }
