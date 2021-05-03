@@ -33,6 +33,13 @@ switch ($_SERVER['REQUEST_METHOD']) {
           echo json_encode($post->shop($req[0] . '_tbl', null), JSON_PRETTY_PRINT);
         }
         break;
+      case 'user_inventory':
+        if (count($req) > 1) {
+          echo json_encode($gm->exec_query($req[0] . '_tbl', $req[1]), JSON_PRETTY_PRINT);
+        } else {
+          echo json_encode($gm->exec_query($req[0] . '_tbl', null), JSON_PRETTY_PRINT);
+        }
+        break;
       case 'user':
         if (count($req) > 1) {
           echo json_encode($gm->exec_query($req[0] . '_tbl', $req[1]), JSON_PRETTY_PRINT);
@@ -153,6 +160,11 @@ switch ($_SERVER['REQUEST_METHOD']) {
       case 'collabtask':
         $d = json_decode(file_get_contents("php://input"));
         echo json_encode($gm->insert("collab_tasks_tbl", $d), JSON_PRETTY_PRINT);
+        return array("data" => $d);
+        break;
+      case 'createItem':
+        $d = json_decode(file_get_contents("php://input"));
+        echo json_encode($gm->insert("shop_tbl", $d), JSON_PRETTY_PRINT);
         return array("data" => $d);
         break;
 

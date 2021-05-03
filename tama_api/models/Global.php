@@ -17,6 +17,9 @@
       if($filter_data != null && $table == "user_tbl") {
 				$this->sql .= " WHERE user_id=$filter_data";
 			}
+      if($filter_data != null && $table == "user_inventory_tbl") {
+				$this->sql .= " WHERE user_id=$filter_data";
+			}
 
 			$data = array(); $code = 0; $msg= ""; $remarks = "";
 			try {

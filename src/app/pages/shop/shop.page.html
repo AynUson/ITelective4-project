@@ -8,6 +8,19 @@
       <ion-icon color="primary" slot="icon-only" name="briefcase"></ion-icon>
     </ion-button>
   </ion-toolbar>
+  <ion-toolbar>
+    <ion-segment value="headdress" (ionChange)="segmentChanged($event)">
+      <ion-segment-button value="themes">
+        <ion-label>Themes</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="headdress">
+        <ion-label>Headdress</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="icons">
+        <ion-label>Icons</ion-label>
+      </ion-segment-button>
+    </ion-segment>
+  </ion-toolbar>
 
   <!-- <ion-item lines='none' >
     <ion-avatar slot="start">
@@ -23,19 +36,72 @@
 <ion-content>
 
   <div class="slides ion-margin-bottom">
-        <h2>Themes</h2>
+    <!-- DONT DELETE -->
+    <!-- <form id="form"  ngNativeValidate (submit)="upload($event)">
 
-          <div *ngFor="let item of items">
-            <ion-card [ngStyle]="{'background-color': item.item_property }">
-              <ion-card-header style=" color:#ffffff">
-                <h3> {{item.item_name}}  </h3>
-              </ion-card-header>
-              <ion-card-content class="ion-text-left flexbox" >
-                <ion-card-title class="ion-margin-bottom"  style=" color:#ffffff">{{item.item_description}}</ion-card-title>
-                <ion-button color="light" class="buttonright"> Buy {{item.item_price}} </ion-button>
-              </ion-card-content>
-            </ion-card>
+        <ion-label >Upload temporary</ion-label>
+      <ion-item>
+        <ion-label position="floating" >Id</ion-label>
+        <ion-input  name="id"  type="number" [(ngModel)]="category"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating" >Name</ion-label>
+        <ion-input  name="name" [(ngModel)]="name"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating" >Price</ion-label>
+        <ion-input  name="prc" type="number" [(ngModel)]="price"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-input (change)="onUploadHandler($event)" name="image" type="file"  [(ngModel)]="images"></ion-input>
+      </ion-item>
+      <ion-button expand="block" shape="round" type="submit" >upload</ion-button>
+    </form> -->
+
+      <div *ngIf="selectedSegment == 'themes'">
+        <h2>Themes</h2>
+          <div *ngFor="let item of themes">
+              <ion-card [ngStyle]="{'background-color': item.item_property }" *ngIf="item.item_category_id==1">
+                <ion-card-header style=" color:#ffffff" class="ion-text-left flexbox">
+                  <h3> {{item.item_name}}  </h3>
+                  <ion-button color="light" class="buttonright" (click)="buyItem(item.item_id)">$ {{item.item_price}} </ion-button>
+                </ion-card-header>
+                <ion-card-content class="ion-text-left flexbox" *ngFor="let inv of inventory">
+                  <ion-button color="light" class="buttonright" disabled=true  *ngIf="item.item_id==inv.item_id" > Owned </ion-button>
+                </ion-card-content>
+              </ion-card>
           </div>
+        </div>
+        <div *ngIf="selectedSegment == 'headdress'">
+          <h2>Headdress</h2>
+            <div *ngFor="let item of headdress">
+              <ion-card *ngIf="item.item_category_id==2">
+                <ion-card-header class="ion-text-left flexbox" >
+                  <img src="{{ item.item_property }}" style="border-radius: 20%; width: 64px;height: auto;">
+                  <h3> {{item.item_name}}  </h3>
+                  <ion-button color="primary" class="buttonright" (click)="buyItem(item.item_id)">$ {{item.item_price}} </ion-button>
+                </ion-card-header>
+                <ion-card-content class="ion-text-left flexbox" *ngFor="let inv of inventory" style=" margin-top: -15px;">
+                  <ion-button color="light" class="buttonright" disabled=true  *ngIf="item.item_id==inv.item_id" > Owned </ion-button>
+                </ion-card-content>
+              </ion-card>
+            </div>
+        </div>
+        <div *ngIf="selectedSegment == 'icons'">
+          <h2>Profile Icon</h2>
+            <div *ngFor="let item of icons">
+              <ion-card *ngIf="item.item_category_id==3" >
+                <ion-card-header class="ion-text-left flexbox" >
+                  <img src="{{ item.item_property }}" style="border-radius: 20%; width: 64px;height: auto;">
+                  <h3> {{item.item_name}}  </h3>
+                  <ion-button color="primary" class="buttonright" (click)="buyItem(item.item_id)">$ {{item.item_price}} </ion-button>
+                </ion-card-header>
+                <ion-card-content class="ion-text-left flexbox" *ngFor="let inv of inventory" style=" margin-top: -15px;">
+                  <ion-button color="light" class="buttonright" disabled=true  *ngIf="item.item_id==inv.item_id" > Owned </ion-button>
+                </ion-card-content>
+              </ion-card>
+            </div>
+        </div>
 
 
   </div>
