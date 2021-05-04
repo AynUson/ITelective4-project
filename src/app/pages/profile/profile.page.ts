@@ -3,7 +3,9 @@ import { Router } from '@angular/router';
 import { Chart } from 'chart.js';
 import { ChartDataSets } from 'chart.js';
 import { Color, Label } from 'ng2-charts';
+import { ViewOwnedPage } from "../../modals/view-owned/view-owned.page";
 
+import {  AlertController, LoadingController, ModalController, ToastController } from '@ionic/angular';
 import { HttpClient } from '@angular/common/http';
 import { DataService } from 'src/app/services/data.service';
 @Component({
@@ -13,23 +15,37 @@ import { DataService } from 'src/app/services/data.service';
 })
 export class ProfilePage implements OnInit {
   user:any;
-  constructor(private router: Router,private http: HttpClient,private data_service: DataService) { }
-
+  constructor(private router: Router,private http: HttpClient,private data_service: DataService, private modalController:ModalController) { }
+  xp:any;
   ngOnInit() {
-    this.getData();
+
     this.user=this.data_service.userLoggedIn;
+    this.xp = this.user.user_xp / 100;
     console.log(this.user)
+    this.getData();
     this.getEquiped();
     this.getOwned();
   }
-  ownedItems:any;
-  ownedCount:any = 0;
+
+  async OpenOwnedItemModal() {
+    let modal =await this.modalController.create({ component:ViewOwnedPage });
+    modal.onDidDismiss().then(()=>{
+      this.getData();
+    this.getEquiped();
+    this.getOwned();
+    this.ownedCount = 0
+    });
+      modal.present();
+
+  }
+
   equipedTheme:any;
   equipedProp:any="";
   equipedProfile:any
   equipedHeaddress:any
   equips:any
-
+  ownedItems:any;
+  ownedCount:any = 0;
   getOwned(){
     this.data_service.sendAPIRequest("getOwned/"+this.data_service.userLoggedIn.user_id, null).subscribe(data => {
       this.ownedItems = data.payload

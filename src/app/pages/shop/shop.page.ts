@@ -1,9 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { ToastController } from '@ionic/angular';
+import { AlertController, ModalController, ToastController } from '@ionic/angular';
 import { DataService } from 'src/app/services/data.service';
 
+import { ViewOwnedPage } from "../../modals/view-owned/view-owned.page";
 @Component({
   selector: 'app-shop',
   templateUrl: './shop.page.html',
@@ -16,7 +17,7 @@ export class ShopPage implements OnInit {
   name:any;
   price:any;
   selectedSegment:any = 'headdress';
-  constructor(private router: Router,private data_service: DataService, public toastController: ToastController) { }
+  constructor(private router: Router,private data_service: DataService, public toastController: ToastController, public alertController: AlertController, private modalController:ModalController) { }
 
   ngOnInit() {
     this.user=this.data_service.userLoggedIn;
@@ -26,6 +27,16 @@ export class ShopPage implements OnInit {
 
   }
 
+
+  async OpenOwnedItemModal() {
+    let modal =await this.modalController.create({ component:ViewOwnedPage });
+    modal.onDidDismiss().then(()=>{
+      this.getUserInv();
+      this.getItem();
+    });
+      modal.present();
+
+  }
 
   segmentChanged(ev: any) {
     console.log('Segment changed', ev.target.value);
@@ -71,14 +82,43 @@ export class ShopPage implements OnInit {
   //   }
   //   reader.readAsDataURL(this.imageToUpload);
   // }
-  
+
+  async askBuy(id,prc,name){
+    if(prc > this.user.user_gold){
+      this.presentToast("Not enough currency!")
+    }else{
+
+      const alert = await this.alertController.create({
+        cssClass: '',
+        header: 'Are you sure?',
+        message: 'Purchase <strong>'+name+'</strong>?',
+        buttons: [
+          {
+            text: 'Cancel',
+            role: 'cancel',
+            cssClass: 'secondary',
+            handler: (blah) => {
+              console.log('Confirm Cancel: blah');
+            }
+          }, {
+            text: 'Okay',
+            handler: () => {
+
+              this.buyItem(id,prc);
+
+            }
+          }
+        ]
+      });
+
+      await alert.present();
+    }
+  }
+
   owned:boolean;
   updateUser:any = {};
   toBeBought: any = {};
   buyItem(id,prc){
-    if(prc > this.user.user_gold){
-      this.presentToast("Not enough currency!")
-    }else{
       this.updateUser.user_gold = this.user.user_gold - prc
       this.toBeBought.item_id = id
       this.toBeBought.user_id = this.data_service.userLoggedIn.user_id
@@ -99,7 +139,6 @@ export class ShopPage implements OnInit {
         this.data_service.sendAPIRequest("buyItem/", this.toBeBought).subscribe(data => {
           console.log(data)
           this.getUserInv();
-          this.getItem();
           this.presentToast("Item bought!")
         });
 
@@ -107,7 +146,7 @@ export class ShopPage implements OnInit {
         //show toast
         this.presentToast("Already Owned!")
       }
-    }
+
 
   }
 
@@ -130,6 +169,9 @@ export class ShopPage implements OnInit {
   icons:any[] =[];
 
   getItem(){
+    this.themes=[];
+    this.headdress=[];
+    this.icons=[];
     this.data_service.sendAPIRequest("shop/", null).subscribe(data => {
       this.items = data.payload
       for(let item of this.items){

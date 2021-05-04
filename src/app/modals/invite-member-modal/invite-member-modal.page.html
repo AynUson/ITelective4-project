@@ -24,6 +24,7 @@
   </div>
   <ion-list>
     <ion-item *ngFor="let collaborator of searchedItem">
+      <img style="float:right" src="{{collaborator.item_property}}" />
       <ion-label>{{collaborator.user_name}}</ion-label>
       <div *ngIf="collaborator.isAccepted == 0">
         <ion-button disabled=true (click)="checkIfMem(collaborator.user_id,collaborator.user_name)"> Invited </ion-button>

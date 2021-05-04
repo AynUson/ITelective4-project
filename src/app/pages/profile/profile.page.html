@@ -18,6 +18,7 @@
       <ion-icon color={{equipedTheme}}  slot="icon-only"    name="log-out"></ion-icon>
     </ion-button>
   </ion-toolbar>
+  <ion-progress-bar color={{equipedTheme}}  value={{xp}}></ion-progress-bar>
 <!--
   <ion-item lines='none'   color={{equipedTheme}}  style="color:white">
     <ion-avatar slot="start">
@@ -57,7 +58,7 @@
           </div>
 
         </ion-item>
-        <ion-item color={{equipedTheme}}  style="color:white">
+        <ion-item color={{equipedTheme}} (click)="OpenOwnedItemModal()"  style="color:white">
           <ion-label>Owned Items </ion-label>
           <div style="margin-top: -5px;padding: 3px;background-color: white; width: 34px;height:34px;border-radius: 20%;text-align: center;padding: 0px 0;
           ">

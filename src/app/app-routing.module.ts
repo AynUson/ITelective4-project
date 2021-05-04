@@ -41,6 +41,10 @@ const routes: Routes = [
   {
     path: 'view-task',
     loadChildren: () => import('./modals/view-task/view-task.module').then( m => m.ViewTaskPageModule)
+  },
+  {
+    path: 'view-owned',
+    loadChildren: () => import('./modals/view-owned/view-owned.module').then( m => m.ViewOwnedPageModule)
   }
 
 

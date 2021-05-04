@@ -152,6 +152,21 @@ switch ($_SERVER['REQUEST_METHOD']) {
           echo json_encode($post->getOwnedItem(null), JSON_PRETTY_PRINT);
         }
         break;
+      case 'getUserwIcon':
+        if (count($req) > 1) {
+          echo json_encode($post->getUserwIcon($req[1]), JSON_PRETTY_PRINT);
+        } else {
+          echo json_encode($post->getUserwIcon(null), JSON_PRETTY_PRINT);
+        }
+        break;
+      case 'getRecId':
+        if (count($req) > 1) {
+          echo json_encode($post->getRecId($req[1], $req[2]), JSON_PRETTY_PRINT);
+        } else {
+          echo json_encode($post->getRecId(null,null), JSON_PRETTY_PRINT);
+        }
+        break;
+
 
 
 
@@ -212,6 +227,21 @@ switch ($_SERVER['REQUEST_METHOD']) {
         $d = json_decode(file_get_contents("php://input"));
         echo json_encode($gm->update("task_tbl", $d, 'task_id=' . $req[1]), JSON_PRETTY_PRINT);
         break;
+      case 'unEquipAll':
+        $d = json_decode(file_get_contents("php://input"));
+        echo json_encode($post->unEquip("user_inventory_tbl", $d, 'user_inventory_tbl.user_id=' . $req[1], 'shop_tbl.item_category_id=' . $req[2]), JSON_PRETTY_PRINT);
+        break;
+      case 'equip':
+        $d = json_decode(file_get_contents("php://input"));
+        echo json_encode($gm->update("user_inventory_tbl", $d, 'owned_item_id=' . $req[1]), JSON_PRETTY_PRINT);
+        break;
+
+
+
+
+
+
+
         //DELETE
       case 'deleteTask':
         if (count($req) > 1) {

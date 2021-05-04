@@ -15,12 +15,24 @@ export class CollabPopoverComponent implements OnInit {
     private router:Router, private modalController:ModalController, public alertController: AlertController, public toastController: ToastController,public loadingController: LoadingController) { }
 
   ngOnInit() {
-    this.checkIfCreator()
+    this.getMemRecId();
+    this.checkIfCreator();
+    this.getOwned();
   }
   ionViewDidEnter() {
 
   }
-
+  rec:any;
+  rec_id:any = 0;
+  getMemRecId(){
+    this.data_service.sendAPIRequest("getRecId/"+this.data_service.currentCollabView.collab_room_id+"/"+this.data_service.user_id, null).subscribe(data => {
+      this.rec = data.payload
+      console.log(this.rec )
+      for(let eq of this.rec){
+          this.rec_id = eq.member_rec_id;
+      }
+    });
+  }
 
   dismissPopover() {
     this.popCtrl.dismiss({
@@ -62,7 +74,7 @@ export class CollabPopoverComponent implements OnInit {
           text: 'Okay',
           handler: () => {
             this.dismissPopover()
-            this.data_service.sendAPIRequest("leaveRoom/"+ this.data_service.currentCollabView.collab_room_id+"/"+this.user_id, null).subscribe(data => {
+            this.data_service.sendAPIRequest("leaveRoom/"+  this.rec_id, null).subscribe(data => {
               console.log(data)
             });
             this.loadLeave();
@@ -75,6 +87,24 @@ export class CollabPopoverComponent implements OnInit {
 
     await alert.present();
 
+  }
+
+
+  ownedItems:any;
+  ownedCount:any = 0;
+  headdress:any;
+  getOwned(){
+    this.data_service.sendAPIRequest("getOwned/"+this.data_service.userLoggedIn.user_id, null).subscribe(data => {
+      this.ownedItems = data.payload
+      console.log(this.ownedItems )
+      for(let eq of this.ownedItems){
+        if(eq.item_category_id == 2 && eq.isEquiped == 1){
+          this.headdress = eq.item_property
+        }
+        this.ownedCount++
+        console.log(eq.item_name )
+      }
+    });
   }
 
   async disbandRoom(){

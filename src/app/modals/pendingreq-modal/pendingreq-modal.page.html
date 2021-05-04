@@ -23,8 +23,21 @@
       <ion-item-sliding id="item100"  *ngFor="let req of selectedData">
         <ion-item>
           <ion-label>
-            <h2>{{req.collab_room_name}}</h2>
-            <p>{{req.collab_room_description}}</p>
+            <ion-row class="ion-justify-content-start">
+              <ion-col size="3">
+                <div>
+            <img class="item"  src="{{req.item_property}}"/>
+                </div>
+              </ion-col>
+              <ion-col size="3">
+                <div>
+                  <h2>{{req.collab_room_name}}</h2>
+                  <p>{{req.collab_room_description}}</p>
+                </div>
+
+              </ion-col>
+            </ion-row>
+
           </ion-label>
 
           <ion-note slot="end">

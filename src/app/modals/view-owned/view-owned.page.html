@@ -1,0 +1,100 @@
+<ion-header>
+  <ion-toolbar color={{equipedTheme}}>
+    <div class="headerCon">
+      <img class="item" src="../../../assets/deal.png" />
+      <ion-title><b>Owned Items</b></ion-title>
+    </div>
+    <ion-buttons slot="start">
+      <ion-button (click)="CloseModal()">
+        <ion-icon name="arrow-back-outline"></ion-icon>
+      </ion-button>
+  </ion-buttons>
+  </ion-toolbar>
+  <ion-toolbar>
+    <ion-segment value="headdress" (ionChange)="segmentChanged($event)">
+      <ion-segment-button value="themes">
+        <ion-label>Themes</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="headdress">
+        <ion-label>Headdress</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="icons">
+        <ion-label>Icons</ion-label>
+      </ion-segment-button>
+    </ion-segment>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content >
+  <div class="slides ion-margin-bottom">
+    <ion-list >
+
+      <!-- Multi-line sliding item with icon options on both sides -->
+        <div *ngIf="selectedSegment == 'themes'">
+          <ion-item-sliding id="item100"  *ngFor="let owned of themes" >
+            <ion-item color={{equipedTheme}} >
+              <ion-label>
+                <h2>{{owned.item_name}}</h2>
+              </ion-label>
+              <div class="headerCon" *ngIf=" owned.item_id == equipedThemeId">
+                <ion-icon color=light name="sparkles"></ion-icon>
+              </div>
+            </ion-item>
+
+            <!--Equip -->
+            <ion-item-options side="end" *ngIf="owned.item_id != equipedThemeId">
+              <ion-item-option color={{equipedTheme}}  (click)="equipLoad(owned.item_category_id, owned.item_name,owned.owned_item_id)" >
+                <ion-icon slot="icon-only"  name="hand-left"></ion-icon>
+              </ion-item-option>
+            </ion-item-options>
+          </ion-item-sliding>
+        </div>
+        <div *ngIf="selectedSegment == 'headdress'">
+
+          <ion-item-sliding id="item100"  *ngFor="let owned of headdress">
+            <ion-item>
+              <ion-label>
+                <img src="{{ owned.item_property }}" style="border-radius: 20%; width: 64px;height: auto;">
+                <h2>{{owned.item_name}}</h2>
+              </ion-label>
+              <div class="headerCon" *ngIf=" owned.item_id == equipedHeaddressId">
+                <ion-icon color={{equipedTheme}} name="sparkles"></ion-icon>
+              </div>
+            </ion-item>
+
+            <!--Equip -->
+            <ion-item-options side="end" *ngIf="owned.item_id != equipedHeaddressId">
+              <ion-item-option color={{equipedTheme}}  (click)="equipLoad(owned.item_category_id, owned.item_name,owned.owned_item_id)" >
+                <ion-icon slot="icon-only"  name="hand-left"></ion-icon>
+              </ion-item-option>
+            </ion-item-options>
+          </ion-item-sliding>
+        </div>
+        <div *ngIf="selectedSegment == 'icons'">
+
+          <ion-item-sliding id="item100"  *ngFor="let owned of icons">
+            <ion-item>
+              <ion-label>
+                <img src="{{ owned.item_property }}" style="border-radius: 20%; width: 64px;height: auto;">
+                <h2>{{owned.item_name}}</h2>
+              </ion-label>
+              <div class="headerCon" *ngIf=" owned.item_id == equipedProfileId">
+                <ion-icon color={{equipedTheme}} name="sparkles"></ion-icon>
+              </div>
+            </ion-item>
+
+            <!--Equip -->
+            <ion-item-options side="end" *ngIf="owned.item_id != equipedProfileId">
+              <ion-item-option color={{equipedTheme}}  (click)="equipLoad(owned.item_category_id, owned.item_name,owned.owned_item_id)" >
+                <ion-icon slot="icon-only"  name="hand-left"></ion-icon>
+              </ion-item-option>
+            </ion-item-options>
+          </ion-item-sliding>
+        </div>
+      </ion-list>
+  </div>
+
+
+
+
+</ion-content>

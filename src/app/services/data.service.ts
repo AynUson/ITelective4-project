@@ -36,4 +36,10 @@ export class DataService {
       this._http.post(this.baseURL + method + condition, JSON.stringify(data))
     );
   }
+
+  sendAPIRequest3(method, data, condition, condition2) {
+    return <any>(
+      this._http.post(this.baseURL + method + condition +'/'+condition2, JSON.stringify(data))
+    );
+  }
 }

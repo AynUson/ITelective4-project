@@ -4,7 +4,7 @@
       <img class="item" src="../../../assets/Tcircle.png" />
       <ion-title><b>Shop</b></ion-title>
     </div>
-    <ion-button slot="end" color="light"  >
+    <ion-button slot="end" color="light" (click)="OpenOwnedItemModal()"  >
       <ion-icon color="primary" slot="icon-only" name="briefcase"></ion-icon>
     </ion-button>
   </ion-toolbar>
@@ -71,7 +71,7 @@
 
                   </div>
                 </ion-card-header>
-                <ion-button color="light" class="buttonright" (click)="buyItem(item.item_id,item.item_price)">$ {{item.item_price}} </ion-button>
+                <ion-button color="light" class="buttonright" (click)="askBuy(item.item_id,item.item_price,item.item_name)">$ {{item.item_price}} </ion-button>
               </ion-card>
           </div>
         </div>
@@ -89,7 +89,7 @@
 
                   </div>
                 </ion-card-header>
-                <ion-button color="primary" class="buttonright" (click)="buyItem(item.item_id,item.item_price)">$ {{item.item_price}} </ion-button>
+                <ion-button color="primary" class="buttonright" (click)="askBuy(item.item_id,item.item_price,item.item_name)">$ {{item.item_price}} </ion-button>
               </ion-card>
             </div>
         </div>
@@ -107,7 +107,7 @@
 
                   </div>
                 </ion-card-header>
-                <ion-button color="primary" class="buttonright" (click)="buyItem(item.item_id,item.item_price)">$ {{item.item_price}} </ion-button>
+                <ion-button color="primary" class="buttonright" (click)="askBuy(item.item_id,item.item_price,item.item_name)">$ {{item.item_price}} </ion-button>
               </ion-card>
             </div>
         </div>

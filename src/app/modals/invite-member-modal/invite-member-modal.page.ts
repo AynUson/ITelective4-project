@@ -45,7 +45,7 @@ export class InviteMemberModalPage implements OnInit {
   }
   users:any;
   public getUsers(){
-    this.data_service.sendAPIRequest(("user"), null)
+    this.data_service.sendAPIRequest(("getUserwIcon"), null)
     .subscribe(result=>{
       this.users = result.payload;
       this.list = this.users;
@@ -66,8 +66,13 @@ export class InviteMemberModalPage implements OnInit {
       for(let mem of this.members){
         console.log(mem.user_id+", "+ mem.collab_room_id )
         if(this.initCollab.user_id == mem.user_id && this.initCollab.collab_room_id==mem.collab_room_id && mem.isAccepted == 1){
-          this.presentToast(mem.user_name+" is already a member!")
-          console.log(mem.user_name+" is already a member!")
+          if(this.data_service.user_id == mem.user_id){
+            this.presentToast("You can't invite yourself! Make some friends!")
+          }else{
+            this.presentToast(mem.user_name+" is already a member!")
+            console.log(mem.user_name+" is already a member!")
+
+          }
           this.isMember=true;
           break;
         }

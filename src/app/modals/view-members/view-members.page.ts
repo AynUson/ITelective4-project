@@ -17,11 +17,13 @@ export class ViewMembersPage implements OnInit {
     ionViewDidEnter() {
       this.getCollabMem();
     this.checkIfCreator();
-
+    this.getOwned();
     }
   ngOnInit() {
+    this.user_id = this.data_service.user_id
     this.getCollabMem();
     this.checkIfCreator();
+    this.getOwned();
   }
 
   async deleteMem(id,name){
@@ -59,6 +61,18 @@ export class ViewMembersPage implements OnInit {
 
   }
 
+  ownedItems:any;
+  ownedCount:any = 0;
+  getOwned(){
+    this.data_service.sendAPIRequest("getOwned/"+this.creator_id, null).subscribe(data => {
+      this.ownedItems = data.payload
+      console.log(this.ownedItems )
+      for(let eq of this.ownedItems){
+        this.ownedCount++
+        console.log(eq.item_name )
+      }
+    });
+  }
 
 
 

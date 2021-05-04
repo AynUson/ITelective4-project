@@ -88,7 +88,21 @@ export class PendingreqModalPage implements OnInit {
 
   }
 
-
+  isCreator:boolean = false;
+  creator:any;
+  creator_id:any;
+  checkIfCreator(){
+    this.data_service.sendAPIRequest("checkIfCreator/" + this.data_service.currentCollabView.collab_room_id, null).subscribe(data => {
+      this.creator = data.payload
+      for( let cr of this.creator){
+        console.log("CR "+cr.user_id);
+        this.creator_id =cr.user_id
+      }
+      if(this.data_service.user_id == this.creator_id){
+        this.isCreator = true;
+      }
+    });
+  }
 
   selectedData: any[] = [];
   getData() {

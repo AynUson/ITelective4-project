@@ -18,6 +18,7 @@ export class CollabModalPage implements OnInit {
 
   ngOnInit() {
     this.addCollab.user_id = this.data_service.user_id;
+    this.initCollab.user_id = this.data_service.user_id;
     this.roomCheck();
   }
 
@@ -73,7 +74,7 @@ export class CollabModalPage implements OnInit {
   });
   }
   initCollabMem(){
-    this.initCollab.user_id = this.data_service.user_id;
+
   }
 
   async presentToast(msg) {
