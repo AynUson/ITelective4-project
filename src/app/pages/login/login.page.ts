@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+
 import { UserService } from 'src/app/services/user.service';
 import { AlertController, LoadingController } from '@ionic/angular';
 import { DataService } from '../../services/data.service';
 import { ToastController } from '@ionic/angular';
-
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-login',
   templateUrl: './login.page.html',
@@ -22,6 +22,8 @@ export class LoginPage implements OnInit {
 
 
   ngOnInit() {
+    this.unameInput = this.data_service.newlyusern
+    this.pwordInput = this.data_service.newlypword
     this.getUsers();
   }
 
@@ -71,12 +73,14 @@ export class LoginPage implements OnInit {
     let count = 0
     if(this.unameInput != null && this.pwordInput != null){
       for(let user of this.users){
-        if((this.unameInput == user.user_name || this.unameInput == user.user_email) && this.pwordInput == user.user_pword){
+        if((this.unameInput == user.user_name || this.unameInput == user.user_email) && this.pwordInput == atob(user.user_pword)){
           this.presentToast("Welcome "+user.user_name+"!")
           this.data_service.userLoggedIn = user;
           this.data_service.user_id = user.user_id;
           this.router.navigate(['/home/dashboard']);
           this.user.setLogin();
+          this.data_service.newlyusern = ''
+          this.data_service.newlypword = ''
           break;
         }else{
           count++

@@ -219,6 +219,46 @@
                   return $this->sendPayload($data, $remarks, $msg, $code);
               }
 
+        function usernCheck($filter_data) {
+
+          $this->sql = "SELECT * FROM user_tbl ";
+
+                if($filter_data != null) {
+                    $this->sql .= " WHERE user_name = '$filter_data'";
+                }
+
+                $data = array(); $code = 0; $msg= ""; $remarks = "";
+                try {
+                    if ($res = $this->pdo->query($this->sql)->fetchAll()) {
+                        foreach ($res as $rec) { array_push($data, $rec);}
+                        $res = null; $code = 200; $msg = "Successfully retrieved the requested records"; $remarks = "success";
+                    }
+                } catch (\PDOException $e) {
+                    $msg = $e->getMessage(); $code = 401; $remarks = "failed";
+                }
+                return $this->sendPayload($data, $remarks, $msg, $code);
+            }
+          function emailCheck($filter_data) {
+
+            $this->sql = "SELECT * FROM user_tbl ";
+
+                  if($filter_data != null) {
+                      $this->sql .= " WHERE user_email = '$filter_data'";
+                  }
+
+                  $data = array(); $code = 0; $msg= ""; $remarks = "";
+                  try {
+                      if ($res = $this->pdo->query($this->sql)->fetchAll()) {
+                          foreach ($res as $rec) { array_push($data, $rec);}
+                          $res = null; $code = 200; $msg = "Successfully retrieved the requested records"; $remarks = "success";
+                      }
+                  } catch (\PDOException $e) {
+                      $msg = $e->getMessage(); $code = 401; $remarks = "failed";
+                  }
+                  return $this->sendPayload($data, $remarks, $msg, $code);
+              }
+
+
 
         function tasksCategory($table) {
 

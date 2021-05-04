@@ -166,6 +166,20 @@ switch ($_SERVER['REQUEST_METHOD']) {
           echo json_encode($post->getRecId(null,null), JSON_PRETTY_PRINT);
         }
         break;
+      case 'usernCheck':
+        if (count($req) > 1) {
+          echo json_encode($post->usernCheck($req[1]), JSON_PRETTY_PRINT);
+        } else {
+          echo json_encode($post->usernCheck(null), JSON_PRETTY_PRINT);
+        }
+        break;
+      case 'emailCheck':
+        if (count($req) > 1) {
+          echo json_encode($post->emailCheck($req[1]), JSON_PRETTY_PRINT);
+        } else {
+          echo json_encode($post->emailCheck(null), JSON_PRETTY_PRINT);
+        }
+        break;
 
 
 
@@ -198,6 +212,16 @@ switch ($_SERVER['REQUEST_METHOD']) {
         return array("data" => $d);
         break;
       case 'buyItem':
+        $d = json_decode(file_get_contents("php://input"));
+        echo json_encode($gm->insert("user_inventory_tbl", $d), JSON_PRETTY_PRINT);
+        return array("data" => $d);
+        break;
+      case 'createUser':
+        $d = json_decode(file_get_contents("php://input"));
+        echo json_encode($gm->insert("user_tbl", $d), JSON_PRETTY_PRINT);
+        return array("data" => $d);
+        break;
+      case 'giveDefault':
         $d = json_decode(file_get_contents("php://input"));
         echo json_encode($gm->insert("user_inventory_tbl", $d), JSON_PRETTY_PRINT);
         return array("data" => $d);

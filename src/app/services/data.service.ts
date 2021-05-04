@@ -21,11 +21,12 @@ export class DataService {
   schoolCount:number=0;
   othersCount:number=0;
   task:any;
+  newlyusern:any;
+  newlypword:any;
   constructor(private _http: HttpClient) { }
 
 
   sendAPIRequest(method:any, data:any) {
-    console.log(data)
     return <any>(
       this._http.post(this.baseURL + method, (JSON.stringify(data)))
     );
