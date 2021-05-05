@@ -50,8 +50,7 @@ export class CollabModalPage implements OnInit {
       this.initCollabMem();
       this.insertCollabMem();
       this.presentToast("Task created!")
-      this.router.navigate(['/home/collaboration']);
-      this.ModalController.dismiss();
+      this.CloseModal()
   }
 
   roomCheck(){
@@ -87,6 +86,7 @@ export class CollabModalPage implements OnInit {
   }
 
   CloseModal() {
+    this.router.navigate(['/home/collaboration']);
     this.ModalController.dismiss();
  }
 }

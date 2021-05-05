@@ -13,15 +13,19 @@ import { PendingreqModalPage } from "../../modals/pendingreq-modal/pendingreq-mo
 export class CollaborationPage implements OnInit {
   user:any;
   constructor(private data_service: DataService,
-    private router:Router,private modalController:ModalController) { }
+    private router:Router,private modalController:ModalController) {
+      
+     }
 
   ngOnInit() {
+    this.data_service.checkStorage()
     this.user=this.data_service.userLoggedIn;
     this.getData();
     this.pendingReq = 0;
   }
 
   ionViewDidEnter() {
+    this.data_service.checkStorage()
     this.user=this.data_service.userLoggedIn;
     this.getData();
     this.pendingReq = 0;

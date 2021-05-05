@@ -20,6 +20,7 @@ export class ShopPage implements OnInit {
   constructor(private router: Router,private data_service: DataService, public toastController: ToastController, public alertController: AlertController, private modalController:ModalController) { }
 
   ngOnInit() {
+    this.data_service.checkStorage()
     this.user=this.data_service.userLoggedIn;
     console.log(this.data_service.userLoggedIn.user_id)
     this.getUserInv();

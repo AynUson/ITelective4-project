@@ -15,22 +15,25 @@ import { DataService } from 'src/app/services/data.service';
 })
 export class ProfilePage implements OnInit {
   user:any;
-  constructor(private router: Router,private http: HttpClient,private data_service: DataService, private modalController:ModalController) { }
+  constructor(private router: Router,private http: HttpClient,private data_service: DataService, private modalController:ModalController,public alertController: AlertController) { }
   xp:any;
   ngOnInit() {
-
+    this.data_service.checkStorage()
     this.user=this.data_service.userLoggedIn;
     this.xp = this.user.user_xp / 100;
     console.log(this.user)
-    this.getData();
+    this.getTasks();
     this.getEquiped();
     this.getOwned();
   }
-
+  ionViewDidEnter() {
+    this.data_service.checkStorage()
+    this.getTasks();
+  }
   async OpenOwnedItemModal() {
     let modal =await this.modalController.create({ component:ViewOwnedPage });
     modal.onDidDismiss().then(()=>{
-      this.getData();
+      this.getTasks();
     this.getEquiped();
     this.getOwned();
     this.ownedCount = 0
@@ -65,12 +68,12 @@ export class ProfilePage implements OnInit {
         if(eq.item_category_id == 1){
           this.equipedTheme = eq.item_name
           this.equipedProp = eq.item_property
-          this.chartColors = [
-            {
-              borderColor: '#000000',
-              backgroundColor: this.equipedProp
-            }
-          ]
+          // this.chartColors = [
+          //   {
+          //     borderColor: '#000000',
+          //     backgroundColor: this.equipedProp
+          //   }
+          // ]
           console.log("Property: "+this.equipedProp)
 
         }
@@ -87,16 +90,17 @@ export class ProfilePage implements OnInit {
     });
   }
 
-  chartData: ChartDataSets[] = [{ data: [], label: 'Stock price' }];
+  colorHex:any = ['#FB3640','#EFCA08','#43AA8B','#253D5B']
+  chartData: ChartDataSets[] = [{
+     data: [],
+     backgroundColor:  this.colorHex
+
+    }];
   chartLabels: Label[];
 
   // Options
   chartOptions = {
     responsive: true,
-    title: {
-      display: true,
-      text: 'Week Productivity'
-    },
     pan: {
       enabled: true,
       mode: 'xy'
@@ -106,22 +110,49 @@ export class ProfilePage implements OnInit {
       mode: 'xy'
     }
   };
-  chartColors: Color[] = [
-    {
-      borderColor: '',
-      backgroundColor: ''
-    }
-  ];
-  chartType = 'line';
-  showLegend = false;
+
+  chartType = 'pie';
+  showLegend = true;
 
   // For search
   stock = '';
+  school:number = 0;
+  work:number = 0;
+  fitness:number = 0;
+  others:number = 0;
+  getTasks(){
+    this.school = 0
+    this.work = 0
+    this.fitness = 0
+    this.others = 0
+    this.data_service.sendAPIRequest("task/"+this.data_service.userLoggedIn.user_id, null).subscribe(data => {
+      const tasks = data.payload
+      this.chartLabels = ['School','Work','Fitness','Others'];
+      this.chartData[0].data = [];
+
+    for (let entry of tasks) {
+      if(entry.category_id == 1){
+        this.school++
+      }
+      if(entry.category_id == 2){
+        this.work++
+      }
+      if(entry.category_id == 3){
+        this.fitness++
+      }
+      if(entry.category_id == 4){
+        this.others++
+      }
+      this.chartData[0].data = [this.school,this.work, this.fitness,this.others]
+    }
+    });
+  }
+
 
   getData() {
     this.http.get(`https://financialmodelingprep.com/api/v3/historical-price-full/AAPL?from=2019-01-14&to=2019-03-12&apikey=demo`).subscribe(res => {
     const history = res['historical'];
-
+    console.log(history)
     this.chartLabels = [];
     this.chartData[0].data = [];
 
@@ -137,7 +168,40 @@ typeChanged(e) {
   this.chartType = on ? 'line' : 'bar';
 }
 
+
+async logoutbtn(){
+
+
+    const alert = await this.alertController.create({
+      cssClass: '',
+      header: 'Logging out?',
+      message: 'Be sure to be back!',
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          cssClass: 'secondary',
+          handler: (blah) => {
+            console.log('Confirm Cancel: blah');
+          }
+        }, {
+          text: 'Confirm',
+          handler: () => {
+
+            this.data_service.logout();
+            if(this.data_service.userLoggedIn == null)
+            this.router.navigate(['/login'])
+          }
+        }
+      ]
+    });
+
+    await alert.present();
+
+}
+
+
   logout(){
-    this.router.navigate(['login']);
+    this.data_service.logout();
   }
 }

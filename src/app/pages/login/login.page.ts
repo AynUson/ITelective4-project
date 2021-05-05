@@ -74,13 +74,14 @@ export class LoginPage implements OnInit {
     if(this.unameInput != null && this.pwordInput != null){
       for(let user of this.users){
         if((this.unameInput == user.user_name || this.unameInput == user.user_email) && this.pwordInput == atob(user.user_pword)){
+          this.router.navigate(['/home/dashboard']);
           this.presentToast("Welcome "+user.user_name+"!")
           this.data_service.userLoggedIn = user;
           this.data_service.user_id = user.user_id;
-          this.router.navigate(['/home/dashboard']);
-          this.user.setLogin();
+          this.data_service.log(user.user_id,user);
           this.data_service.newlyusern = ''
           this.data_service.newlypword = ''
+
           break;
         }else{
           count++

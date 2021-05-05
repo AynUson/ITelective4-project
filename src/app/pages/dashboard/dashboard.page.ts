@@ -29,7 +29,10 @@ export class DashboardPage{
 
     this.tbcolor = this.colors[this.randomNum];
   }
-  constructor(private tasksService: TasksService, private data_service: DataService, private modalController:ModalController, private router:Router) {  }
+  constructor(private tasksService: TasksService, private data_service: DataService, private modalController:ModalController, private router:Router) {
+
+    this.data_service.checkStorage()
+   }
 
 
 
@@ -49,6 +52,7 @@ export class DashboardPage{
     }
 
     ionViewWillEnter()  {
+
       this.getTasks();
       this.getData();
       this.filterTasks();
@@ -63,6 +67,7 @@ export class DashboardPage{
     this.getData();
     this.filterTasks();
     this.getCateg();
+
   }
 
   selectedData: any[] = [];
@@ -94,7 +99,6 @@ export class DashboardPage{
           this.othersCount++;
         }
       }
-      console.log(this.selectedData)
     });
   }
 
@@ -102,7 +106,6 @@ export class DashboardPage{
   getCateg(){
     this.data_service.sendAPIRequest("task_category/", null).subscribe(data => {
       this.category = data.payload
-      console.log(data.payload)
     });
   }
   categoryTasks:any[]=[];
@@ -121,14 +124,12 @@ export class DashboardPage{
       for(let task of this.categoryTasks){
         if(task.category_id == categ.category_id){
           this.categoryTaskOnView.push(task)
-          console.log(task.task_title);
         }
       }
       this.data_service.schoolCount = this.schoolCount;
       this.data_service.workCount = this.workCount;
       this.data_service.fitnessCount = this.fitnessCount;
       this.data_service.othersCount = this.othersCount;
-      console.log(this.categoryTaskOnView)
       this.data_service.tasksCateg = this.categoryTaskOnView;
       this.data_service.categ = title;
       this.data_service.icon = icon;
@@ -147,7 +148,6 @@ export class DashboardPage{
 // ON progress show tasks of the logged in user
   public filterTasks(){
     this.getTasks();
-    console.log("TASKS: "+this.a);
     for(let task of this.a){
       if(this.user.user_id == task.user_id){
         this.filteredTask = task;

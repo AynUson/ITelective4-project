@@ -61,8 +61,13 @@ export class SignupPage implements OnInit {
       this.users = result.payload;
       this.allowsignup =true
       for(let user of this.users){
-        if(user.user_name == this.unameInput || user.user_email == this.emailInput){
-          this.presentToast("Username/Email already exist")
+        if(user.user_name == this.unameInput){
+          this.presentToast("Username already exist")
+          this.allowsignup =false
+          break;
+        }
+        if(user.user_email == this.emailInput){
+          this.presentToast("Email already exist")
           this.allowsignup =false
           break;
         }
@@ -135,11 +140,10 @@ export class SignupPage implements OnInit {
     this.checkFields();
     if(this.fieldsFilled){
       this.passwordMatch();
-      if(this.pwordMatch){
         this.validate();
         this.checkUserN()
         this.checkFields();
-      }
+
     }
 
   }

@@ -38,6 +38,7 @@ export class CollaborationViewPage implements OnInit {
     this.user_id=this.data_service.user_id;
     this.room = this.data_service.currentCollabView;
     console.log(this.data_service.currentCollabView.collab_room_id);
+    this.load();
     // this.getCollabTasks();
     // this.getCollabMem();
   }
@@ -51,8 +52,7 @@ export class CollaborationViewPage implements OnInit {
     await popover.present();
 
     const { role } = await popover.onDidDismiss();
-    this.getCollabTasks();
-    this.getCollabMem();
+    this.load();
     console.log('onDidDismiss resolved with role', role);
   }
 
@@ -183,8 +183,7 @@ export class CollaborationViewPage implements OnInit {
   async OpenViewMemModal() {
     let modal =await this.modalController.create({ component:ViewMembersPage });
     modal.onDidDismiss().then(()=>{
-      this.getCollabTasks();
-      this.getCollabMem();
+      this.load();
     });
       modal.present();
 
@@ -193,8 +192,7 @@ export class CollaborationViewPage implements OnInit {
     this.data_service.DoneIsCollab = true;
     let modal =await this.modalController.create({ component:ViewDoneTasksPage });
     modal.onDidDismiss().then(()=>{
-      this.getCollabTasks();
-      this.getCollabMem();
+      this.load();
     });
       modal.present();
 
@@ -205,8 +203,7 @@ export class CollaborationViewPage implements OnInit {
     this.data_service.task = task
     let modal =await this.modalController.create({ component:ViewTaskPage });
     modal.onDidDismiss().then(()=>{
-      this.getCollabTasks();
-      this.getCollabMem();
+      this.load();
     });
       modal.present();
   }
@@ -228,8 +225,7 @@ export class CollaborationViewPage implements OnInit {
     // });
     let modal =await this.modalController.create({ component:CollabtaskModalPage });
     modal.onDidDismiss().then(()=>{
-      this.getCollabTasks();
-      this.getCollabMem();
+      this.load();
     });
       modal.present();
 
