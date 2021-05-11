@@ -6,10 +6,18 @@ ion-header {
     background: #fff;
     padding: 0 10px;
   }
-  .headerCon{
+  .headerCon {
     display: flex;
     flex-wrap: wrap;
-}
+  }
+
+  .center {
+    display: block;
+    margin-left: 30%;
+    margin-right: 30%;
+    width: 50%;
+  }
+
   .headerCon .item {
     display: inline-block;
     width: 17%;
@@ -38,7 +46,6 @@ ion-header {
 }
 
 ion-content {
-
   --background: linear-gradient(
     90deg,
     rgba(43, 90, 148, 1) 0%,
@@ -90,10 +97,10 @@ ion-content {
   }
 }
 
-.flexbox{
+.flexbox {
   display: flex;
 }
-.buttonright{
+.buttonright {
   position: absolute;
   right: 10px;
   padding: 0px 10px 10px 10px;

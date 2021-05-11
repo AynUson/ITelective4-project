@@ -1,7 +1,7 @@
 <ion-header>
   <ion-toolbar color="primary">
     <div class="headerCon">
-      <img class="item" src="../../../assets/Tcircle.png" />
+      <img style="height: 35px; width: 35px;"class="item" src="../../../assets/t.png" />
       <ion-title><b>Shop</b></ion-title>
     </div>
     <ion-button slot="end" color="light" (click)="OpenOwnedItemModal()"  >
@@ -59,11 +59,11 @@
     </form> -->
 
       <div *ngIf="selectedSegment == 'themes'">
-        <div style="float:right; width: 40%; margin-right:15px">
+        <div style="float:left; width: 30%; ">
           <ion-card class="showMoney ">
             <ion-card-header class="ion-text-left flexbox">
-              <img src="../../../assets/gold.png" style="border-radius: 20%; width: 32px;height: auto; margin: -6px 10px 0px 0px ">
-              <h3> : ${{user.user_gold}}</h3>
+              <img src="../../../assets/gold1.png" style="width: 30px; height: 30px; margin-top: -7px; margin-right: 2px;">
+              <h3> ${{user.user_gold}}</h3>
             </ion-card-header>
           </ion-card>
         </div>
@@ -85,11 +85,11 @@
           </div>
         </div>
         <div *ngIf="selectedSegment == 'headdress'">
-          <div style="float:right; width: 40%; margin-right:15px">
+          <div style="float:left; width: 30%;">
             <ion-card class="showMoney ">
               <ion-card-header class="ion-text-left flexbox">
-                <img src="../../../assets/gold.png" style="border-radius: 20%; width: 32px;height: auto; margin: -6px 10px 0px 0px ">
-                <h3> : ${{user.user_gold}}</h3>
+                <img src="../../../assets/gold1.png" style="width: 30px; height: 30px; margin-top: -7px; margin-right: 2px;">
+                <h3> ${{user.user_gold}}</h3>
               </ion-card-header>
             </ion-card>
           </div>
@@ -110,11 +110,11 @@
             </div>
         </div>
         <div *ngIf="selectedSegment == 'icons'">
-          <div style="float:right; width: 40%; margin-right:15px">
+          <div style="float:left; width: 30%;">
             <ion-card class="showMoney ">
               <ion-card-header class="ion-text-left flexbox">
-                <img src="../../../assets/gold.png" style="border-radius: 20%; width: 32px;height: auto; margin: -6px 10px 0px 0px ">
-                <h3> : ${{user.user_gold}}</h3>
+                <img src="../../../assets/gold1.png" style="width: 30px; height: 30px; margin-top: -7px; margin-right: 2px;">
+                <h3> ${{user.user_gold}}</h3>
               </ion-card-header>
             </ion-card>
           </div>

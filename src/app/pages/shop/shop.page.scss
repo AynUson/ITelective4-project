@@ -6,10 +6,10 @@ ion-header {
     background: #fff;
     padding: 0 10px;
   }
-  .headerCon{
+  .headerCon {
     display: flex;
     flex-wrap: wrap;
-}
+  }
   .headerCon .item {
     display: inline-block;
     width: 17%;
@@ -57,7 +57,7 @@ ion-content {
   ion-card {
     width: 95%;
     height: 150px;
-    box-shadow: none;
+    box-shadow: 1;
     border-radius: 14px;
     background: rgba(255, 255, 255, 0.8);
   }
@@ -105,10 +105,10 @@ ion-content {
   }
 }
 
-.flexbox{
+.flexbox {
   display: flex;
 }
-.buttonright{
+.buttonright {
   position: absolute;
   right: 10px;
   padding: 0px 10px 10px 10px;
