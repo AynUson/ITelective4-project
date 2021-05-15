@@ -14,7 +14,7 @@ export class CollaborationPage implements OnInit {
   user:any;
   constructor(private data_service: DataService,
     private router:Router,private modalController:ModalController) {
-      
+
      }
 
   ngOnInit() {
@@ -33,7 +33,11 @@ export class CollaborationPage implements OnInit {
   acceptedCollab: any[] = [];
   selectedData: any[] = [];
   pendingReq:number = 0;
+  collabEmpty:boolean;
   getData() {
+    if(this.selectedData = []){
+      this.collabEmpty = true;
+    }
     console.log(this.data_service.user_id)
 
     this.data_service.sendAPIRequest("showCollabJoin/" + this.data_service.user_id, null).subscribe(data => {

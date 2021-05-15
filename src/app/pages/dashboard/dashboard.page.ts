@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { Tasks } from './tasks.model';
 import { TasksService } from './tasks.service';
-import {  ModalController } from '@ionic/angular';
+import {  AlertController, ModalController, ToastController } from '@ionic/angular';
 import { ModalPage } from "../../modals/modal/modal.page";
 import { DataService } from '../../services/data.service';
 import { Router } from '@angular/router';
+import { PendingreqModalPage } from "../../modals/pendingreq-modal/pendingreq-modal.page";
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.page.html',
@@ -29,7 +30,7 @@ export class DashboardPage{
 
     this.tbcolor = this.colors[this.randomNum];
   }
-  constructor(private tasksService: TasksService, private data_service: DataService, private modalController:ModalController, private router:Router) {
+  constructor(private tasksService: TasksService, private data_service: DataService, private modalController:ModalController, private router:Router, public toastController: ToastController, public alertController: AlertController) {
 
     this.data_service.checkStorage()
    }
@@ -65,10 +66,59 @@ export class DashboardPage{
     this.countReset();
     this.getTasks();
     this.getData();
+    this.getPendingReq();
     this.filterTasks();
     this.getCateg();
 
   }
+  async toPendingreq() {
+    // this.modalController.create(
+    //   { component:ModalPage }).then((modalElement)=>{
+    //   modalElement.present();
+    // });
+    let modal =await this.modalController.create({ component:PendingreqModalPage });
+    modal.onDidDismiss().then(()=>{
+      this.router.navigate(['/home/collaboration']);
+    });
+      modal.present();
+
+  }
+
+  async presentToast(msg) {
+    const toast = await this.toastController.create({
+      message: msg,
+      duration: 2000,
+      position: 'bottom'
+    });
+    toast.present();
+  }
+
+  isCreator:boolean = false;
+  creator:any;
+  creator_id:any;
+  checkIfCreator(){
+    this.data_service.sendAPIRequest("checkIfCreator/" + this.data_service.currentCollabView.collab_room_id, null).subscribe(data => {
+      this.creator = data.payload
+      for( let cr of this.creator){
+        console.log("CR "+cr.user_id);
+        this.creator_id =cr.user_id
+      }
+      if(this.data_service.user_id == this.creator_id){
+        this.isCreator = true;
+      }
+    });
+  }
+  pendingReq: any[] = [];
+  getPendingReq() {
+    console.log(this.data_service.user_id)
+
+    this.data_service.sendAPIRequest("showCollabJoin3/" + this.data_service.user_id, null).subscribe(data => {
+      this.pendingReq = data.payload
+
+      console.log(this.pendingReq)
+    });
+  }
+
 
   selectedData: any[] = [];
   countReset(){

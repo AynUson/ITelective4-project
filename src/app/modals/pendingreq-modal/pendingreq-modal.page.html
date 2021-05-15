@@ -40,11 +40,6 @@
 
           </ion-label>
 
-          <ion-note slot="end">
-            10:45 AM
-            <!-- Deadline or date created -->
-          </ion-note>
-
         </ion-item>
 
         <!-- DELETE AND VIEW -->
@@ -59,6 +54,8 @@
       </ion-item-sliding>
 
     </ion-list>
-
+    <div  *ngIf="reqEmpty">
+      <img src="../../../../assets/relax.png" alt="">
+    </div>
 
 </ion-content>

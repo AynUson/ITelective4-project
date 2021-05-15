@@ -42,8 +42,9 @@ export class LoginPage implements OnInit {
      public toastController: ToastController,
      public loadingController: LoadingController
      ) { }
-
+    doneLog:boolean = false;
   async Log(e) {
+    this.doneLog =false
     const loading = await this.loadingController.create({
       cssClass: 'my-custom-class',
       message: 'Authenticating...',
@@ -52,11 +53,19 @@ export class LoginPage implements OnInit {
     });
     await loading.present();
 
-    const { role, data } = await loading.onDidDismiss();
+
     console.log('Loading dismissed!');
     this.loginUser(e);
 }
 
+async dismiss() {
+  this.doneLog = true;
+  if(this.doneLog){
+    return await this.loadingController.dismiss().then(() => console.log('dismissed'));
+  }
+
+  this.doneLog = false;
+}
   public getUsers(){
     this.data_service.sendAPIRequest(("user"), null)
     .subscribe(result=>{
@@ -74,6 +83,7 @@ export class LoginPage implements OnInit {
     if(this.unameInput != null && this.pwordInput != null){
       for(let user of this.users){
         if((this.unameInput == user.user_name || this.unameInput == user.user_email) && this.pwordInput == atob(user.user_pword)){
+
           this.router.navigate(['/home/dashboard']);
           this.presentToast("Welcome "+user.user_name+"!")
           this.data_service.userLoggedIn = user;
@@ -81,6 +91,7 @@ export class LoginPage implements OnInit {
           this.data_service.log(user.user_id,user);
           this.data_service.newlyusern = ''
           this.data_service.newlypword = ''
+          this.dismiss();
 
           break;
         }else{

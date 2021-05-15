@@ -32,6 +32,31 @@ export class SignupPage implements OnInit {
     },150);
   }
 
+  doneSignup:boolean = false;
+  async loadSignup(){
+    this.doneSignup =false
+    const loading = await this.loadingController.create({
+      cssClass: 'my-custom-class',
+      message: 'Signing up...',
+      duration: 2000,
+      spinner:"circular"
+    });
+    await loading.present();
+
+
+    console.log('Loading dismissed!');
+    this.signup();
+  }
+
+async dismiss() {
+  this.doneSignup = true;
+  if(this.doneSignup){
+    return await this.loadingController.dismiss().then(() => console.log('dismissed'));
+  }
+
+  this.doneSignup = false;
+}
+
   async presentToast(msg) {
     const toast = await this.toastController.create({
       message: msg,
@@ -126,6 +151,7 @@ export class SignupPage implements OnInit {
             console.log("Success!")
             this.clearFields();
             this.router.navigate(['/login']);
+            this.dismiss();
           });
 
          });
