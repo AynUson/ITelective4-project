@@ -25,9 +25,17 @@ export class ShopPage implements OnInit {
     console.log(this.data_service.userLoggedIn.user_id)
     this.getUserInv();
     this.getItem();
+    this.getUsers();
 
   }
-
+  ionViewDidEnter(){
+    this.data_service.checkStorage()
+    this.user=this.data_service.userLoggedIn;
+    console.log(this.data_service.userLoggedIn.user_id)
+    this.getUserInv();
+    this.getItem();
+    this.getUsers();
+  }
 
   async OpenOwnedItemModal() {
     let modal =await this.modalController.create({ component:ViewOwnedPage });
@@ -120,7 +128,7 @@ export class ShopPage implements OnInit {
   updateUser:any = {};
   toBeBought: any = {};
   buyItem(id,prc){
-      this.updateUser.user_gold = this.user.user_gold - prc
+      this.updateUser.user_gold = this.gold - prc
       this.toBeBought.item_id = id
       this.toBeBought.user_id = this.data_service.userLoggedIn.user_id
       this.owned = false
@@ -134,7 +142,7 @@ export class ShopPage implements OnInit {
       if(this.owned == false){
         //insert to db
         this.data_service.sendAPIRequest2("updateUser/", this.updateUser, this.data_service.userLoggedIn.user_id).subscribe(data => {
-          this.user.user_gold = this.updateUser.user_gold;
+          this.gold = this.updateUser.user_gold;
           console.log(data)
         });
         this.data_service.sendAPIRequest("buyItem/", this.toBeBought).subscribe(data => {
@@ -154,7 +162,18 @@ export class ShopPage implements OnInit {
   owneditem(){
     this.presentToast("Already Owned!")
   }
-
+  users:any = []
+  gold:any;
+  public getUsers(){
+    this.data_service.sendAPIRequest("user/"+this.data_service.userLoggedIn.user_id, null)
+    .subscribe(result=>{
+      this.users = result.payload;
+      for(let user of this.users){
+        this.gold=user.user_gold
+        console.log("CURRENT USER GOLD: "+user.user_gold)
+      }
+  });
+  }
   inventory:any;
   getUserInv(){
     this.data_service.sendAPIRequest("user_inventory/"+this.data_service.userLoggedIn.user_id, null).subscribe(data => {

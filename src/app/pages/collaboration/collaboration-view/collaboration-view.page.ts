@@ -52,6 +52,7 @@ export class CollaborationViewPage implements OnInit {
     await popover.present();
 
     const { role } = await popover.onDidDismiss();
+
     this.load();
     console.log('onDidDismiss resolved with role', role);
   }
@@ -64,6 +65,12 @@ export class CollaborationViewPage implements OnInit {
     await loading.present();
 
     const { role, data } = await loading.onDidDismiss();
+    this.user=this.data_service.userLoggedIn;
+    this.level = this.user.user_level
+    this.xp = this.user.user_xp
+    this.gold = this.user.user_gold
+    this.user_id=this.data_service.user_id;
+    this.room = this.data_service.currentCollabView;
     this.getCollabTasks();
     this.getCollabMem();
   }

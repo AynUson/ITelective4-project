@@ -37,7 +37,7 @@ export class SignupPage implements OnInit {
     this.doneSignup =false
     const loading = await this.loadingController.create({
       cssClass: 'my-custom-class',
-      message: 'Signing up...',
+      message: 'Processing...',
       duration: 2000,
       spinner:"circular"
     });

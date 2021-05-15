@@ -16,20 +16,46 @@ import { DataService } from 'src/app/services/data.service';
 export class ProfilePage implements OnInit {
   user:any;
   constructor(private router: Router,private http: HttpClient,private data_service: DataService, private modalController:ModalController,public alertController: AlertController) { }
-  xp:any;
+
   ngOnInit() {
     this.data_service.checkStorage()
     this.user=this.data_service.userLoggedIn;
+    this.gold = this.data_service.userLoggedIn.user_gold
     this.xp = this.user.user_xp / 100;
     console.log(this.user)
+    this.ownedCount = 0
     this.getTasks();
     this.getEquiped();
     this.getOwned();
+    this.getUsers()
   }
   ionViewDidEnter() {
     this.data_service.checkStorage()
+    this.user=this.data_service.userLoggedIn;
+    console.log(this.user)
+    this.ownedCount = 0
     this.getTasks();
+    this.getEquiped();
+    this.getOwned();
+    this.getUsers()
+
   }
+
+  users:any = []
+  gold:any;
+  xp:any;
+  public getUsers(){
+    this.data_service.sendAPIRequest("user/"+this.data_service.userLoggedIn.user_id, null)
+    .subscribe(result=>{
+      this.users = result.payload;
+      for(let user of this.users){
+        this.gold=user.user_gold
+        this.xp=user.user_xp/ 100
+        console.log("CURRENT USER GOLD: "+user.user_gold)
+      }
+  });
+  }
+
   async OpenOwnedItemModal() {
     let modal =await this.modalController.create({ component:ViewOwnedPage });
     modal.onDidDismiss().then(()=>{

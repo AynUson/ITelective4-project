@@ -16,10 +16,12 @@ export class InviteMemberModalPage implements OnInit {
   initCollab = new InitCollab(0,0,0);
   list: any[] = [];
   searchedItem: any;
+  user_id:any
   constructor(private data_service: DataService,
     private router:Router, private modalController:ModalController, public toastController: ToastController, public alertController: AlertController,public loadingController: LoadingController) { }
 
   ngOnInit() {
+    this.user_id = this.data_service.user_id;
     this.initCollab.collab_room_id = this.data_service.currentCollabView.collab_room_id;
     console.log(this.initCollab.collab_room_id);
     this.getUsers();
