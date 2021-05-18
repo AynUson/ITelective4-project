@@ -93,7 +93,7 @@ export class ShopPage implements OnInit {
   // }
 
   async askBuy(id,prc,name){
-    if(prc > this.user.user_gold){
+    if(prc > this.gold){
       this.presentToast("Not enough currency!")
     }else{
 

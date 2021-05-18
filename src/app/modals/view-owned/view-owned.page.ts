@@ -36,6 +36,8 @@ export class ViewOwnedPage implements OnInit {
   });
   await loading.present();
   this.equip(categId,name,ownedId)
+  this.getOwned()
+  this.getEquiped()
   console.log('Loading dismissed!');
 }
 async dismiss() {
@@ -70,11 +72,22 @@ async dismiss() {
     console.log(data)
     this.data_service.sendAPIRequest2("equip/", this.updateEquip, ownedId).subscribe(data => {
       console.log(data)
+
       this.getEquiped()
+      this.getOwned()
       this.doneEquip=true;
       this.presentToast("Equiped!")
       this.dismiss()
     });
+    if(categId == 1){
+      this.equipedThemeId = ownedId
+    }
+    if(categId == 2){
+      this.equipedHeaddressId = ownedId
+    }
+    if(categId == 3){
+      this.equipedProfileId = ownedId
+    }
   });
 
 

@@ -33,11 +33,9 @@ export class CollaborationPage implements OnInit {
   acceptedCollab: any[] = [];
   selectedData: any[] = [];
   pendingReq:number = 0;
-  collabEmpty:boolean;
+  collabEmpty:boolean = false;
   getData() {
-    if(this.selectedData = []){
-      this.collabEmpty = true;
-    }
+
     console.log(this.data_service.user_id)
 
     this.data_service.sendAPIRequest("showCollabJoin/" + this.data_service.user_id, null).subscribe(data => {
@@ -49,11 +47,18 @@ export class CollaborationPage implements OnInit {
       }
       console.log(this.pendingReq)
       console.log(this.selectedData)
+
     });
 
     this.data_service.sendAPIRequest("showCollabJoin2/" + this.data_service.user_id, null).subscribe(data => {
       this.acceptedCollab = data.payload
       console.log(this.acceptedCollab)
+      if(this.acceptedCollab.length > 0){
+        this.collabEmpty = false;
+      }
+      if(this.acceptedCollab.length <= 0){
+        this.collabEmpty = true;
+      }
     });
   }
 

@@ -176,12 +176,10 @@ othersCount:number=0;
             this.tasks.splice(index, 1);
             console.log(title+" mark as done!");
             console.log(index+" Index!");
-            this.checkIfBlank();
             this.count = 0
             for(let t of this.tasks){
               this.count++
             }
-
             //End Done task on task_tbl
             //Update Xp gold level
             this.updateUser();
@@ -217,7 +215,6 @@ othersCount:number=0;
     this.user.user_xp = this.xp
     this.user.user_gold = this.gold
     this.user.user_level = this.level
-    this.checkIfBlank();
 
   }
 
@@ -225,22 +222,22 @@ othersCount:number=0;
   categoryId: number;
   categoryBlank:boolean= false;
   checkIfBlank(){
-    if(this.category == "Fitness" && this.fitnessCount == 0 ){
+    if(this.category == "Fitness" && this.fitnessCount <= 0 ){
       this.categoryBlank=true
       this.categoryId = 3
       this.count = this.fitnessCount
     }
-    if(this.category == "School" && this.schoolCount == 0 ){
+    if(this.category == "School" && this.schoolCount <= 0 ){
       this.categoryBlank=true
       this.categoryId = 1
       this.count = this.schoolCount
     }
-    if(this.category == "Work" && this.workCount == 0 ){
+    if(this.category == "Work" && this.workCount <= 0 ){
       this.categoryBlank=true
       this.categoryId = 2
       this.count = this.workCount
     }
-    if(this.category == "Others" && this.othersCount == 0 ){
+    if(this.category == "Others" && this.othersCount <= 0 ){
       this.categoryBlank=true
       this.categoryId = 4
       this.count = this.othersCount

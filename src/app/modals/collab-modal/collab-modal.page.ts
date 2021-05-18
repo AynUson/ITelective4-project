@@ -19,7 +19,6 @@ export class CollabModalPage implements OnInit {
   ngOnInit() {
     this.addCollab.user_id = this.data_service.user_id;
     this.initCollab.user_id = this.data_service.user_id;
-    this.roomCheck();
   }
 
 
@@ -38,19 +37,21 @@ export class CollabModalPage implements OnInit {
   room_id:any;
   room:any;
   createCollab(){
-    this.roomCheck();
     this.data_service.sendAPIRequest(("createCollab/"), this.addCollab)
           .subscribe((result)=>{
-            //this.room = result.payload
-            console.log(this.room);
+           this.room = result.payload
+           for(let rm of this.room){
+             this.room_id = rm.collab_room_id
+           }
+           this.initCollab.collab_room_id = this.room_id;
+            this.initCollabMem();
+            this.insertCollabMem();
+            this.presentToast("Room created!")
+            this.CloseModal()
 
         });
 
-      this.initCollab.collab_room_id = this.room_id;
-      this.initCollabMem();
-      this.insertCollabMem();
-      this.presentToast("Task created!")
-      this.CloseModal()
+
   }
 
   roomCheck(){
