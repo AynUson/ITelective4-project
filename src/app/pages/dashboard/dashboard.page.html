@@ -31,10 +31,31 @@
       <!-- <ion-slides [options]="slidesOptions" *ngFor="let task of selectedData">
         <ion-slide > -->
         <ion-grid>
+            <ion-row justify-content-start align-items-start>
+
+              <ion-col *ngFor="let categ of category"  size="6" >
+                <ion-card style="width: 100%;margin-bottom: -40px;" *ngIf="categ.category_id == 1 || categ.category_id == 2 ">
+                  
+                  <ion-card-header (click)="viewCategory(categ,categ.category, categ.category_property)">
+                    <ion-icon  name="{{categ.category_property}}"></ion-icon>
+                    <ion-card-title size="small"> {{categ.category}} </ion-card-title>
+                  </ion-card-header>
+                    <ion-card-content class="fixline">
+                      <h3 *ngIf="categ.category_id == 1"> {{schoolCount}} </h3>
+                      <h3 *ngIf="categ.category_id == 2"> {{workCount}} </h3>
+                      <h3 *ngIf="categ.category_id == 3"> {{fitnessCount}} </h3>
+                      <h3 *ngIf="categ.category_id == 4"> {{othersCount}} </h3>
+                    </ion-card-content>
+                </ion-card>
+              </ion-col>
+            </ion-row>
+
+          </ion-grid>
+          <ion-grid>
             <ion-row>
 
-              <ion-col *ngFor="let categ of category" col-6 no-padding>
-                <ion-card>
+              <ion-col *ngFor="let categ of category"  size="6">
+                <ion-card style="width: 100%" *ngIf="categ.category_id == 3 || categ.category_id == 4 ">
                   <ion-card-header (click)="viewCategory(categ,categ.category, categ.category_property)">
                     <ion-icon  name="{{categ.category_property}}"></ion-icon>
                     <ion-card-title size="small"> {{categ.category}} </ion-card-title>
@@ -50,6 +71,8 @@
 
             </ion-row>
           </ion-grid>
+
+
 
    </div>
 
