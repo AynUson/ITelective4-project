@@ -239,6 +239,10 @@ switch ($_SERVER['REQUEST_METHOD']) {
         $d = json_decode(file_get_contents("php://input"));
         echo json_encode($gm->update("task_tbl", $d, 'task_id=' . $req[1]), JSON_PRETTY_PRINT);
         break;
+      case 'doneCollabTask':
+        $d = json_decode(file_get_contents("php://input"));
+        echo json_encode($gm->update("collab_tasks_tbl", $d, 'task_id=' . $req[1]), JSON_PRETTY_PRINT);
+        break;
       // case 'deleteTask':
       //   $d = json_decode(file_get_contents("php://input"));
       //   echo json_encode($gm->update("task_tbl", $d, 'task_id=' . $req[1]), JSON_PRETTY_PRINT);

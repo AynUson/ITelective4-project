@@ -20,14 +20,17 @@ export class ViewDoneTasksPage implements OnInit {
   othersCount:number=0;
   categoryBlank:boolean= false;
   categoryId:number;
+  isCollab:boolean;
     ionViewDidEnter() {
       this.category=this.data_service.categ;
       if(this.data_service.DoneIsCollab == true)
       {
+        this.isCollab = true
         this.getCollabTasks();
       }
       if(this.data_service.DoneIsCollab == false)
       {
+        this.isCollab = false
         this.getTask();
       }
 

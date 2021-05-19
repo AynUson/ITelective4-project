@@ -21,7 +21,6 @@ export class CollaborationViewPage implements OnInit {
   room:any;
   level:any
   xp:any
-  gold:any
   selectedData: any[] = [];
   constructor(private data_service: DataService,
     private router:Router, private modalController:ModalController, public alertController: AlertController, public toastController: ToastController,public loadingController: LoadingController, public popoverController: PopoverController) { }
@@ -32,12 +31,9 @@ export class CollaborationViewPage implements OnInit {
   }
   ngOnInit() {
     this.user=this.data_service.userLoggedIn;
-    this.level = this.user.user_level
-    this.xp = this.user.user_xp
-    this.gold = this.user.user_gold
     this.user_id=this.data_service.user_id;
     this.room = this.data_service.currentCollabView;
-    console.log(this.data_service.currentCollabView.collab_room_id);
+    console.log("Category ID: "+this.data_service.currentCollabView.collab_category_id);
     this.load();
     // this.getCollabTasks();
     // this.getCollabMem();
@@ -71,6 +67,7 @@ export class CollaborationViewPage implements OnInit {
     this.gold = this.user.user_gold
     this.user_id=this.data_service.user_id;
     this.room = this.data_service.currentCollabView;
+    this.getUsers();
     this.getCollabTasks();
     this.getCollabMem();
   }
@@ -139,10 +136,16 @@ export class CollaborationViewPage implements OnInit {
           text: 'Okay',
           handler: () => {
             //Done task on task_tbl
+            let updateCollabTask : any = {};
+            updateCollabTask.doneBy = this.user_id;
             let updateData : any = {};
             updateData.task_isDone = 1;
+            this.data_service.sendAPIRequest2("doneCollabTask/", updateCollabTask, id).subscribe(data => {
+              console.log(data)
+            });
             this.data_service.sendAPIRequest2("doneTask/", updateData, id).subscribe(data => {
               console.log(data)
+              this.updateUser();
             });
             let index = this.selectedData.findIndex(x => x.task_id ===id);
             this.selectedData.splice(index, 1);
@@ -151,7 +154,7 @@ export class CollaborationViewPage implements OnInit {
 
             //End Done task on task_tbl
             //Update Xp gold level
-            this.updateUser();
+
           }
         }
       ]
@@ -159,6 +162,20 @@ export class CollaborationViewPage implements OnInit {
 
     await alert.present();
 
+  }
+  users:any = []
+  gold:any;
+  public getUsers(){
+    this.data_service.sendAPIRequest("user/"+this.data_service.userLoggedIn.user_id, null)
+    .subscribe(result=>{
+      this.users = result.payload;
+      for(let user of this.users){
+        this.xp = user.user_xp
+        this.level = user.user_level
+        this.gold=user.user_gold
+        console.log("CURRENT USER GOLD: "+user.user_gold)
+      }
+  });
   }
   updateUser(){
     let doneXp = 10;

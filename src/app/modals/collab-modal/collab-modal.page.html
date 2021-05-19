@@ -4,7 +4,7 @@
       <img class="item" src="../../../assets/deal.png" />
       <ion-title><b>Start a Collaboration</b></ion-title>
     </div>
-    
+
     <ion-buttons slot="start">
       <ion-button (click)="CloseModal()">
         <ion-icon name="arrow-back-outline"></ion-icon>
@@ -33,6 +33,8 @@
           <ion-select name="category" [(ngModel)]="addCollab.collab_category_id">
             <ion-select-option value="1">School</ion-select-option>
             <ion-select-option value="2">Work</ion-select-option>
+            <ion-select-option value="3">Fitness</ion-select-option>
+            <ion-select-option value="4">Others</ion-select-option>
           </ion-select>
         </ion-item>
 

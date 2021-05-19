@@ -28,7 +28,9 @@
           </ion-label>
 
         </ion-item>
-
+        <ion-note slot="end" *ngIf="isCollab">
+          Done by:  {{req.user_name}}
+        </ion-note>
       </ion-item>
 
     </ion-list>

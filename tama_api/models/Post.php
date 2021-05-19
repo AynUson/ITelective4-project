@@ -76,7 +76,8 @@
 
 			$this->sql = "SELECT * FROM task_tbl
       INNER JOIN collab_tasks_tbl ON task_tbl.task_id=collab_tasks_tbl.task_id
-      INNER JOIN collab_room_tbl ON collab_tasks_tbl.collab_room_id=collab_room_tbl.collab_room_id";
+      INNER JOIN collab_room_tbl ON collab_tasks_tbl.collab_room_id=collab_room_tbl.collab_room_id
+      INNER JOIN user_tbl ON user_tbl.user_id=task_tbl.user_id";
 
             if($filter_data != null) {
                 $this->sql .= " WHERE task_tbl.task_isDone=0 AND collab_room_tbl.collab_room_id=$filter_data";
@@ -98,7 +99,8 @@
 
         $this->sql = "SELECT * FROM task_tbl
         INNER JOIN collab_tasks_tbl ON task_tbl.task_id=collab_tasks_tbl.task_id
-        INNER JOIN collab_room_tbl ON collab_tasks_tbl.collab_room_id=collab_room_tbl.collab_room_id";
+        INNER JOIN collab_room_tbl ON collab_tasks_tbl.collab_room_id=collab_room_tbl.collab_room_id
+        INNER JOIN user_tbl ON user_tbl.user_id=collab_tasks_tbl.doneBy";
 
               if($filter_data != null) {
                   $this->sql .= " WHERE task_tbl.task_isDone=1 AND task_tbl.task_isCollab=1 AND collab_room_tbl.collab_room_id=$filter_data";

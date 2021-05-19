@@ -27,15 +27,14 @@
         </ion-item>
 
         <ion-item>
-          <ion-label position="floating">Category</ion-label>
-          <ion-select name="category" [(ngModel)]="addCollabTask.category_id">
-            <ion-select-option value="1">School</ion-select-option>
-            <ion-select-option value="2">Work</ion-select-option>
-            <ion-select-option value="3">Fitness</ion-select-option>
-            <ion-select-option value="4">Others</ion-select-option>
+          <ion-label>Category</ion-label>
+          <ion-select name="category" value="{{category}}" disabled  >
+            <ion-select-option value="school">School</ion-select-option>
+            <ion-select-option value="work">Work</ion-select-option>
+            <ion-select-option value="fitness">Fitness</ion-select-option>
+            <ion-select-option value="others">Others</ion-select-option>
           </ion-select>
         </ion-item>
-
         <ion-button (click)="create()"> Create </ion-button>
       </ion-card>
   </div>

@@ -14,14 +14,39 @@ export class CollabtaskModalPage implements OnInit {
   addCollabTask = new AddCollabTask(0,0,'','',1);
   addCollabTask2 = new AddCollabTask2(0,0);
   constructor(private ModalController:ModalController,private data_service: DataService,private router:Router, public toastController: ToastController,public loadingController: LoadingController) { }
-
+  category:any;
+  category_id:number;
   ngOnInit() {
 
     this.addCollabTask.user_id = this.data_service.user_id;
     console.log(this.data_service.currentCollabView.collab_room_id);
+    this.addCollabTask.category_id = this.data_service.currentCollabView.collab_category_id
+    this.getCateg();
+    console.log("Category ID: "+this.addCollabTask.category_id)
     // this.taskCheck();
   }
+  ionViewDidEnter(){
+    this.addCollabTask.user_id = this.data_service.user_id;
+    console.log(this.data_service.currentCollabView.collab_room_id);
+    this.addCollabTask.category_id = this.data_service.currentCollabView.collab_category_id
+    this.getCateg();
+    console.log("Category ID: "+this.addCollabTask.category_id)
+  }
 
+  getCateg(){
+    if(this.addCollabTask.category_id == 1){
+      this.category = "school"
+    }
+    if(this.addCollabTask.category_id == 2){
+      this.category = "work"
+    }
+    if(this.addCollabTask.category_id == 3){
+      this.category = "fitness"
+    }
+    if(this.addCollabTask.category_id == 4){
+      this.category = "others"
+    }
+  }
 
   async create() {
     const loading = await this.loadingController.create({

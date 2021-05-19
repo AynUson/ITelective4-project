@@ -45,6 +45,9 @@
               <img class="item"  src="{{own.item_property}}" *ngIf=" own.item_category_id == 2 && own.isEquiped == 1"/>
             </div>
           </div>
+          <div *ngIf="req.isAccepted == 0">
+            <p>Pending</p>
+          </div>
         </ion-item>
 
         <!-- DELETE AND VIEW -->

@@ -14,7 +14,6 @@ export class CategoryViewPage implements OnInit {
 user:any;
 level:any;
 xp:any;
-gold:any;
 user_id:any;
 tasks: any[]=[]
 category:any;
@@ -47,10 +46,8 @@ othersCount:number=0;
     this.category=this.data_service.categ;
     this.icon = this.data_service.icon;
     this.user=this.data_service.userLoggedIn;
-    this.level = this.user.user_level
-    this.xp = this.user.user_xp
-    this.gold = this.user.user_gold
     this.user_id=this.data_service.user_id;
+    this.getUsers();
     //this.tasks = this.data_service.tasksCateg;
     this.getTask();
     // this.checkIfBlank();
@@ -171,6 +168,7 @@ othersCount:number=0;
             updateData.task_isDone = 1;
             this.data_service.sendAPIRequest2("doneTask/", updateData, id).subscribe(data => {
               console.log(data)
+              this.updateUser();
             });
             let index = this.tasks.findIndex(x => x.task_id ===id);
             this.tasks.splice(index, 1);
@@ -182,7 +180,7 @@ othersCount:number=0;
             }
             //End Done task on task_tbl
             //Update Xp gold level
-            this.updateUser();
+
           }
         }
       ]
@@ -190,6 +188,20 @@ othersCount:number=0;
 
     await alert.present();
 
+  }
+  users:any = []
+  gold:any;
+  public getUsers(){
+    this.data_service.sendAPIRequest("user/"+this.data_service.userLoggedIn.user_id, null)
+    .subscribe(result=>{
+      this.users = result.payload;
+      for(let user of this.users){
+        this.xp = user.user_xp
+        this.level = user.user_level
+        this.gold=user.user_gold
+        console.log("CURRENT USER GOLD: "+user.user_gold)
+      }
+  });
   }
   updateUser(){
     let doneXp = 10;
