@@ -1,19 +1,21 @@
 <ion-content>
   <ion-slides pager="true" [options]="slideOpts">
     <ion-slide>
-
-        <img src="../../../assets/Tcircle.png" alt="tama img">
-        <h1>Welcome to TAMA</h1>
+      <img src="../../../assets/Tcircle.png" alt="tama img" />
+      <h1 style="letter-spacing: 3px; ">TAMA</h1>
 
       <p>"Play and be productive today!"</p>
     </ion-slide>
     <ion-slide>
-      <h1>Gamified + Collaboration!!!</h1>
+      <h2 style="letter-spacing: 3px; ">Gamified + Collaboration!!!</h2>
     </ion-slide>
     <ion-slide>
-      <h1>Lets get started!</h1>
+      <h2 style="letter-spacing: 3px; ">Lets get started!</h2>
       <div class="btnBot">
-        <ion-button fill="clear" (click)="toLogin()"><p>Start</p><ion-icon slot="end" name="arrow-forward"></ion-icon></ion-button>
+        <ion-button fill="clear" (click)="toLogin()"
+          ><p>Start</p>
+          <ion-icon slot="end" name="arrow-forward"></ion-icon
+        ></ion-button>
       </div>
     </ion-slide>
   </ion-slides>

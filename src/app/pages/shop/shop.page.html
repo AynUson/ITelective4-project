@@ -11,7 +11,7 @@
   <ion-toolbar>
     <ion-segment value="headdress" (ionChange)="segmentChanged($event)">
       <ion-segment-button value="themes">
-        <ion-label>Themes</ion-label>
+        <p>Themes</p>
       </ion-segment-button>
       <ion-segment-button value="headdress">
         <ion-label>Headdress</ion-label>
@@ -75,7 +75,7 @@
                   <h3> {{item.item_name}}  </h3>
                   <div  *ngFor="let inv of inventory" >
                     <ion-button color="light" class="buttonright" size="large" (click)="owneditem()" *ngIf="item.item_id==inv.item_id"  fill="clear">
-                      <img float-right *ngIf="item.item_id==inv.item_id" src="../../../assets/backpack.png" style="right:0px;border-radius: 20%; width: 32px;height: auto;">
+                      <img float-right *ngIf="item.item_id==inv.item_id" src="../../../assets/backpack.png" style="right:0px;border-radius: 20%; width: 32px;height: auto;opacity: 0.7;">
                     </ion-button>
 
                   </div>
@@ -100,7 +100,7 @@
                   <h3> {{item.item_name}} </h3>
                   <div  *ngFor="let inv of inventory" >
                     <ion-button color="light" class="buttonright" size="large" (click)="owneditem()" *ngIf="item.item_id==inv.item_id"  fill="clear">
-                      <img float-right *ngIf="item.item_id==inv.item_id" src="../../../assets/backpack.png" style="right:0px;border-radius: 20%; width: 32px;height: auto;">
+                      <img float-right *ngIf="item.item_id==inv.item_id" src="../../../assets/backpack.png" style="right:0px;border-radius: 20%; width: 32px;height: auto;opacity: 0.7;">
                     </ion-button>
 
                   </div>
@@ -125,7 +125,7 @@
                   <h3> {{item.item_name}}  </h3>
                   <div  *ngFor="let inv of inventory" >
                     <ion-button color="light" class="buttonright" size="large" (click)="owneditem()" *ngIf="item.item_id==inv.item_id"  fill="clear">
-                      <img float-right *ngIf="item.item_id==inv.item_id" src="../../../assets/backpack.png" style="right:0px;border-radius: 20%; width: 32px;height: auto;">
+                      <img float-right *ngIf="item.item_id==inv.item_id" src="../../../assets/backpack.png" style="right:0px;border-radius: 20%; width: 32px;height: auto; opacity: 0.7;">
                     </ion-button>
 
                   </div>

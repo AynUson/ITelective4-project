@@ -35,7 +35,7 @@
 
               <ion-col *ngFor="let categ of category"  size="6" >
                 <ion-card style="width: 100%;margin-bottom: -40px;" *ngIf="categ.category_id == 1 || categ.category_id == 2 ">
-                  
+
                   <ion-card-header (click)="viewCategory(categ,categ.category, categ.category_property)">
                     <ion-icon  name="{{categ.category_property}}"></ion-icon>
                     <ion-card-title size="small"> {{categ.category}} </ion-card-title>
@@ -84,9 +84,23 @@
 
   <div class="container">
 
-    <h2 style="float:left;font-weight: 700; margin-bottom: -5px;">Collab Request</h2>
-    <ion-button slot="end" color="light" style="margin-bottom: -5px; margin-left: 30px;" (click)="toPendingreq()"> Respond </ion-button>
-    <ion-item lines="none" *ngFor="let req of pendingReq">
+    <p style="float:left;font-size: 20px; margin-bottom: -5px;margin-left: -5px;">Collab Request</p>
+    <ion-button size="default" slot="end" color="light" style="margin-bottom: -5px; margin-left: 10px;" (click)="toPendingreq()"> <ion-icon name="body"></ion-icon></ion-button>
+
+    <ion-item lines="none" *ngIf="pendingEmpty">
+      <ion-grid>
+        <ion-row class="ion-align-items-center">
+          <ion-col size="12">
+
+            <h3>No pending collab request.</h3>
+
+          </ion-col>
+
+        </ion-row>
+      </ion-grid>
+    </ion-item>
+
+    <ion-item item lines="none" *ngFor="let req of pendingReq">
       <ion-grid>
         <ion-row class="ion-align-items-center">
           <ion-col size="3">
@@ -96,18 +110,14 @@
             </ion-avatar>
 
           </ion-col>
-          <ion-col size="7">
+          <ion-col size="6" >
             <ion-label>
 							<h2>{{req.collab_room_name}}</h2>
               <p style="color:rgb(235, 224, 224);">{{req.collab_room_description}}</p>
 						</ion-label>
 
           </ion-col>
-          <ion-col size="2">
-            <ion-button color="light" fill="clear">
-              <ion-icon slot="icon-only" name="ellipsis-vertical"></ion-icon>
-            </ion-button>
-          </ion-col>
+
         </ion-row>
       </ion-grid>
     </ion-item>

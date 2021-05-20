@@ -106,16 +106,20 @@ export class PendingreqModalPage implements OnInit {
   reqEmpty:boolean;
   selectedData: any[] = [];
   getData() {
-    if(this.selectedData = []){
-      this.reqEmpty = true;
-    }
+
     console.log(this.data_service.user_id)
 
     this.data_service.sendAPIRequest("showCollabJoin3/" + this.data_service.user_id, null).subscribe(data => {
       this.selectedData = data.payload
-
+      if(this.selectedData.length <= 0){
+        this.reqEmpty = true;
+      }
+      if(this.selectedData.length > 0){
+        this.reqEmpty = false;
+      }
       console.log(this.selectedData)
     });
+
   }
 
 

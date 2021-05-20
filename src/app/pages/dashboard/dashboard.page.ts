@@ -108,13 +108,19 @@ export class DashboardPage{
       }
     });
   }
+  pendingEmpty:boolean;
   pendingReq: any[] = [];
   getPendingReq() {
     console.log(this.data_service.user_id)
 
     this.data_service.sendAPIRequest("showCollabJoin3/" + this.data_service.user_id, null).subscribe(data => {
       this.pendingReq = data.payload
-
+      if(this.pendingReq.length <= 0){
+        this.pendingEmpty = true
+      }
+      if(this.pendingReq.length > 1){
+        this.pendingEmpty = false
+      }
       console.log(this.pendingReq)
     });
   }
