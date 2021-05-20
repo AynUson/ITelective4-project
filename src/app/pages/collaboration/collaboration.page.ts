@@ -35,7 +35,7 @@ export class CollaborationPage implements OnInit {
   pendingReq:number = 0;
   collabEmpty:boolean = false;
   getData() {
-
+    this.pendingReq = 0;
     console.log(this.data_service.user_id)
 
     this.data_service.sendAPIRequest("showCollabJoin/" + this.data_service.user_id, null).subscribe(data => {

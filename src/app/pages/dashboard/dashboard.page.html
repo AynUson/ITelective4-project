@@ -22,15 +22,14 @@
 </ion-header>
 
 
-<ion-content>
+<ion-content >
 
-  <!-- {{a | json}} -->
 
   <div class="slides ion-margin-bottom" >
 
       <!-- <ion-slides [options]="slidesOptions" *ngFor="let task of selectedData">
         <ion-slide > -->
-        <ion-grid>
+        <ion-grid style="margin-left: -18px;">
             <ion-row justify-content-start align-items-start>
 
               <ion-col *ngFor="let categ of category"  size="6" >
@@ -51,7 +50,7 @@
             </ion-row>
 
           </ion-grid>
-          <ion-grid>
+          <ion-grid style="margin-left: -18px;">
             <ion-row>
 
               <ion-col *ngFor="let categ of category"  size="6">
@@ -85,9 +84,9 @@
   <div class="container">
 
     <p style="float:left;font-size: 20px; margin-bottom: -5px;margin-left: -5px;">Collab Request</p>
-    <ion-button size="default" slot="end" color="light" style="margin-bottom: -5px; margin-left: 10px;" (click)="toPendingreq()"> <ion-icon name="body"></ion-icon></ion-button>
+    <ion-button size="small" slot="end" color="light" style="margin-bottom: -30px; margin-left: 15px;" (click)="toPendingreq()"> <ion-icon name="people" style="font-size: 24px;"></ion-icon></ion-button>
 
-    <ion-item lines="none" *ngIf="pendingEmpty">
+    <ion-item lines="none" *ngIf="pendingEmpty" style="margin-top: 40px">
       <ion-grid>
         <ion-row class="ion-align-items-center">
           <ion-col size="12">
@@ -100,7 +99,7 @@
       </ion-grid>
     </ion-item>
 
-    <ion-item item lines="none" *ngFor="let req of pendingReq">
+    <ion-item item lines="none" *ngFor="let req of pendingReq" style="margin-top: 40px">
       <ion-grid>
         <ion-row class="ion-align-items-center">
           <ion-col size="3">

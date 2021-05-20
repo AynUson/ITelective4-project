@@ -24,6 +24,9 @@
 @import "~@ionic/angular/css/text-alignment.css";
 @import "~@ionic/angular/css/text-transformation.css";
 @import "~@ionic/angular/css/flex-utils.css";
+* ::-webkit-scrollbar {
+  display: none;
+}
 
 .my-custom-class {
   --background: #3880ff;

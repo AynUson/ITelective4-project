@@ -44,10 +44,17 @@ ion-header {
 }
 
 ion-content {
+  // --offset-bottom: auto!important;
+  // --overflow: hidden;
+  // overflow: auto;
+  // &::-webkit-scrollbar {
+  //   display: none;
+  // }
   ion-icon {
     font-size: 32px;
     color: #3880ff;
   }
+
   --background: linear-gradient(
     90deg,
     rgba(43, 90, 148, 1) 0%,

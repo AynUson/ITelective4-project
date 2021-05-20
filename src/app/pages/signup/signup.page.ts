@@ -121,7 +121,7 @@ async dismiss() {
           this.user.user_email = this.emailInput
           this.user.user_pword = btoa(this.pwordInput)
           this.user.user_gold = 50
-          this.data_service.newlyusern = this.unameInput
+          this.data_service.newlyusern = this.emailInput
           this.data_service.newlypword = this.pwordInput
           this.data_service.sendAPIRequest("createUser/", this.user)
           .subscribe(result=>{

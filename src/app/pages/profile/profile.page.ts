@@ -76,6 +76,7 @@ export class ProfilePage implements OnInit {
   ownedItems:any;
   ownedCount:any = 0;
   getOwned(){
+    this.ownedCount = 0
     this.data_service.sendAPIRequest("getOwned/"+this.data_service.userLoggedIn.user_id, null).subscribe(data => {
       this.ownedItems = data.payload
       console.log(this.ownedItems )
