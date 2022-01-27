@@ -5,7 +5,7 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class DataService {
-  baseURL="http://localhost/TAMA/tama_api/"
+  baseURL="http://localhost/ITelective4-project/tama_api/"
   DoneIsCollab:any;
   categ_id:number;
   userLoggedIn:any;
